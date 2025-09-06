@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
           variant="secondary"
           className="bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer"
         >
-          Play as Guest
+          <Link href="/guest">Play as Guest</Link>
         </Button>
         <Button
           size={"lg"}
