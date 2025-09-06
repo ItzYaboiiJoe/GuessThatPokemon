@@ -1,3 +1,47 @@
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-yellow-200 to-red-400">
+      {/* Title */}
+      <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+        Who’s That Pokémon?
+      </h1>
+
+      {/* Pokeball Image */}
+      <div className="mb-8 animate-bounce">
+        <Image
+          src="/pokeball.png"
+          alt="Pokeball"
+          width={128}
+          height={128}
+          priority
+        />
+      </div>
+
+      {/* Buttons */}
+      <div className="flex flex-col md:flex-row gap-4">
+        <Button
+          size={"lg"}
+          variant="secondary"
+          className="bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer"
+        >
+          Play as Guest
+        </Button>
+        <Button
+          size={"lg"}
+          variant="default"
+          className="bg-blue-600 text-white font-bold hover:bg-blue-500 hover:cursor-pointer"
+        >
+          Login / Register
+        </Button>
+      </div>
+
+      {/* Leaderboard */}
+      <p className="mt-6 text-white underline cursor-pointer hover:text-gray-200">
+        View Leaderboard
+      </p>
+    </div>
+  );
 }
