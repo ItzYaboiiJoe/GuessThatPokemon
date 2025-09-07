@@ -17,7 +17,7 @@ export default function Home() {
           alt="Pokeball"
           width={128}
           height={128}
-          priority
+          priority={true}
         />
       </div>
 
