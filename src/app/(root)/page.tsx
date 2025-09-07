@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-yellow-200 to-red-400">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       {/* Title */}
       <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
         Who’s That Pokémon?

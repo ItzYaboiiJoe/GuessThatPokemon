@@ -20,7 +20,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icon.ico" type="image/x-icon" />
       </head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body
+        className={`${inter.className} antialiased bg-gradient-to-b from-yellow-200 via-orange-300 to-red-400`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

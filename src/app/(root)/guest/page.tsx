@@ -1,38 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const GuestPage = () => {
+  // State to hold the guest trainer name
   const [guestTrainerName, setGuestTrainerName] = useState("");
 
-  const handleStart = () => {
-    localStorage.setItem("guestTrainerName", guestTrainerName);
-  };
+  // Generate a random guest trainer name on component mount and setting to localStorage
+  useEffect(() => {
+    const generateID = Math.random().toString().slice(2, 12);
+    const newName = "Guest" + generateID;
+    setGuestTrainerName(newName);
+
+    localStorage.setItem("guestTrainerName", newName);
+  }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-yellow-200 via-orange-300 to-red-400">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="bg-white/90 rounded-xl shadow-xl p-8 w-full max-w-md text-center">
         {/* Title */}
-        <h1 className="text-2xl font-bold mb-4">Enter Your Trainer Name</h1>
-
-        {/* Nickname Input */}
-        <Input
-          type="text"
-          placeholder="e.g. AshKetchum99"
-          className="mb-4 text-center"
-          value={guestTrainerName}
-          onChange={(e) => setGuestTrainerName(e.target.value)}
-        />
+        <h1 className="text-2xl font-bold mb-4">Welcome Trainer</h1>
+        <h1 className="text-2xl font-bold mb-4">{guestTrainerName}</h1>
 
         {/* Start Button */}
-        <Button
-          onClick={handleStart}
-          className="w-full bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer"
-        >
-          Start Game
-        </Button>
+        <Link href="/game">
+          <Button className="w-full bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer">
+            Start Game
+          </Button>
+        </Link>
 
         {/* Info Note */}
         <p className="mt-4 text-sm text-gray-600">
