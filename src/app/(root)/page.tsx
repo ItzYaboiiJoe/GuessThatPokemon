@@ -23,13 +23,15 @@ export default function Home() {
 
       {/* Buttons */}
       <div className="flex flex-col md:flex-row gap-4">
-        <Button
-          size={"lg"}
-          variant="secondary"
-          className="bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer"
-        >
-          <Link href="/guest">Play as Guest</Link>
-        </Button>
+        <Link href="/guest">
+          <Button
+            size={"lg"}
+            variant="secondary"
+            className="bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer"
+          >
+            Play as Guest
+          </Button>
+        </Link>
         <Button
           size={"lg"}
           variant="default"

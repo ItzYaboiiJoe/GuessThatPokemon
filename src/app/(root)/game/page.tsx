@@ -1,10 +1,22 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import fetchPokemon from "@/components/api/fetch";
 
 const GamePage = () => {
   const trainerName = localStorage.getItem("guestTrainerName");
+  const [pokemonImage, setPokemonImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPokemon = async () => {
+      const spriteUrl = await fetchPokemon();
+      setPokemonImage(spriteUrl);
+    };
+    loadPokemon();
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-indigo-900 via-purple-800 to-black text-white p-6">
@@ -16,7 +28,7 @@ const GamePage = () => {
       {/* Pokémon silhouette */}
       <div className="flex flex-col items-center">
         <Image
-          src="/pokeball.png"
+          src={pokemonImage || "/pokeball.png"}
           alt="Pokemon silhouette"
           width={200}
           height={200}
@@ -25,12 +37,12 @@ const GamePage = () => {
         <h1 className="text-3xl font-bold mt-6">Who’s That Pokémon?</h1>
       </div>
 
-      {/* Answer buttons */}
-      <div className="grid grid-cols-2 gap-4 mt-8 w-full max-w-md">
-        <Button className="">Pokemon 1</Button>
-        <Button className="">Pokemon 2</Button>
-        <Button className="">Pokemon 3</Button>
-        <Button className="">Pokemon 4</Button>
+      {/* Answer Input */}
+      <div className="flex flex-col items-center">
+        <Input type="text" />
+        <Button className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer">
+          Submit
+        </Button>
       </div>
 
       {/* Back to Menu Button */}
