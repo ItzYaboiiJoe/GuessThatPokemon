@@ -47,7 +47,7 @@ const GamePage = () => {
         {pokemon ? (
           <Image
             src={pokemon.PokemonImage}
-            alt={pokemon.PokemonName}
+            alt="Failed to Fetch Pokemon (Sorry)"
             width={300}
             height={300}
             priority
@@ -57,7 +57,7 @@ const GamePage = () => {
           // Pokeball Rotating Animation when loading
           <Image
             src="/pokeball.png"
-            alt="Pokemon silhouette"
+            alt="Pokeball Rotating"
             width={300}
             height={300}
             priority
