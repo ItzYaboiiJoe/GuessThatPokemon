@@ -9,6 +9,7 @@ import {
   liveFetchPokemon,
   PokemonDetails,
 } from "@/components/api/fetch";
+import AnswerForm from "@/components/shared/answerForm";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
@@ -66,11 +67,8 @@ const GamePage = () => {
         )}
         <h1 className="text-3xl font-bold mt-6">Who’s That Pokémon?</h1>
 
-        {/* Answer Section */}
-        <Input className="mt-10" type="text" />
-        <Button className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer">
-          Submit
-        </Button>
+        {/* Answer Section Component */}
+        <AnswerForm />
       </div>
 
       {/* Empty Space */}
