@@ -65,8 +65,8 @@ const GamePage = () => {
         )}
         <h1 className="text-3xl font-bold mt-6">Who’s That Pokémon?</h1>
 
-        {/* Answer Section Component */}
-        <AnswerForm />
+        {/* Answer Section Component will load once pokemon is not null */}
+        {pokemon && <AnswerForm pokemonName={pokemon.PokemonName} />}
       </div>
 
       {/* Empty Space */}

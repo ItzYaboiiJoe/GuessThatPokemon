@@ -13,12 +13,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+// Define the Pokemon Name Prop
+type PokemonNameProp = {
+  pokemonName: string;
+};
+
 // Define the form schema
 const formSchema = z.object({
   answer: z.string().min(1, "You must enter an answer"),
 });
 
-const AnswerForm = () => {
+const AnswerForm = ({ pokemonName }: PokemonNameProp) => {
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -27,7 +32,14 @@ const AnswerForm = () => {
 
   // Handle form submission
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const correctAnswer = pokemonName.toLowerCase().trim();
+    const userAnswer = values.answer.toLowerCase().trim();
+
+    if (userAnswer === correctAnswer) {
+      console.log("Correct Answer!");
+    } else {
+      console.log("Wrong Answer");
+    }
   };
 
   return (
