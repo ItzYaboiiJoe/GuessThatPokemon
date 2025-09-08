@@ -17,9 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/icon.ico" type="image/x-icon" />
-      </head>
       <body
         className={`${inter.className} antialiased bg-gradient-to-b from-yellow-200 via-orange-300 to-red-400`}
       >
