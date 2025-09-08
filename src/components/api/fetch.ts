@@ -1,21 +1,45 @@
-const fetchPokemon = async () => {
-  // Fetch a random Pokemon ID
-  const pokemonIdResponse = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=1"
-  );
-  const pokemonIdData = await pokemonIdResponse.json();
+// Fetch Pokemon Details from Supabase Table
 
-  // Generate a random ID between 1 and the total count of Pokemon
-  const randomPokemonId = Math.floor(Math.random() * pokemonIdData.count) + 1;
+import { supabase } from "@/lib/supabaseClient";
 
-  // Fetch the Pokemon ID details
-  const pokemonResponse = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`
-  );
-  const pokemonData = await pokemonResponse.json();
-
-  // Return the front default sprite URL
-  return pokemonData.sprites.front_default;
+export type PokemonDetails = {
+  PokemonName: string;
+  PokemonImage: string;
 };
 
-export default fetchPokemon;
+// Selecting the latest entry from the Pokemon_PokemonDetails table
+export const fetchPokemon = async () => {
+  const { data, error } = await supabase
+    .from("Pokemon_PokemonDetails")
+    .select("*")
+    .order("id", { ascending: false })
+    .limit(1)
+    .single();
+  if (error || !data) {
+    console.error("Failed to fetch answers:", error);
+    return null;
+  }
+
+  return data;
+};
+
+// Real-time subscription to listen for new entries in the Pokemon_PokemonDetails table
+export const liveFetchPokemon = (
+  callback: (pokemon: PokemonDetails) => void
+) => {
+  const channel = supabase
+    .channel("custom-insert-channel")
+    .on(
+      "postgres_changes",
+      { event: "INSERT", schema: "public", table: "Pokemon_PokemonDetails" },
+      (payload) => {
+        const newRow = payload.new as PokemonDetails;
+        callback(newRow);
+      }
+    )
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+};

@@ -4,21 +4,35 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import fetchPokemon from "@/components/api/fetch";
+import {
+  fetchPokemon,
+  liveFetchPokemon,
+  PokemonDetails,
+} from "@/components/api/fetch";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
   const trainerName = localStorage.getItem("guestTrainerName");
-  // State to hold the fetched Pokemon sprite URL
-  const [pokemonImage, setPokemonImage] = useState<string | null>(null);
+  // State to hold the current Pokemon details
+  const [pokemon, setPokemon] = useState<PokemonDetails | null>(null);
 
-  // Fetch Pokemon Sprite from API Response
   useEffect(() => {
-    const loadPokemon = async () => {
-      const spriteUrl = await fetchPokemon();
-      setPokemonImage(spriteUrl);
+    // Get the latest Pokémon once on page load
+    const loadLatest = async () => {
+      const latest = await fetchPokemon();
+      if (latest) setPokemon(latest);
     };
-    loadPokemon();
+    loadLatest();
+
+    // Watch for new Pokémon entries inserted into the table
+    const unsubscribe = liveFetchPokemon((newPokemon) => {
+      setPokemon(newPokemon);
+    });
+
+    // Cleanup subscription
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
@@ -28,16 +42,28 @@ const GamePage = () => {
         <h2 className="text-lg font-bold">Trainer: {trainerName}</h2>
       </div>
 
-      {/* Pokémon silhouette */}
+      {/* Pokémon Image */}
       <div className="flex flex-col items-center">
-        <Image
-          src={pokemonImage || "/pokeball.png"}
-          alt="Pokemon silhouette"
-          width={300}
-          height={300}
-          priority
-          className="brightness-0 invert drop-shadow-[0_0_20px_rgba(255,255,0,0.7)]"
-        />
+        {pokemon ? (
+          <Image
+            src={pokemon.PokemonImage}
+            alt={pokemon.PokemonName}
+            width={300}
+            height={300}
+            priority
+            className="brightness-0 invert drop-shadow-[0_0_20px_rgba(255,255,0,0.7)]"
+          />
+        ) : (
+          // Pokeball Rotating Animation when loading
+          <Image
+            src="/pokeball.png"
+            alt="Pokemon silhouette"
+            width={300}
+            height={300}
+            priority
+            className="animate-spin"
+          />
+        )}
         <h1 className="text-3xl font-bold mt-6">Who’s That Pokémon?</h1>
 
         {/* Answer Section */}
