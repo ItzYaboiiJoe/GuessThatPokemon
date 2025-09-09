@@ -1,0 +1,113 @@
+"use client";
+
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+
+// Define the form schema
+const formSchema = z.object({
+  trainerName: z
+    .string()
+    .nonempty("You must enter your trainer name")
+    .min(3, "Trainer name must be at least 3 characters"),
+  email: z.email("Invalid email address"),
+  password: z
+    .string()
+    .nonempty("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+});
+
+const RegisterForm = () => {
+  // Initialize the form
+  const form = useForm<z.infer<typeof formSchema>>({
+    defaultValues: { trainerName: "", email: "", password: "" },
+    resolver: zodResolver(formSchema),
+  });
+
+  // Handle form submission
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        {/* Trainer Name Input */}
+        <FormField
+          control={form.control}
+          name="trainerName"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="Trainer Name"
+                  className="text-center rounded-xl"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="text-center" />
+            </FormItem>
+          )}
+        />
+
+        {/* Email Address Input */}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="Email Address"
+                  className="mt-4 text-center rounded-xl"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="text-center" />
+            </FormItem>
+          )}
+        />
+
+        {/* Password Input */}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  className="mt-4 text-center rounded-xl"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="text-center" />
+            </FormItem>
+          )}
+        />
+
+        {/* Register Button */}
+        <Button
+          type="submit"
+          className="mt-6 w-full bg-yellow-400 text-black font-bold text-lg py-6 rounded-xl shadow-2xl hover:bg-yellow-300 hover:cursor-pointer"
+        >
+          Register
+        </Button>
+      </form>
+    </Form>
+  );
+};
+
+export default RegisterForm;

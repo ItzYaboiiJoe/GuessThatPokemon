@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import RegisterForm from "@/components/shared/registerForm";
 
 export default function RegisterPage() {
   return (
@@ -19,31 +18,8 @@ export default function RegisterPage() {
           Create Your Trainer Account
         </h1>
 
-        {/* Username Input */}
-        <Input
-          type="text"
-          placeholder="Trainer Name"
-          className="mb-4 text-center rounded-xl"
-        />
-
-        {/* Email Input */}
-        <Input
-          type="email"
-          placeholder="Email Address"
-          className="mb-4 text-center rounded-xl"
-        />
-
-        {/* Password Input */}
-        <Input
-          type="password"
-          placeholder="Password"
-          className="mb-6 text-center rounded-xl"
-        />
-
-        {/* Register Button */}
-        <Button className="w-full bg-yellow-400 text-black font-bold text-lg py-6 rounded-xl hover:bg-yellow-300 hover:cursor-pointer">
-          Register
-        </Button>
+        {/* Registration Form */}
+        <RegisterForm />
 
         {/* Already have account */}
         <p className="mt-6 text-sm text-gray-600">
