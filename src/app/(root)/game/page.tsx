@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import {
   fetchPokemon,
@@ -74,9 +75,12 @@ const GamePage = () => {
 
       {/* Back to Menu Button */}
       <div>
-        <p className="text-sm text-gray-400 cursor-pointer hover:text-gray-200">
-          Back to Menu
-        </p>
+        <Link
+          href="/"
+          className="mt-6 inline-block text-gray-500 text-sm font-medium hover:text-gray-600 transition"
+        >
+          ← Back to Menu
+        </Link>
       </div>
     </div>
   );

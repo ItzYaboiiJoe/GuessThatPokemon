@@ -32,13 +32,15 @@ export default function Home() {
             Play as Guest
           </Button>
         </Link>
-        <Button
-          size={"lg"}
-          variant="default"
-          className="bg-blue-600 text-white font-bold hover:bg-blue-500 hover:cursor-pointer"
-        >
-          Login / Register
-        </Button>
+        <Link href={"/login"}>
+          <Button
+            size={"lg"}
+            variant="default"
+            className="bg-blue-600 text-white font-bold hover:bg-blue-500 hover:cursor-pointer"
+          >
+            Login / Register
+          </Button>
+        </Link>
       </div>
 
       {/* Leaderboard */}
