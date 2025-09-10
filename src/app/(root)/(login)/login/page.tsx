@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import LoginForm from "@/components/forms/loginForm";
 
 export default function LoginPage() {
   return (
@@ -19,24 +18,8 @@ export default function LoginPage() {
           Login to Continue
         </h1>
 
-        {/* Email Input */}
-        <Input
-          type="email"
-          placeholder="Email Address"
-          className="mb-4 text-center rounded-xl"
-        />
-
-        {/* Password Input */}
-        <Input
-          type="password"
-          placeholder="Password"
-          className="mb-6 text-center rounded-xl"
-        />
-
-        {/* Login Button */}
-        <Button className="w-full bg-blue-600 text-white font-bold text-lg py-6 rounded-xl hover:bg-blue-500 hover:cursor-pointer">
-          Login
-        </Button>
+        {/* Login Form */}
+        <LoginForm />
 
         {/* Link to Register */}
         <p className="mt-6 text-sm text-gray-600">
