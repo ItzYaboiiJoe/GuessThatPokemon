@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { supabase } from "@/lib/supabaseClient";
+import { useState } from "react";
 
 // Define the form schema
 const formSchema = z.object({
@@ -14,6 +16,9 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
+  // State to handle login errors
+  const [errorLogin, setErrorLogin] = useState<string | null>(null);
+
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { email: "", password: "" },
@@ -21,8 +26,19 @@ const LoginForm = () => {
   });
 
   // Handle form submission
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // Sign in the user with Supabase
+    const { error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+
+    // Feedback to the user
+    if (!error) {
+      alert("Login successful!");
+    } else {
+      setErrorLogin(error.message);
+    }
   };
 
   return (
@@ -71,6 +87,13 @@ const LoginForm = () => {
         >
           Login
         </Button>
+
+        {/* Error Message if there were login problems */}
+        {errorLogin && (
+          <p className="mt-4 text-center text-red-600 font-semibold">
+            {errorLogin}
+          </p>
+        )}
       </form>
     </Form>
   );

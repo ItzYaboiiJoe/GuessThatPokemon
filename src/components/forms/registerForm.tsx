@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { supabase } from "@/lib/supabaseClient";
+import { useState } from "react";
 
 // Define the form schema
 const formSchema = z.object({
@@ -28,6 +29,9 @@ const formSchema = z.object({
 });
 
 const RegisterForm = () => {
+  // State to handle registration errors
+  const [registerError, setregisterError] = useState<string | null>(null);
+
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { trainerName: "", email: "", password: "" },
@@ -37,7 +41,7 @@ const RegisterForm = () => {
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Sign up the user with Supabase
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
       options: {
@@ -48,11 +52,10 @@ const RegisterForm = () => {
     });
 
     // Feedback to the user
-    if (error) {
-      alert(error.message);
-    } else {
-      console.log("Registered user:", data.user);
+    if (!error) {
       alert("Registration successful!");
+    } else {
+      setregisterError(error.message);
     }
   };
 
@@ -123,6 +126,13 @@ const RegisterForm = () => {
         >
           Register
         </Button>
+
+        {/* Error Message if there were registration problems */}
+        {registerError && (
+          <p className="mt-4 text-center text-red-600 font-semibold">
+            {registerError}
+          </p>
+        )}
       </form>
     </Form>
   );
