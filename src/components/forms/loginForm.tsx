@@ -28,7 +28,7 @@ const LoginForm = () => {
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Sign in the user with Supabase
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data: loginUser, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
     });
@@ -36,6 +36,21 @@ const LoginForm = () => {
     // Feedback to the user
     if (!error) {
       alert("Login successful!");
+
+      // Check if the user exists in table and insert into the table if doesn't, this way the table will only have users that have logged in at least once and verified their email
+      const { data: Pokemon_Players } = await supabase
+        .from("Pokemon_Players")
+        .select("*")
+        .eq("TrainerID", loginUser.user.id);
+
+      if (Pokemon_Players?.length === 0) {
+        const {} = await supabase.from("Pokemon_Players").insert([
+          {
+            TrainerName: loginUser.user.user_metadata.trainer_name,
+            TrainerID: loginUser.user.id,
+          },
+        ]);
+      }
     } else {
       setErrorLogin(error.message);
     }
