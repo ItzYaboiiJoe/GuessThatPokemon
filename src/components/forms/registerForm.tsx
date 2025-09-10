@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Define the form schema
 const formSchema = z.object({
@@ -31,6 +32,8 @@ const formSchema = z.object({
 const RegisterForm = () => {
   // State to handle registration errors
   const [registerError, setregisterError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,6 +57,7 @@ const RegisterForm = () => {
     // Feedback to the user
     if (!error) {
       alert("Registration successful!");
+      router.push("/login");
     } else {
       setregisterError(error.message);
     }
