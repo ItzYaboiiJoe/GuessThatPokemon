@@ -12,6 +12,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { supabase } from "@/lib/supabaseClient";
 
 // Define the form schema
 const formSchema = z.object({
@@ -34,8 +35,25 @@ const RegisterForm = () => {
   });
 
   // Handle form submission
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // Sign up the user with Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email: values.email,
+      password: values.password,
+      options: {
+        data: {
+          trainer_name: values.trainerName,
+        },
+      },
+    });
+
+    // Feedback to the user
+    if (error) {
+      alert(error.message);
+    } else {
+      console.log("Registered user:", data.user);
+      alert("Registration successful!");
+    }
   };
 
   return (
