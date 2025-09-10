@@ -8,7 +8,7 @@ import {
   liveFetchPokemon,
   PokemonDetails,
 } from "@/components/api/fetch";
-import AnswerForm from "@/components/shared/answerForm";
+import AnswerForm from "@/components/forms/answerForm";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
