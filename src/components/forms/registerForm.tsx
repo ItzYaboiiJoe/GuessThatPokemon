@@ -56,7 +56,6 @@ const RegisterForm = () => {
 
     // Feedback to the user
     if (!error) {
-      alert("Registration successful!");
       router.push("/login");
     } else {
       setregisterError(error.message);

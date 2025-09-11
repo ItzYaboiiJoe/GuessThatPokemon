@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Define the form schema
 const formSchema = z.object({
@@ -18,6 +19,8 @@ const formSchema = z.object({
 const LoginForm = () => {
   // State to handle login errors
   const [errorLogin, setErrorLogin] = useState<string | null>(null);
+
+  const router = useRouter();
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -35,8 +38,6 @@ const LoginForm = () => {
 
     // Feedback to the user
     if (!error) {
-      alert("Login successful!");
-
       // Check if the user exists in table and insert into the table if doesn't, this way the table will only have users that have logged in at least once and verified their email
       const { data: Pokemon_Players } = await supabase
         .from("Pokemon_Players")
@@ -51,6 +52,8 @@ const LoginForm = () => {
           },
         ]);
       }
+      // Redirect to the main menu
+      router.push("/menu");
     } else {
       setErrorLogin(error.message);
     }
