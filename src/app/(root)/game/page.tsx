@@ -12,7 +12,7 @@ import AnswerForm from "@/components/forms/answerForm";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
-  const trainerName = localStorage.getItem("guestTrainerName");
+  const trainerName = localStorage.getItem("TrainerName");
   // State to hold the current Pokemon details
   const [pokemon, setPokemon] = useState<PokemonDetails | null>(null);
 

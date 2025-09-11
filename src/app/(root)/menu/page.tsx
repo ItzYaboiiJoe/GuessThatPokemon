@@ -4,9 +4,13 @@ import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const Menu = () => {
+  // State to hold Trainer Name
   const [trainerName, setTrainerName] = useState("");
+  // State to handle loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch logged in user ID
@@ -24,11 +28,29 @@ const Menu = () => {
           .single();
 
         setTrainerName(data.TrainerName);
+        localStorage.setItem("TrainerName", data.TrainerName);
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  // Show loading state while fetching Trainer Name
+  if (loading) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <Image
+          src="/pokeball.png"
+          alt="Pokeball Rotating"
+          width={300}
+          height={300}
+          priority
+          className="animate-spin"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">

@@ -14,7 +14,7 @@ const GuestPage = () => {
     const newName = "Guest" + generateID;
     setGuestTrainerName(newName);
 
-    localStorage.setItem("guestTrainerName", newName);
+    localStorage.setItem("TrainerName", newName);
   }, []);
 
   return (
