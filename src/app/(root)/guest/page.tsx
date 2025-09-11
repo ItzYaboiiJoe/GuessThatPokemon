@@ -35,6 +35,14 @@ const GuestPage = () => {
         <p className="mt-4 text-sm text-gray-600">
           Progress won’t be saved unless you log in.
         </p>
+
+        {/* Back to Menu Link */}
+        <Link
+          href="/"
+          className="mt-3 inline-block text-red-600 text-sm font-medium hover:text-red-800 transition"
+        >
+          ← Back to Menu
+        </Link>
       </div>
     </div>
   );
