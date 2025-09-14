@@ -57,29 +57,27 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
           <DialogTitle className="text-2xl font-extrabold drop-shadow text-center">
             Leaderboard
           </DialogTitle>
-          <DialogDescription>
-            <div>
-              <Table className="text-center">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="text-center">Trainer</TableHead>
-                    <TableHead className="text-center">Trivia Solved</TableHead>
-                    <TableHead className="text-center">
-                      First Try Streak
-                    </TableHead>
+          <DialogDescription asChild>
+            <Table className="text-center">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-center">Trainer</TableHead>
+                  <TableHead className="text-center">Trivia Solved</TableHead>
+                  <TableHead className="text-center">
+                    First Try Streak
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {leaderboardData.map((leaderboardData) => (
+                  <TableRow key={leaderboardData.id}>
+                    <TableCell>{leaderboardData.TrainerName}</TableCell>
+                    <TableCell>{leaderboardData.TriviaSolved}</TableCell>
+                    <TableCell>{leaderboardData.WinningStreak}</TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {leaderboardData.map((leaderboardData) => (
-                    <TableRow key={leaderboardData.id}>
-                      <TableCell>{leaderboardData.TrainerName}</TableCell>
-                      <TableCell>{leaderboardData.TriviaSolved}</TableCell>
-                      <TableCell>{leaderboardData.WinningStreak}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+                ))}
+              </TableBody>
+            </Table>
           </DialogDescription>
         </DialogHeader>
 
