@@ -58,24 +58,28 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
             Leaderboard
           </DialogTitle>
           <DialogDescription>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Trainer</TableHead>
-                  <TableHead>Trivia Solved</TableHead>
-                  <TableHead>First Try Streak</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {leaderboardData.map((leaderboardData) => (
-                  <TableRow key={leaderboardData.id}>
-                    <TableCell>{leaderboardData.TrainerName}</TableCell>
-                    <TableCell>{leaderboardData.TriviaSolved}</TableCell>
-                    <TableCell>{leaderboardData.WinningStreak}</TableCell>
+            <div>
+              <Table className="text-center">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-center">Trainer</TableHead>
+                    <TableHead className="text-center">Trivia Solved</TableHead>
+                    <TableHead className="text-center">
+                      First Try Streak
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {leaderboardData.map((leaderboardData) => (
+                    <TableRow key={leaderboardData.id}>
+                      <TableCell>{leaderboardData.TrainerName}</TableCell>
+                      <TableCell>{leaderboardData.TriviaSolved}</TableCell>
+                      <TableCell>{leaderboardData.WinningStreak}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </DialogDescription>
         </DialogHeader>
 
