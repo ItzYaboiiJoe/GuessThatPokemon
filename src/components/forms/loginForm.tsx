@@ -50,7 +50,6 @@ const LoginForm = () => {
           .insert([
             {
               TrainerName: loginUser.user.user_metadata.trainer_name,
-              TrainerID: loginUser.user.id,
             },
           ]);
 
