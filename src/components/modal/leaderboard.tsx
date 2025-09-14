@@ -60,7 +60,7 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
           <DialogDescription asChild>
             <Table className="text-center">
               <TableHeader>
-                <TableRow>
+                <TableRow className="border-gray-400">
                   <TableHead className="text-center">Trainer</TableHead>
                   <TableHead className="text-center">Trivia Solved</TableHead>
                   <TableHead className="text-center">
@@ -70,7 +70,7 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
               </TableHeader>
               <TableBody>
                 {leaderboardData.map((leaderboardData) => (
-                  <TableRow key={leaderboardData.id}>
+                  <TableRow className="border-none" key={leaderboardData.id}>
                     <TableCell>{leaderboardData.TrainerName}</TableCell>
                     <TableCell>{leaderboardData.TriviaSolved}</TableCell>
                     <TableCell>{leaderboardData.WinningStreak}</TableCell>
