@@ -10,6 +10,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { fetchLeaderboard, LeaderboardEntry } from "../api/handleLeaderboard";
 
@@ -41,7 +49,7 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className="w-96 rounded-2xl shadow-2xl bg-gradient-to-b from-yellow-100 via-orange-100 to-white"
+        className="rounded-2xl shadow-2xl bg-gradient-to-b from-yellow-100 via-orange-100 to-white"
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
@@ -49,8 +57,25 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
           <DialogTitle className="text-2xl font-extrabold drop-shadow text-center">
             Leaderboard
           </DialogTitle>
-          <DialogDescription className="text-center">
-            Content Here
+          <DialogDescription>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Trainer</TableHead>
+                  <TableHead>Trivia Solved</TableHead>
+                  <TableHead>First Try Streak</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {leaderboardData.map((leaderboardData) => (
+                  <TableRow key={leaderboardData.id}>
+                    <TableCell>{leaderboardData.TrainerName}</TableCell>
+                    <TableCell>{leaderboardData.TriviaSolved}</TableCell>
+                    <TableCell>{leaderboardData.WinningStreak}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </DialogDescription>
         </DialogHeader>
 

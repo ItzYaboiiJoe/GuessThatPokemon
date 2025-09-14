@@ -3,6 +3,7 @@
 import { supabase } from "@/lib/supabaseClient";
 
 export type LeaderboardEntry = {
+  id: number;
   TrainerName: string;
   TriviaSolved: number;
   WinningStreak: number;
