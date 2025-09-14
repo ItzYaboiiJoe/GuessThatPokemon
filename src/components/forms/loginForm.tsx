@@ -51,7 +51,21 @@ const LoginForm = () => {
             TrainerID: loginUser.user.id,
           },
         ]);
+
+        // Create an empty entry in the leaderboard table for the new user
+        const { error: leaderboardError } = await supabase
+          .from("Pokemon_Leaderboard")
+          .insert({
+            TrainerName: loginUser.user.user_metadata.trainer_name,
+            TriviaSolved: 0,
+            WinningStreak: 0,
+          });
+
+        if (leaderboardError) {
+          setErrorLogin(leaderboardError.message);
+        }
       }
+
       // Redirect to the main menu
       router.push("/menu");
     } else {
