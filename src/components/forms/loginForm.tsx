@@ -45,12 +45,19 @@ const LoginForm = () => {
         .eq("TrainerID", loginUser.user.id);
 
       if (Pokemon_Players?.length === 0) {
-        const {} = await supabase.from("Pokemon_Players").insert([
-          {
-            TrainerName: loginUser.user.user_metadata.trainer_name,
-            TrainerID: loginUser.user.id,
-          },
-        ]);
+        const { error: playerError } = await supabase
+          .from("Pokemon_Players")
+          .insert([
+            {
+              TrainerName: loginUser.user.user_metadata.trainer_name,
+              TrainerID: loginUser.user.id,
+            },
+          ]);
+
+        if (playerError) {
+          setErrorLogin(playerError.message);
+          return;
+        }
 
         // Create an empty entry in the leaderboard table for the new user
         const { error: leaderboardError } = await supabase
@@ -63,6 +70,7 @@ const LoginForm = () => {
 
         if (leaderboardError) {
           setErrorLogin(leaderboardError.message);
+          return;
         }
       }
 
