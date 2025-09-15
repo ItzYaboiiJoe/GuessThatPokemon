@@ -15,6 +15,8 @@ const GamePage = () => {
   const trainerName = localStorage.getItem("TrainerName");
   // State to hold the current Pokemon details
   const [pokemon, setPokemon] = useState<PokemonDetails | null>(null);
+  // State to manage if the correct answer was input
+  const [isCorrect, setIsCorrect] = useState(false);
 
   useEffect(() => {
     // Get the latest Pokémon once on page load
@@ -51,7 +53,9 @@ const GamePage = () => {
             width={300}
             height={300}
             priority
-            className="brightness-0 invert drop-shadow-[0_0_20px_rgba(255,255,0,0.7)]"
+            className={`${
+              !isCorrect ? "brightness-0 invert" : ""
+            } drop-shadow-[0_0_20px_rgba(255,255,0,0.7)]`}
           />
         ) : (
           // Pokeball Rotating Animation when loading
@@ -67,7 +71,12 @@ const GamePage = () => {
         <h1 className="text-3xl font-bold mt-6">Who’s That Pokémon?</h1>
 
         {/* Answer Section Component will load once pokemon is not null */}
-        {pokemon && <AnswerForm pokemonName={pokemon.PokemonName} />}
+        {pokemon && (
+          <AnswerForm
+            pokemonName={pokemon.PokemonName}
+            onCorrect={() => setIsCorrect(true)}
+          />
+        )}
       </div>
 
       {/* Empty Space */}

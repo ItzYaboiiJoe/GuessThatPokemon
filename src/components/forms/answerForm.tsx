@@ -16,6 +16,7 @@ import {
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
   pokemonName: string;
+  onCorrect: () => void;
 };
 
 // Define the form schema
@@ -23,20 +24,24 @@ const formSchema = z.object({
   answer: z.string().min(1, "You must enter an answer"),
 });
 
-const AnswerForm = ({ pokemonName }: PokemonNameProp) => {
+const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { answer: "" },
   });
 
+  let triesAttempt = 0;
+
   // Handle form submission
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const correctAnswer = pokemonName.toLowerCase().trim();
     const userAnswer = values.answer.toLowerCase().trim();
+    triesAttempt++;
 
     if (userAnswer === correctAnswer) {
       console.log("Correct Answer!");
+      onCorrect();
     } else {
       console.log("Wrong Answer");
     }
