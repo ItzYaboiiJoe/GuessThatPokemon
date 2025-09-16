@@ -74,12 +74,16 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
       console.log("Correct Answer!");
       // Modify Score if user is logged in
       if (checkUser?.length === 1) {
+        // update users completed trivia by one solvedTrivia + 1
         if (triesAttempt.current === 1) {
-          console.log("First Try");
+          // update users streak by one firstTryStreak + 1
         }
       }
       onCorrect();
     } else {
+      if (checkUser?.length === 1) {
+        // Update users streak back to 0
+      }
       console.log("Wrong Answer");
     }
   };
