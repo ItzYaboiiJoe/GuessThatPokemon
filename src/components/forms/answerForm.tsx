@@ -79,8 +79,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
       // check to update values if the player is an auth user
       if (checkUser?.length === 1) {
         const newSolved = solvedTrivia + 1;
-        const newStreak =
-          triesAttempt.current === 1 ? firstTryStreak + 1 : firstTryStreak;
+        const newStreak = triesAttempt.current === 1 ? firstTryStreak + 1 : 0;
 
         // Update table and increment the solved value by 1 and win streak if the user got it first try
         await updateLeaderboard(newSolved, newStreak, trainerName);
