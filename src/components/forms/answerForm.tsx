@@ -12,8 +12,11 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { LeaderboardEntry } from "../api/handleLeaderboard";
-import { checkLeaderboard } from "../api/handleLeaderboard";
+import {
+  LeaderboardEntry,
+  updateLeaderboard,
+  checkLeaderboard,
+} from "../api/handleLeaderboard";
 import { useState, useEffect, useRef } from "react";
 
 // Define the Pokemon Name Prop
@@ -65,26 +68,36 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   const triesAttempt = useRef(0);
 
   // Handle form submission
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const correctAnswer = pokemonName.toLowerCase().trim();
     const userAnswer = values.answer.toLowerCase().trim();
     triesAttempt.current++;
 
     if (userAnswer === correctAnswer) {
       console.log("Correct Answer!");
-      // Modify Score if user is logged in
+
       if (checkUser?.length === 1) {
-        // update users completed trivia by one solvedTrivia + 1
-        if (triesAttempt.current === 1) {
-          // update users streak by one firstTryStreak + 1
-        }
+        const newSolved = solvedTrivia + 1;
+        const newStreak =
+          triesAttempt.current === 1 ? firstTryStreak + 1 : firstTryStreak;
+
+        // Update table and increment the solved value by 1 and win streak if the user got it first try
+        await updateLeaderboard(newSolved, newStreak, trainerName);
+
+        // Update local state so next submit uses fresh values
+        setSolvedTrivia(newSolved);
+        setFirstTryStreak(newStreak);
       }
+
+      // A flag to send to the game page to display the image after correct answer submitted
       onCorrect();
     } else {
-      if (checkUser?.length === 1) {
-        // Update users streak back to 0
-      }
       console.log("Wrong Answer");
+      if (checkUser?.length === 1) {
+        // Reset First try streak back to 0
+        await updateLeaderboard(solvedTrivia, 0, trainerName);
+        setFirstTryStreak(0);
+      }
     }
   };
 

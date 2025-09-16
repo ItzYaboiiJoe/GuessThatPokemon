@@ -32,3 +32,21 @@ export const checkLeaderboard = async (trainerName: string) => {
 
   return data;
 };
+
+// This API is to update the current player stats
+export const updateLeaderboard = async (
+  userTriviaSolved: number,
+  userWinStreak: number,
+  trainerName: string
+) => {
+  const { data: updateData, error: errorUpdate } = await supabase
+    .from("Pokemon_Leaderboard")
+    .update({ TriviaSolved: userTriviaSolved, WinningStreak: userWinStreak })
+    .eq("TrainerName", trainerName);
+
+  if (errorUpdate) {
+    console.log(errorUpdate);
+  }
+
+  return updateData;
+};
