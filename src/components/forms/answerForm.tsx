@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { LeaderboardEntry } from "../api/handleLeaderboard";
 import { checkLeaderboard } from "../api/handleLeaderboard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
@@ -30,6 +30,9 @@ const formSchema = z.object({
 const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   // State to store the checking leaderboard api
   const [checkUser, setCheckUser] = useState<LeaderboardEntry[] | null>(null);
+  // State to manage leaderboard score
+  const [solvedTrivia, setSolvedTrivia] = useState(0);
+  const [firstTryStreak, setFirstTryStreak] = useState(0);
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,24 +52,32 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
     loadData();
   }, [trainerName]);
 
-  // Checking if the user exists or its a guest
-  if (checkUser?.length === 0) {
-    console.log("Its a guest user");
-  } else if (checkUser?.length === 1) {
-    console.log("Current Solved Trivia: ", checkUser?.[0].TriviaSolved);
-    console.log("Winning Streak:", checkUser?.[0].WinningStreak);
-  }
+  // Checking if the user exists or its a guest and fetch the current leaderboard score use has
+  useEffect(() => {
+    if (checkUser?.length === 0) {
+      console.log("Its a guest user");
+    } else if (checkUser?.length === 1) {
+      setSolvedTrivia(checkUser?.[0].TriviaSolved);
+      setFirstTryStreak(checkUser?.[0].WinningStreak);
+    }
+  }, [checkUser]);
 
-  let triesAttempt = 0;
+  const triesAttempt = useRef(0);
 
   // Handle form submission
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const correctAnswer = pokemonName.toLowerCase().trim();
     const userAnswer = values.answer.toLowerCase().trim();
-    triesAttempt++;
+    triesAttempt.current++;
 
     if (userAnswer === correctAnswer) {
       console.log("Correct Answer!");
+      // Modify Score if user is logged in
+      if (checkUser?.length === 1) {
+        if (triesAttempt.current === 1) {
+          console.log("First Try");
+        }
+      }
       onCorrect();
     } else {
       console.log("Wrong Answer");
