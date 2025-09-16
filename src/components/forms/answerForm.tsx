@@ -76,6 +76,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
     if (userAnswer === correctAnswer) {
       console.log("Correct Answer!");
 
+      // check to update values if the player is an auth user
       if (checkUser?.length === 1) {
         const newSolved = solvedTrivia + 1;
         const newStreak =
