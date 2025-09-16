@@ -12,6 +12,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { LeaderboardEntry } from "../api/handleLeaderboard";
+import { checkLeaderboard } from "../api/handleLeaderboard";
+import { useState, useEffect } from "react";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
@@ -25,11 +28,34 @@ const formSchema = z.object({
 });
 
 const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
+  // State to store the checking leaderboard api
+  const [checkUser, setCheckUser] = useState<LeaderboardEntry[] | null>(null);
+
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { answer: "" },
   });
+
+  // Fetch trainer name
+  const trainerName = localStorage.getItem("TrainerName")!;
+
+  // Call API to check if the user is a guest or an auth user to setup leaderboard stats update
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await checkLeaderboard(trainerName);
+      if (data) setCheckUser(data);
+    };
+    loadData();
+  }, [trainerName]);
+
+  // Checking if the user exists or its a guest
+  if (checkUser?.length === 0) {
+    console.log("Its a guest user");
+  } else if (checkUser?.length === 1) {
+    console.log("Current Solved Trivia: ", checkUser?.[0].TriviaSolved);
+    console.log("Winning Streak:", checkUser?.[0].WinningStreak);
+  }
 
   let triesAttempt = 0;
 

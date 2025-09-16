@@ -22,3 +22,13 @@ export const fetchLeaderboard = async () => {
 
   return data;
 };
+
+// This API to check if the user exists in the table
+export const checkLeaderboard = async (trainerName: string) => {
+  const { data } = await supabase
+    .from("Pokemon_Leaderboard")
+    .select("*")
+    .eq("TrainerName", trainerName);
+
+  return data;
+};
