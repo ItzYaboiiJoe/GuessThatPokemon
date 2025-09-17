@@ -74,6 +74,7 @@ const LoginForm = () => {
       }
 
       // Redirect to the main menu
+      localStorage.setItem("TrainerID", loginUser.user.id);
       router.push("/menu");
     } else {
       setErrorLogin(error.message);

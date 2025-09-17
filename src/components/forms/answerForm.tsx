@@ -17,6 +17,7 @@ import {
   updateLeaderboard,
   checkLeaderboard,
 } from "../api/handleLeaderboard";
+import { fetchPlayerInfo } from "../api/fetch";
 import { useState, useEffect, useRef } from "react";
 
 // Define the Pokemon Name Prop
@@ -36,6 +37,9 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   // State to manage leaderboard score
   const [solvedTrivia, setSolvedTrivia] = useState(0);
   const [firstTryStreak, setFirstTryStreak] = useState(0);
+  // State to store submission to prevent multiple submission
+  const [submissionDate, setSubmissionDate] = useState<string | null>(null);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,6 +49,13 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
 
   // Fetch trainer name
   const trainerName = localStorage.getItem("TrainerName")!;
+  // Fetch Trainer GUID
+  const trainerID = localStorage.getItem("TrainerID")!;
+  // Current Date
+  const currentDate = new Date();
+  const currentDateEastern = currentDate.toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+  });
 
   // Call API to check if the user is a guest or an auth user to setup leaderboard stats update
   useEffect(() => {
@@ -64,6 +75,22 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
       setFirstTryStreak(checkUser?.[0].WinningStreak);
     }
   }, [checkUser]);
+
+  // Fetch the latest submission Date the user has
+  useEffect(() => {
+    const loadID = async () => {
+      const lastSubmissionDate = await fetchPlayerInfo(trainerID);
+      setSubmissionDate(lastSubmissionDate![0].SubmissionDate);
+    };
+    loadID();
+  }, [trainerID]);
+
+  // Disable Submit button if the user submitted already current day
+  useEffect(() => {
+    if (submissionDate === currentDateEastern) {
+      setHasSubmitted(true);
+    }
+  }, [submissionDate, currentDateEastern]);
 
   const triesAttempt = useRef(0);
 
@@ -91,6 +118,8 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
 
       // A flag to send to the game page to display the image after correct answer submitted
       onCorrect();
+      // To disable the submit button
+      setHasSubmitted(true);
     } else {
       console.log("Wrong Answer");
       if (checkUser?.length === 1) {
@@ -113,13 +142,14 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input className="mt-10" {...field} />
+                <Input disabled={hasSubmitted} className="mt-10" {...field} />
               </FormControl>
               <FormMessage className="text-center" />
             </FormItem>
           )}
         />
         <Button
+          disabled={hasSubmitted}
           type="submit"
           className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
         >
