@@ -39,14 +39,10 @@ export const updateLeaderboard = async (
   userWinStreak: number,
   trainerName: string
 ) => {
-  const { data: updateData, error: errorUpdate } = await supabase
+  const { data: updateData } = await supabase
     .from("Pokemon_Leaderboard")
     .update({ TriviaSolved: userTriviaSolved, WinningStreak: userWinStreak })
     .eq("TrainerName", trainerName);
-
-  if (errorUpdate) {
-    console.log(errorUpdate);
-  }
 
   return updateData;
 };
