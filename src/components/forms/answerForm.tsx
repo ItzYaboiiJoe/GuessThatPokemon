@@ -68,9 +68,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
 
   // Checking if the user exists or its a guest and fetch the current leaderboard score use has
   useEffect(() => {
-    if (checkUser?.length === 0) {
-      console.log("Its a guest user");
-    } else if (checkUser?.length === 1) {
+    if (checkUser?.length === 1) {
       setSolvedTrivia(checkUser?.[0].TriviaSolved);
       setFirstTryStreak(checkUser?.[0].WinningStreak);
     }
