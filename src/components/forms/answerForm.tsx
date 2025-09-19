@@ -43,6 +43,12 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   // State to handle results modal visibility
   const [resultsOpen, setResultsOpen] = useState(false);
+  // State for passing results to modal
+  const [resultTitle, setResultTitle] = useState("");
+  const [resultDescription, setResultDescription] = useState("");
+  const [resultStatus, setResultStatus] = useState<
+    "correct" | "wrong" | undefined
+  >(undefined);
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -106,7 +112,9 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
     triesAttempt.current++;
 
     if (userAnswer === correctAnswer) {
-      console.log("Correct Answer!");
+      setResultTitle("Correct");
+      setResultDescription("Correct Description");
+      setResultStatus("correct");
       resultsButton();
 
       // check to update values if the player is an auth user
@@ -128,7 +136,9 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
       setHasSubmitted(true);
     } else {
       resultsButton();
-      console.log("Wrong Answer");
+      setResultTitle("Wrong");
+      setResultDescription("Wrong Description");
+      setResultStatus("wrong");
       if (checkUser?.length === 1) {
         // Reset First try streak back to 0
         await updateLeaderboard(solvedTrivia, 0, trainerName);
@@ -165,7 +175,13 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
           </Button>
         </form>
       </Form>
-      <Results open={resultsOpen} setOpen={setResultsOpen} />
+      <Results
+        open={resultsOpen}
+        setOpen={setResultsOpen}
+        title={resultTitle}
+        description={resultDescription}
+        status={resultStatus}
+      />
     </>
   );
 };

@@ -14,9 +14,18 @@ import { Button } from "../ui/button";
 interface resultsProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  title: string;
+  description: string;
+  status?: "correct" | "wrong";
 }
 
-const Results = ({ open, setOpen }: resultsProps) => {
+const Results = ({
+  open,
+  setOpen,
+  title,
+  description,
+  status,
+}: resultsProps) => {
   // Function to close the modal
   const handleClose = () => {
     setOpen(false);
@@ -30,9 +39,19 @@ const Results = ({ open, setOpen }: resultsProps) => {
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
         <DialogHeader className="text-center">
-          <DialogTitle className="text-center">Test Title</DialogTitle>
+          <DialogTitle
+            className={`text-center ${
+              status === "correct"
+                ? "text-green-600"
+                : status === "wrong"
+                ? "text-red-600"
+                : ""
+            }`}
+          >
+            {title}
+          </DialogTitle>
           <DialogDescription className="text-center">
-            Test Description
+            {description}
           </DialogDescription>
         </DialogHeader>
 
