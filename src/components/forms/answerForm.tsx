@@ -18,6 +18,7 @@ import {
   checkLeaderboard,
 } from "../api/handleLeaderboard";
 import { fetchPlayerInfo } from "../api/fetch";
+import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
 
 // Define the Pokemon Name Prop
@@ -40,12 +41,18 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   // State to store submission to prevent multiple submission
   const [submissionDate, setSubmissionDate] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  // State to handle results modal visibility
+  const [resultsOpen, setResultsOpen] = useState(false);
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { answer: "" },
   });
+
+  const resultsButton = () => {
+    setResultsOpen(true);
+  };
 
   // Fetch trainer name
   const trainerName = localStorage.getItem("TrainerName")!;
@@ -100,6 +107,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
 
     if (userAnswer === correctAnswer) {
       console.log("Correct Answer!");
+      resultsButton();
 
       // check to update values if the player is an auth user
       if (checkUser?.length === 1) {
@@ -119,6 +127,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
       // To disable the submit button
       setHasSubmitted(true);
     } else {
+      resultsButton();
       console.log("Wrong Answer");
       if (checkUser?.length === 1) {
         // Reset First try streak back to 0
@@ -129,32 +138,35 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
   };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col items-center"
-      >
-        <FormField
-          control={form.control}
-          name="answer"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input disabled={hasSubmitted} className="mt-10" {...field} />
-              </FormControl>
-              <FormMessage className="text-center" />
-            </FormItem>
-          )}
-        />
-        <Button
-          disabled={hasSubmitted}
-          type="submit"
-          className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col items-center"
         >
-          Submit
-        </Button>
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="answer"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input disabled={hasSubmitted} className="mt-10" {...field} />
+                </FormControl>
+                <FormMessage className="text-center" />
+              </FormItem>
+            )}
+          />
+          <Button
+            disabled={hasSubmitted}
+            type="submit"
+            className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
+          >
+            Submit
+          </Button>
+        </form>
+      </Form>
+      <Results open={resultsOpen} setOpen={setResultsOpen} />
+    </>
   );
 };
 

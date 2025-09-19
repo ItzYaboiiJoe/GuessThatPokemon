@@ -11,9 +11,19 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 
-const Results = () => {
+interface resultsProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const Results = ({ open, setOpen }: resultsProps) => {
+  // Function to close the modal
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         className="w-96 rounded-2xl shadow-2xl bg-gradient-to-b from-yellow-100 via-orange-100 to-white"
         onInteractOutside={(e) => e.preventDefault()}
@@ -31,7 +41,9 @@ const Results = () => {
         </div>
 
         <div className="mt-6 flex justify-center">
-          <Button>Close</Button>
+          <Button className="hover:cursor-pointer" onClick={handleClose}>
+            Close
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
