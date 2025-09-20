@@ -24,6 +24,8 @@ import { useState, useEffect, useRef } from "react";
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
   pokemonName: string;
+  pokemonType: string;
+  pokemonCry: string;
   onCorrect: () => void;
 };
 
@@ -32,7 +34,12 @@ const formSchema = z.object({
   answer: z.string().min(1, "You must enter an answer"),
 });
 
-const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
+const AnswerForm = ({
+  pokemonName,
+  pokemonType,
+  pokemonCry,
+  onCorrect,
+}: PokemonNameProp) => {
   // State to store the checking leaderboard api
   const [checkUser, setCheckUser] = useState<LeaderboardEntry[] | null>(null);
   // State to manage leaderboard score
@@ -114,7 +121,11 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
     if (userAnswer === correctAnswer) {
       setResultTitle("Correct");
       setResultDescription(
-        pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1) + " Type: "
+        pokemonName.charAt(0).toUpperCase() +
+          pokemonName.slice(1) +
+          " is a " +
+          pokemonType +
+          " type pokemon"
       );
       setResultStatus("correct");
       resultsButton();
@@ -138,7 +149,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
       setHasSubmitted(true);
     } else {
       resultsButton();
-      setResultTitle("Wrong");
+      setResultTitle("That is incorrect, Try again!");
       setResultDescription("Wrong Description");
       setResultStatus("wrong");
       if (checkUser?.length === 1) {
@@ -183,6 +194,7 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
         title={resultTitle}
         description={resultDescription}
         status={resultStatus}
+        cry={pokemonCry}
       />
     </>
   );

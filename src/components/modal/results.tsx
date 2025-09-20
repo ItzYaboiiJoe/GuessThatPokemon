@@ -2,6 +2,8 @@
 // It will display either correct or incorrect
 // It will also display the results when the user already submitted the answer for the day
 
+"use client";
+
 import {
   Dialog,
   DialogContent,
@@ -10,6 +12,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
+import { useRef } from "react";
 
 interface resultsProps {
   open: boolean;
@@ -17,6 +20,7 @@ interface resultsProps {
   title: string;
   description: string;
   status?: "correct" | "wrong";
+  cry: string;
 }
 
 const Results = ({
@@ -25,10 +29,19 @@ const Results = ({
   title,
   description,
   status,
+  cry,
 }: resultsProps) => {
   // Function to close the modal
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleCryButton = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
   };
 
   return (
@@ -40,7 +53,7 @@ const Results = ({
       >
         <DialogHeader className="text-center">
           <DialogTitle
-            className={`text-center ${
+            className={`text-center text-2xl ${
               status === "correct"
                 ? "text-green-600"
                 : status === "wrong"
@@ -54,8 +67,12 @@ const Results = ({
           {description}
         </DialogHeader>
 
+        {/* Handle Cry Button if status is correct*/}
         <div>
-          <span>Insert Hints and pokemon types here</span>
+          <audio ref={audioRef} preload="auto" src={cry}></audio>
+          {status === "correct" && (
+            <Button onClick={handleCryButton}>Cry</Button>
+          )}
         </div>
 
         <div className="mt-6 flex justify-center">

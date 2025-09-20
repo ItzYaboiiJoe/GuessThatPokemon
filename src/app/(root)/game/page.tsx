@@ -74,6 +74,8 @@ const GamePage = () => {
         {pokemon && (
           <AnswerForm
             pokemonName={pokemon.PokemonName}
+            pokemonType={pokemon.PokemonType}
+            pokemonCry={pokemon.PokemonCry}
             onCorrect={() => setIsCorrect(true)}
           />
         )}
