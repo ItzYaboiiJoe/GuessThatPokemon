@@ -113,7 +113,9 @@ const AnswerForm = ({ pokemonName, onCorrect }: PokemonNameProp) => {
 
     if (userAnswer === correctAnswer) {
       setResultTitle("Correct");
-      setResultDescription("Correct Description");
+      setResultDescription(
+        pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1) + " Type: "
+      );
       setResultStatus("correct");
       resultsButton();
 

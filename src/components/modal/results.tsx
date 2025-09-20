@@ -50,9 +50,8 @@ const Results = ({
           >
             {title}
           </DialogTitle>
-          <DialogDescription className="text-center">
-            {description}
-          </DialogDescription>
+          <DialogDescription></DialogDescription>
+          {description}
         </DialogHeader>
 
         <div>
