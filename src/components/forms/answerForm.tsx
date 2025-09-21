@@ -56,6 +56,9 @@ const AnswerForm = ({
   const [resultStatus, setResultStatus] = useState<
     "correct" | "wrong" | undefined
   >(undefined);
+  // State to manage displaying Hints on incorrect
+  const [firstHint, setFirstHint] = useState(false);
+  const [secondHint, setSecondHint] = useState(false);
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -120,6 +123,8 @@ const AnswerForm = ({
 
     if (userAnswer === correctAnswer) {
       setResultTitle("Correct");
+      setFirstHint(false);
+      setSecondHint(false);
       setResultDescription(
         pokemonName.charAt(0).toUpperCase() +
           pokemonName.slice(1) +
@@ -150,7 +155,13 @@ const AnswerForm = ({
     } else {
       resultsButton();
       setResultTitle("That is incorrect, Try again!");
-      setResultDescription("Wrong Description");
+      if (triesAttempt.current === 3) {
+        setFirstHint(true);
+        setResultDescription("Here is a hint:");
+      } else if (triesAttempt.current === 5) {
+        setSecondHint(true);
+        setResultDescription("Here is a second Hint:");
+      }
       setResultStatus("wrong");
       if (checkUser?.length === 1) {
         // Reset First try streak back to 0
@@ -195,6 +206,8 @@ const AnswerForm = ({
         description={resultDescription}
         status={resultStatus}
         cry={pokemonCry}
+        firstHint={firstHint}
+        secondHint={secondHint}
       />
     </>
   );

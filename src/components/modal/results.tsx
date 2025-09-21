@@ -21,6 +21,8 @@ interface resultsProps {
   description: string;
   status?: "correct" | "wrong";
   cry: string;
+  firstHint: boolean;
+  secondHint: boolean;
 }
 
 const Results = ({
@@ -30,6 +32,8 @@ const Results = ({
   description,
   status,
   cry,
+  firstHint,
+  secondHint,
 }: resultsProps) => {
   // Function to close the modal
   const handleClose = () => {
@@ -71,8 +75,10 @@ const Results = ({
           >
             {title}
           </DialogTitle>
-          <DialogDescription className="text-gray-700 text-lg">
-            {description}
+          <DialogDescription className="text-gray-700 text-lg space-y-2">
+            {status === "correct" && <div>{description}</div>}
+            {firstHint && <div>{description}</div>}
+            {secondHint && <div>{description}</div>}
           </DialogDescription>
         </DialogHeader>
 
