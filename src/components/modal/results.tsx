@@ -52,12 +52,12 @@ const Results = ({
   // JSX for Cry Button
   const cryButton = () => {
     return (
-      <div className="mt-4">
+      <div className="mt-4 animate-bounce">
         <audio ref={audioRef} preload="auto" src={cry}></audio>
         <Button
           variant="default"
           onClick={handleCryButton}
-          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold hover:cursor-pointer"
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold hover:cursor-pointer shadow-md"
         >
           ▶ Cry
         </Button>
@@ -83,7 +83,7 @@ const Results = ({
           <DialogTitle
             className={`text-2xl font-bold mb-2 ${
               status === "correct"
-                ? "text-green-600"
+                ? "text-green-600 text-center"
                 : status === "wrong"
                 ? "text-red-600"
                 : "text-gray-700"
@@ -91,12 +91,31 @@ const Results = ({
           >
             {title}
           </DialogTitle>
-          <DialogDescription className="text-gray-700 text-lg space-y-2">
-            {status === "correct" && <div>{description}</div>}
-            {firstHint && (
-              <div>Here is a Hint: The pokemon is a {description} type</div>
+          <DialogDescription className="text-gray-700 text-lg space-y-4 text-left">
+            {status === "correct" && (
+              <div className="bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
+                <p>
+                  <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                  <span className="italic">
+                    {description.replace(description.split(" ")[0], "")}
+                  </span>
+                </p>
+              </div>
             )}
-            {secondHint && <div>Here is a second Hint: {cryButton()}</div>}
+
+            {firstHint && (
+              <div className="bg-yellow-100 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm">
+                <span className="font-semibold">Hint 1:</span> The Pokémon is a{" "}
+                <span className="font-bold">{description}</span> type.
+              </div>
+            )}
+
+            {secondHint && (
+              <div className="bg-blue-100 border-l-4 border-blue-400 p-3 rounded-md shadow-sm">
+                <span className="font-semibold">Hint 2:</span> Need more help?
+                <div className="mt-2 flex justify-center">{cryButton()}</div>
+              </div>
+            )}
           </DialogDescription>
         </DialogHeader>
 
