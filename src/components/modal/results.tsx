@@ -49,6 +49,22 @@ const Results = ({
     }
   };
 
+  // JSX for Cry Button
+  const cryButton = () => {
+    return (
+      <div className="mt-4">
+        <audio ref={audioRef} preload="auto" src={cry}></audio>
+        <Button
+          variant="default"
+          onClick={handleCryButton}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold hover:cursor-pointer"
+        >
+          ▶ Cry
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
@@ -77,24 +93,15 @@ const Results = ({
           </DialogTitle>
           <DialogDescription className="text-gray-700 text-lg space-y-2">
             {status === "correct" && <div>{description}</div>}
-            {firstHint && <div>{description}</div>}
-            {secondHint && <div>{description}</div>}
+            {firstHint && (
+              <div>Here is a Hint: The pokemon is a {description} type</div>
+            )}
+            {secondHint && <div>Here is a second Hint: {cryButton()}</div>}
           </DialogDescription>
         </DialogHeader>
 
         {/* Handle Cry Button if status is correct*/}
-        {status === "correct" && (
-          <div className="mt-4">
-            <audio ref={audioRef} preload="auto" src={cry}></audio>
-            <Button
-              variant="default"
-              onClick={handleCryButton}
-              className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold hover:cursor-pointer"
-            >
-              ▶ Cry
-            </Button>
-          </div>
-        )}
+        {status === "correct" && cryButton()}
 
         {/* Close button */}
         <div className="mt-6">

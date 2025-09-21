@@ -157,10 +157,9 @@ const AnswerForm = ({
       setResultTitle("That is incorrect, Try again!");
       if (triesAttempt.current === 3) {
         setFirstHint(true);
-        setResultDescription("Here is a hint:");
+        setResultDescription(pokemonType);
       } else if (triesAttempt.current === 5) {
         setSecondHint(true);
-        setResultDescription("Here is a second Hint:");
       }
       setResultStatus("wrong");
       if (checkUser?.length === 1) {
