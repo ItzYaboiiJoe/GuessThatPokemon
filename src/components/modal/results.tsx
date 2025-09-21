@@ -36,6 +36,7 @@ const Results = ({
     setOpen(false);
   };
 
+  // Create Cry Audio Functionality
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleCryButton = () => {
@@ -47,36 +48,55 @@ const Results = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className="w-96 rounded-2xl shadow-2xl bg-gradient-to-b from-yellow-100 via-orange-100 to-white"
+        className={`w-[400px] rounded-2xl shadow-xl border p-6 text-center
+          ${
+            status === "correct"
+              ? "bg-gradient-to-b from-green-100 via-white to-green-50 border-green-300"
+              : status === "wrong"
+              ? "bg-gradient-to-b from-red-100 via-white to-red-50 border-red-300"
+              : "bg-gradient-to-b from-gray-100 via-white to-gray-50"
+          }`}
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
-        <DialogHeader className="text-center">
+        <DialogHeader>
           <DialogTitle
-            className={`text-center text-2xl ${
+            className={`text-2xl font-bold mb-2 ${
               status === "correct"
                 ? "text-green-600"
                 : status === "wrong"
                 ? "text-red-600"
-                : ""
+                : "text-gray-700"
             }`}
           >
             {title}
           </DialogTitle>
-          <DialogDescription></DialogDescription>
-          {description}
+          <DialogDescription className="text-gray-700 text-lg">
+            {description}
+          </DialogDescription>
         </DialogHeader>
 
         {/* Handle Cry Button if status is correct*/}
-        <div>
-          <audio ref={audioRef} preload="auto" src={cry}></audio>
-          {status === "correct" && (
-            <Button onClick={handleCryButton}>Cry</Button>
-          )}
-        </div>
+        {status === "correct" && (
+          <div className="mt-4">
+            <audio ref={audioRef} preload="auto" src={cry}></audio>
+            <Button
+              variant="default"
+              onClick={handleCryButton}
+              className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold hover:cursor-pointer"
+            >
+              ▶ Cry
+            </Button>
+          </div>
+        )}
 
-        <div className="mt-6 flex justify-center">
-          <Button className="hover:cursor-pointer" onClick={handleClose}>
+        {/* Close button */}
+        <div className="mt-6">
+          <Button
+            onClick={handleClose}
+            variant="outline"
+            className="px-6 py-2 rounded-lg hover:cursor-pointer"
+          >
             Close
           </Button>
         </div>
