@@ -54,13 +54,15 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold drop-shadow text-center">
+          <DialogTitle className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-red-500 text-center">
             Leaderboard
           </DialogTitle>
+
           <DialogDescription asChild>
             <Table className="text-center">
               <TableHeader>
                 <TableRow className="border-gray-400">
+                  <TableHead className="text-center">Rank</TableHead>
                   <TableHead className="text-center">Trainer</TableHead>
                   <TableHead className="text-center">Trivia Solved</TableHead>
                   <TableHead className="text-center">
@@ -69,11 +71,19 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {leaderboardData.map((leaderboardData) => (
-                  <TableRow className="border-none" key={leaderboardData.id}>
-                    <TableCell>{leaderboardData.TrainerName}</TableCell>
-                    <TableCell>{leaderboardData.TriviaSolved}</TableCell>
-                    <TableCell>{leaderboardData.WinningStreak}</TableCell>
+                {leaderboardData.map((entry, index) => (
+                  <TableRow className="border-none" key={entry.id}>
+                    {/* Rank */}
+                    <TableCell>{index + 1}</TableCell>
+
+                    {/* Trainer */}
+                    <TableCell>{entry.TrainerName}</TableCell>
+
+                    {/* Trivia Solved */}
+                    <TableCell>{entry.TriviaSolved}</TableCell>
+
+                    {/* First Try Streak */}
+                    <TableCell>{entry.WinningStreak}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
