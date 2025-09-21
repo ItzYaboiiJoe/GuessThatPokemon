@@ -53,3 +53,13 @@ export const fetchPlayerInfo = async (trainerGuiID: string) => {
 
   return playerInfo;
 };
+
+// This API to update the player submission Date
+export const updateDate = async (currentDate: Date, trainerGuiID: string) => {
+  const { data: res } = await supabase
+    .from("Pokemon_Players")
+    .update({ SubmissionDate: currentDate })
+    .eq("TrainerID", trainerGuiID);
+
+  return res;
+};

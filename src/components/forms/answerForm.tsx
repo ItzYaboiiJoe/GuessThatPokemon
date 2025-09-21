@@ -17,7 +17,7 @@ import {
   updateLeaderboard,
   checkLeaderboard,
 } from "../api/handleLeaderboard";
-import { fetchPlayerInfo } from "../api/fetch";
+import { fetchPlayerInfo, updateDate } from "../api/fetch";
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
 
@@ -152,6 +152,7 @@ const AnswerForm = ({
       onCorrect();
       // To disable the submit button
       setHasSubmitted(true);
+      updateDate(currentDate, trainerID);
     } else {
       resultsButton();
       setResultTitle("That is incorrect, Try again!");
