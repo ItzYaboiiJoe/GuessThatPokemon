@@ -85,7 +85,7 @@ const Results = ({
               status === "correct"
                 ? "text-green-600 text-center"
                 : status === "wrong"
-                ? "text-red-600"
+                ? "text-red-600 text-center"
                 : "text-gray-700"
             }`}
           >
