@@ -94,12 +94,12 @@ const Results = ({
           <DialogDescription className="text-gray-700 text-lg space-y-4 text-left">
             {status === "correct" && (
               <div className="bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
-                <p>
+                <div>
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}
                   <span className="italic">
                     {description.replace(description.split(" ")[0], "")}
                   </span>
-                </p>
+                </div>
               </div>
             )}
 

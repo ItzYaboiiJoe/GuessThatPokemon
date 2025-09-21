@@ -94,8 +94,12 @@ const AnswerForm = ({
     if (checkUser?.length === 1) {
       setSolvedTrivia(checkUser?.[0].TriviaSolved);
       setFirstTryStreak(checkUser?.[0].WinningStreak);
+      // Disable Submit button if the user submitted already current day
+      if (submissionDate === currentDateEastern) {
+        setHasSubmitted(true);
+      }
     }
-  }, [checkUser]);
+  }, [checkUser, submissionDate, currentDateEastern]);
 
   // Fetch the latest submission Date the user has
   useEffect(() => {
@@ -105,13 +109,6 @@ const AnswerForm = ({
     };
     loadID();
   }, [trainerID]);
-
-  // Disable Submit button if the user submitted already current day
-  useEffect(() => {
-    if (submissionDate === currentDateEastern) {
-      setHasSubmitted(true);
-    }
-  }, [submissionDate, currentDateEastern]);
 
   const triesAttempt = useRef(0);
 
@@ -152,6 +149,7 @@ const AnswerForm = ({
       onCorrect();
       // To disable the submit button
       setHasSubmitted(true);
+      // Update user submissionDate on the database
       updateDate(currentDate, trainerID);
     } else {
       resultsButton();
