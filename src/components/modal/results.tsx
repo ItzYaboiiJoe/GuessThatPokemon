@@ -18,7 +18,7 @@ interface resultsProps {
   setOpen: (open: boolean) => void;
   title: string;
   description: string;
-  status?: "correct" | "wrong";
+  status?: "correct" | "wrong" | "results";
   cry: string;
   firstHint: boolean;
   secondHint: boolean;
@@ -72,6 +72,8 @@ const Results = ({
           ${
             status === "correct"
               ? "bg-gradient-to-b from-green-100 via-white to-green-50 border-green-300"
+              : status === "results"
+              ? "bg-gradient-to-b from-yellow-100 via-white to-yellow-50 border-yellow-300"
               : status === "wrong"
               ? "bg-gradient-to-b from-red-100 via-white to-red-50 border-red-300"
               : "bg-gradient-to-b from-gray-100 via-white to-gray-50"
@@ -86,13 +88,24 @@ const Results = ({
                 ? "text-green-600 text-center"
                 : status === "wrong"
                 ? "text-red-600 text-center"
-                : "text-gray-700"
+                : status === "results"
+                ? "text-yellow-600 text-center"
+                : ""
             }`}
           >
             {title}
           </DialogTitle>
 
           {/* Render Results based on the user submit */}
+          {status === "results" && (
+            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm text-center">
+              <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+              <span className="italic">
+                {description.replace(description.split(" ")[0], "")}
+              </span>
+            </div>
+          )}
+
           {status === "correct" && (
             <div className="bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
               <span className="font-bold">{description.split(" ")[0]}</span>{" "}
@@ -118,7 +131,7 @@ const Results = ({
         </DialogHeader>
 
         {/* Handle Cry Button if status is correct*/}
-        {status === "correct" && cryButton()}
+        {(status === "correct" || status === "results") && cryButton()}
 
         {/* Close button */}
         <div className="mt-6">

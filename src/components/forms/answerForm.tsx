@@ -54,7 +54,7 @@ const AnswerForm = ({
   const [resultTitle, setResultTitle] = useState("");
   const [resultDescription, setResultDescription] = useState("");
   const [resultStatus, setResultStatus] = useState<
-    "correct" | "wrong" | undefined
+    "correct" | "wrong" | "results" | undefined
   >(undefined);
   // State to manage displaying Hints on incorrect
   const [firstHint, setFirstHint] = useState(false);
@@ -66,8 +66,25 @@ const AnswerForm = ({
     defaultValues: { answer: "" },
   });
 
+  // Open the Modal
   const resultsButton = () => {
     setResultsOpen(true);
+  };
+
+  // Results Button Render Modal
+  const postResultButton = () => {
+    setResultsOpen(true);
+    setResultTitle(pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1));
+    setFirstHint(false);
+    setSecondHint(false);
+    setResultDescription(
+      pokemonName.charAt(0).toUpperCase() +
+        pokemonName.slice(1) +
+        " is a " +
+        pokemonType +
+        " type pokemon"
+    );
+    setResultStatus("results");
   };
 
   // Fetch trainer name
@@ -97,9 +114,10 @@ const AnswerForm = ({
       // Disable Submit button if the user submitted already current day
       if (submissionDate === currentDateEastern) {
         setHasSubmitted(true);
+        onCorrect();
       }
     }
-  }, [checkUser, submissionDate, currentDateEastern]);
+  }, [checkUser, submissionDate, currentDateEastern, onCorrect]);
 
   // Fetch the latest submission Date the user has
   useEffect(() => {
@@ -188,13 +206,24 @@ const AnswerForm = ({
               </FormItem>
             )}
           />
-          <Button
-            disabled={hasSubmitted}
-            type="submit"
-            className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
-          >
-            Submit
-          </Button>
+          {/* Display Results or Submit Button based on submission date */}
+          {!hasSubmitted ? (
+            <Button
+              disabled={hasSubmitted}
+              type="submit"
+              className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              onClick={postResultButton}
+              className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
+            >
+              Results
+            </Button>
+          )}
         </form>
       </Form>
       <Results
