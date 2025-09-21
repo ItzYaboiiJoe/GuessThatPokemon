@@ -21,6 +21,11 @@ export default function RootLayout({
         className={`${inter.className} antialiased bg-gradient-to-b from-yellow-200 via-orange-300 to-red-400`}
       >
         {children}
+
+        {/* Version Badge */}
+        <div className="fixed bottom-2 right-2 text-xs text-gray-700 bg-white/70 px-2 py-1 rounded-md shadow-md">
+          Version 0.5 (Beta)
+        </div>
       </body>
     </html>
   );
