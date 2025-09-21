@@ -153,7 +153,7 @@ const AnswerForm = ({
       updateDate(currentDate, trainerID);
     } else {
       resultsButton();
-      setResultTitle("That is incorrect, Try again!");
+      setResultTitle("That is incorrect, try again!");
       if (triesAttempt.current === 3) {
         setFirstHint(true);
         setResultDescription(pokemonType);
