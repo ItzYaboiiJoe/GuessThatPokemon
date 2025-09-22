@@ -52,6 +52,7 @@ const GamePage = () => {
             alt="Failed to Fetch Pokemon (Sorry)"
             width={300}
             height={300}
+            draggable={false}
             priority
             className={`${
               !isCorrect ? "brightness-0 invert" : ""
