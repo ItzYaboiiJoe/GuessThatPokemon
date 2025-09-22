@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../assets/globals.css";
-import { APP_DESCRIPTION, APP_NAME } from "../lib/constants";
+import { APP_DESCRIPTION, APP_NAME, APP_VERSION } from "../lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
 
         {/* Version Badge */}
         <div className="fixed bottom-2 right-2 text-xs text-gray-700 bg-white/70 px-2 py-1 rounded-md shadow-md">
-          Version 0.5 (Beta)
+          {APP_VERSION}
         </div>
       </body>
     </html>
