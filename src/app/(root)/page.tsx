@@ -20,17 +20,18 @@ export default function Home() {
         {/* Title */}
         <h1
           className="
-    text-4xl md:text-6xl font-extrabold mb-6
-    bg-gradient-to-r from-yellow-300 via-orange-400 to-red-500
+    text-5xl md:text-7xl font-extrabold mb-6
+    bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600
     bg-clip-text text-transparent
-    drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]
+    drop-shadow-[0_4px_6px_rgba(0,0,0,0.4)]
+    tracking-wide
   "
         >
           Who’s That Pokémon?
         </h1>
 
         {/* Pokeball Image */}
-        <div className="mb-8 animate-bounce">
+        <div className="mb-8 animate-[bounce_2s_infinite]">
           <Image
             src="/pokeball.png"
             alt="Pokeball"
@@ -46,7 +47,7 @@ export default function Home() {
             <Button
               size={"lg"}
               variant="secondary"
-              className="bg-yellow-400 text-black font-bold shadow-2xl hover:bg-yellow-300 hover:cursor-pointer"
+              className="bg-yellow-400 text-black font-bold shadow-2xl hover:bg-yellow-300 rounded-full hover:cursor-pointer"
             >
               Play as Guest
             </Button>
@@ -55,7 +56,7 @@ export default function Home() {
             <Button
               size={"lg"}
               variant="default"
-              className="bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-2xl hover:cursor-pointer"
+              className="bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-2xl rounded-full hover:cursor-pointer"
             >
               Login / Register
             </Button>
@@ -66,7 +67,7 @@ export default function Home() {
         <Button
           variant={"link"}
           onClick={leaderboardButton}
-          className="mt-6 text-white underline cursor-pointer hover:text-gray-400"
+          className="mt-6 text-white underline-offset-4 cursor-pointer hover:text-yellow-300 transition-colors"
         >
           View Leaderboard
         </Button>

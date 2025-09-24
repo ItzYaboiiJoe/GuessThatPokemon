@@ -39,9 +39,19 @@ const GamePage = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-indigo-900 via-purple-800 to-black text-white p-6">
+      {/* Watermark Pokeball */}
+      <Image
+        src="/pokeball.png"
+        alt="Pokeball Watermark"
+        width={600}
+        height={600}
+        className="absolute top-1/4 opacity-5 pointer-events-none"
+      />
       {/* Trainer Name */}
       <div className="w-full flex justify-between items-center">
-        <h2 className="text-lg font-bold">Trainer: {trainerName}</h2>
+        <h2 className="text-sm md:text-base font-semibold bg-white/10 px-3 py-1 rounded-full shadow-md">
+          Trainer: {trainerName}
+        </h2>
       </div>
 
       {/* Pokémon Image */}
@@ -56,7 +66,7 @@ const GamePage = () => {
             priority
             className={`${
               !isCorrect ? "brightness-0 invert" : ""
-            } drop-shadow-[0_0_20px_rgba(255,255,0,0.7)]`}
+            } drop-shadow-[0_0_20px_rgba(200,100,255,0.7)]`}
           />
         ) : (
           // Pokeball Rotating Animation when loading
@@ -74,8 +84,7 @@ const GamePage = () => {
     text-4xl md:text-5xl font-extrabold mt-6
     text-transparent bg-clip-text 
     bg-gradient-to-r from-pink-400 via-yellow-300 to-pink-400
-    drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]
-  "
+    drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] animate-[pulseGlow_3s_ease-in-out_infinite]"
         >
           Who’s That Pokémon?
         </h1>
@@ -98,7 +107,7 @@ const GamePage = () => {
       <div>
         <Link
           href="/"
-          className="mt-6 inline-block text-gray-500 text-sm font-medium hover:text-gray-600 transition"
+          className="mt-6 inline-block text-red-500 text-sm italic hover:underline hover:text-red-700 transition"
         >
           ← Back to Menu
         </Link>

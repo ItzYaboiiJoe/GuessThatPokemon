@@ -19,14 +19,14 @@ const GuestPage = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="bg-white/90 rounded-xl shadow-xl p-8 w-full max-w-md text-center">
+      <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 w-full max-w-md text-center">
         {/* Title */}
         <h1 className="text-2xl font-bold mb-4">Welcome Trainer</h1>
         <h1 className="text-2xl font-bold mb-4">{guestTrainerName}</h1>
 
         {/* Start Button */}
         <Link href="/game">
-          <Button className="w-full bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer">
+          <Button className="w-full bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 hover:cursor-pointer">
             Start Game
           </Button>
         </Link>
@@ -39,7 +39,7 @@ const GuestPage = () => {
         {/* Back to Menu Link */}
         <Link
           href="/"
-          className="mt-3 inline-block text-red-600 text-sm font-medium hover:text-red-800 transition"
+          className="mt-3 inline-block text-red-600 text-sm font-medium hover:underline hover:text-red-800 transition"
         >
           ← Back to Menu
         </Link>

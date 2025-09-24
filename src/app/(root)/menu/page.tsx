@@ -62,7 +62,7 @@ const Menu = () => {
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-center">
-        <div className="bg-white/90 rounded-xl shadow-xl p-8 w-full max-w-md text-center">
+        <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 w-full max-w-md text-center">
           {/* Title */}
           <h1 className="text-2xl font-bold mb-4">Welcome Trainer</h1>
           <h1 className="text-2xl font-bold mb-4">{trainerName}</h1>
@@ -70,7 +70,7 @@ const Menu = () => {
           <div className="grid grid-cols-2 gap-4">
             {/* Start Button */}
             <Link href="/game">
-              <Button className="w-full bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:cursor-pointer">
+              <Button className="w-full bg-yellow-400 text-black font-bold hover:bg-yellow-300 rounded-full hover:cursor-pointer">
                 Start Game
               </Button>
             </Link>
@@ -78,7 +78,7 @@ const Menu = () => {
             {/* Leaderboard */}
             <Button
               onClick={leaderboardButton}
-              className="bg-red-500 text-white cursor-pointer hover:text-gray-200"
+              className="bg-red-500 text-white cursor-pointer rounded-full hover:bg-orange-500"
             >
               View Leaderboard
             </Button>
@@ -87,7 +87,7 @@ const Menu = () => {
           {/* Back to Menu Link */}
           <Link
             href="/"
-            className="mt-6 inline-block text-red-600 text-sm font-medium hover:text-red-800 transition"
+            className="mt-6 inline-block text-red-600 text-sm font-medium hover:underline hover:text-red-800 transition"
           >
             ← Back to Menu
           </Link>

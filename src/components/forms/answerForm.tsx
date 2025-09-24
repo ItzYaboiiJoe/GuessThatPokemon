@@ -211,7 +211,7 @@ const AnswerForm = ({
             <Button
               disabled={hasSubmitted}
               type="submit"
-              className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
+              className="bg-yellow-500 text-black mt-5 rounded-full hover:bg-yellow-600 hover:cursor-pointer"
             >
               Submit
             </Button>
