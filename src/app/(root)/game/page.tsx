@@ -69,7 +69,16 @@ const GamePage = () => {
             className="animate-spin"
           />
         )}
-        <h1 className="text-3xl font-bold mt-6">Who’s That Pokémon?</h1>
+        <h1
+          className="
+    text-4xl md:text-5xl font-extrabold mt-6
+    text-transparent bg-clip-text 
+    bg-gradient-to-r from-pink-400 via-yellow-300 to-pink-400
+    drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]
+  "
+        >
+          Who’s That Pokémon?
+        </h1>
 
         {/* Answer Section Component will load once pokemon is not null */}
         {pokemon && (

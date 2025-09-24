@@ -64,7 +64,7 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
                 <TableRow className="border-gray-400">
                   <TableHead className="text-center">Rank</TableHead>
                   <TableHead className="text-center">Trainer</TableHead>
-                  <TableHead className="text-center">Trivia Solved</TableHead>
+                  <TableHead className="text-center">Correct Guesses</TableHead>
                   <TableHead className="text-center">
                     First Try Streak
                   </TableHead>
