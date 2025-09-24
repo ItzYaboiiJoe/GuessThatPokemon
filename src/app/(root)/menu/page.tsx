@@ -32,6 +32,7 @@ const Menu = () => {
 
         setTrainerName(data.TrainerName);
         localStorage.setItem("TrainerName", data.TrainerName);
+        localStorage.setItem("Mode", "auth");
         setLoading(false);
       }
     };

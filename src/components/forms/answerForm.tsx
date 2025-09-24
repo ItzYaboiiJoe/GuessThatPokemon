@@ -87,6 +87,8 @@ const AnswerForm = ({
     setResultStatus("results");
   };
 
+  // Fetch Mode
+  const mode = localStorage.getItem("Mode");
   // Fetch trainer name
   const trainerName = localStorage.getItem("TrainerName")!;
   // Fetch Trainer GUID
@@ -99,12 +101,14 @@ const AnswerForm = ({
 
   // Call API to check if the user is a guest or an auth user to setup leaderboard stats update
   useEffect(() => {
-    const loadData = async () => {
-      const data = await checkLeaderboard(trainerName);
-      if (data) setCheckUser(data);
-    };
-    loadData();
-  }, [trainerName]);
+    if (mode === "auth") {
+      const loadData = async () => {
+        const data = await checkLeaderboard(trainerName);
+        if (data) setCheckUser(data);
+      };
+      loadData();
+    }
+  }, [trainerName, mode]);
 
   // Checking if the user exists or its a guest and fetch the current leaderboard score use has
   useEffect(() => {
@@ -121,12 +125,18 @@ const AnswerForm = ({
 
   // Fetch the latest submission Date the user has
   useEffect(() => {
-    const loadID = async () => {
-      const lastSubmissionDate = await fetchPlayerInfo(trainerID);
-      setSubmissionDate(lastSubmissionDate![0].SubmissionDate);
-    };
-    loadID();
-  }, [trainerID]);
+    if (mode === "auth" && trainerID) {
+      const loadID = async () => {
+        const lastSubmissionDate = await fetchPlayerInfo(trainerID);
+
+        if (lastSubmissionDate && lastSubmissionDate.length > 0) {
+          setSubmissionDate(lastSubmissionDate[0].SubmissionDate);
+        }
+      };
+
+      loadID();
+    }
+  }, [trainerID, mode]);
 
   const triesAttempt = useRef(0);
 
@@ -151,7 +161,7 @@ const AnswerForm = ({
       resultsButton();
 
       // check to update values if the player is an auth user
-      if (checkUser?.length === 1) {
+      if (mode === "auth" && checkUser?.length === 1) {
         const newSolved = solvedTrivia + 1;
         const newStreak = triesAttempt.current === 1 ? firstTryStreak + 1 : 0;
 
@@ -168,7 +178,9 @@ const AnswerForm = ({
       // To disable the submit button
       setHasSubmitted(true);
       // Update user submissionDate on the database
-      updateDate(currentDate, trainerID);
+      if (mode === "auth" && trainerID) {
+        updateDate(currentDate, trainerID);
+      }
     } else {
       resultsButton();
       setResultTitle("That is incorrect, try again!");
@@ -179,7 +191,7 @@ const AnswerForm = ({
         setSecondHint(true);
       }
       setResultStatus("wrong");
-      if (checkUser?.length === 1) {
+      if (mode === "auth" && checkUser?.length === 1) {
         // Reset First try streak back to 0
         await updateLeaderboard(solvedTrivia, 0, trainerName);
         setFirstTryStreak(0);

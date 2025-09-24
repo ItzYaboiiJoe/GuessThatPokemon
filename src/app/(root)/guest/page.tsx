@@ -15,6 +15,8 @@ const GuestPage = () => {
     setGuestTrainerName(newName);
 
     localStorage.setItem("TrainerName", newName);
+    localStorage.setItem("Mode", "guest");
+    localStorage.removeItem("TrainerID");
   }, []);
 
   return (
