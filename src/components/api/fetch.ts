@@ -3,6 +3,8 @@
 import { supabase } from "@/lib/supabaseClient";
 
 export type PokemonDetails = {
+  PokemonType: string;
+  PokemonCry: string;
   PokemonName: string;
   PokemonImage: string;
 };
