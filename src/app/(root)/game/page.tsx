@@ -12,7 +12,7 @@ import AnswerForm from "@/components/forms/answerForm";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
-  const trainerName = localStorage.getItem("TrainerName");
+  const [trainerName, setTrainerName] = useState<string | null>(null);
   // State to hold the current Pokemon details
   const [pokemon, setPokemon] = useState<PokemonDetails | null>(null);
   // State to manage if the correct answer was input
@@ -35,6 +35,11 @@ const GamePage = () => {
     return () => {
       unsubscribe();
     };
+  }, []);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("TrainerName");
+    setTrainerName(stored);
   }, []);
 
   return (
