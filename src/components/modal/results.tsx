@@ -19,7 +19,7 @@ interface resultsProps {
   title: string;
   description: string;
   pokemonHabitat: string;
-  pokemonDescription?: string;
+  pokemonDescription: string;
   status?: "correct" | "wrong" | "results";
   cry: string;
   firstHint: boolean;
