@@ -100,6 +100,7 @@ const GamePage = () => {
             pokemonName={pokemon.PokemonName}
             pokemonType={pokemon.PokemonType}
             pokemonCry={pokemon.PokemonCry}
+            pokemonHabitat={pokemon.PokemonHabitat}
             onCorrect={() => setIsCorrect(true)}
           />
         )}

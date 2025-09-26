@@ -26,6 +26,7 @@ type PokemonNameProp = {
   pokemonName: string;
   pokemonType: string;
   pokemonCry: string;
+  pokemonHabitat: string;
   onCorrect: () => void;
 };
 
@@ -38,6 +39,7 @@ const AnswerForm = ({
   pokemonName,
   pokemonType,
   pokemonCry,
+  pokemonHabitat,
   onCorrect,
 }: PokemonNameProp) => {
   // State to store the checking leaderboard api
@@ -53,6 +55,8 @@ const AnswerForm = ({
   // State for passing results to modal
   const [resultTitle, setResultTitle] = useState("");
   const [resultDescription, setResultDescription] = useState("");
+  // State to manage pokemon habitat
+  const [pokemonHabitatState, setPokemonHabitatState] = useState("");
   const [resultStatus, setResultStatus] = useState<
     "correct" | "wrong" | "results" | undefined
   >(undefined);
@@ -84,6 +88,7 @@ const AnswerForm = ({
         pokemonType +
         " type pokemon"
     );
+    setPokemonHabitatState(" is found in " + pokemonHabitat + " habitats.");
     setResultStatus("results");
   };
 
@@ -157,6 +162,7 @@ const AnswerForm = ({
           pokemonType +
           " type pokemon"
       );
+      setPokemonHabitatState(" is found in " + pokemonHabitat + " habitats.");
       setResultStatus("correct");
       resultsButton();
 
@@ -199,6 +205,7 @@ const AnswerForm = ({
     }
   };
 
+  console.log(pokemonHabitat);
   return (
     <>
       <Form {...form}>
@@ -243,6 +250,7 @@ const AnswerForm = ({
         setOpen={setResultsOpen}
         title={resultTitle}
         description={resultDescription}
+        pokemonHabitat={pokemonHabitatState}
         status={resultStatus}
         cry={pokemonCry}
         firstHint={firstHint}

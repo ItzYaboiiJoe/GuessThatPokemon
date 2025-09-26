@@ -18,6 +18,7 @@ interface resultsProps {
   setOpen: (open: boolean) => void;
   title: string;
   description: string;
+  pokemonHabitat: string;
   status?: "correct" | "wrong" | "results";
   cry: string;
   firstHint: boolean;
@@ -29,6 +30,7 @@ const Results = ({
   setOpen,
   title,
   description,
+  pokemonHabitat,
   status,
   cry,
   firstHint,
@@ -98,20 +100,32 @@ const Results = ({
 
           {/* Render Results based on the user submit */}
           {status === "results" && (
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm text-center">
-              <span className="font-bold">{description.split(" ")[0]}</span>{" "}
-              <span className="italic">
-                {description.replace(description.split(" ")[0], "")}
-              </span>
+            <div>
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm text-center">
+                <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                <span className="italic">
+                  {description.replace(description.split(" ")[0], "")}
+                </span>
+              </div>
+              <div className="mt-6 bg-orange-50 border-l-4 border-orange-400 p-3 rounded-md shadow-sm text-center">
+                <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                <span>{pokemonHabitat}</span>
+              </div>
             </div>
           )}
 
           {status === "correct" && (
-            <div className="bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
-              <span className="font-bold">{description.split(" ")[0]}</span>{" "}
-              <span className="italic">
-                {description.replace(description.split(" ")[0], "")}
-              </span>
+            <div>
+              <div className="bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
+                <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                <span className="italic">
+                  {description.replace(description.split(" ")[0], "")}
+                </span>
+              </div>
+              <div className="mt-6 bg-orange-50 border-l-4 border-orange-400 p-3 rounded-md shadow-sm text-center">
+                <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                <span>{pokemonHabitat}</span>
+              </div>
             </div>
           )}
 
