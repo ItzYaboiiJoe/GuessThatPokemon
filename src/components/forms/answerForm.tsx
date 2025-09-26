@@ -27,6 +27,7 @@ type PokemonNameProp = {
   pokemonType: string;
   pokemonCry: string;
   pokemonHabitat: string;
+  pokemonDescription: string;
   onCorrect: () => void;
 };
 
@@ -40,6 +41,7 @@ const AnswerForm = ({
   pokemonType,
   pokemonCry,
   pokemonHabitat,
+  pokemonDescription,
   onCorrect,
 }: PokemonNameProp) => {
   // State to store the checking leaderboard api
@@ -205,7 +207,6 @@ const AnswerForm = ({
     }
   };
 
-  console.log(pokemonHabitat);
   return (
     <>
       <Form {...form}>
@@ -251,6 +252,7 @@ const AnswerForm = ({
         title={resultTitle}
         description={resultDescription}
         pokemonHabitat={pokemonHabitatState}
+        pokemonDescription={pokemonDescription}
         status={resultStatus}
         cry={pokemonCry}
         firstHint={firstHint}
