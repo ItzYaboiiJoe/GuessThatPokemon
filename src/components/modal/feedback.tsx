@@ -12,6 +12,7 @@ import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -20,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
+import { submitFeedback } from "../api/feedback";
 
 interface FeedbackProps {
   open: boolean;
@@ -39,7 +41,11 @@ const Feedback = ({ open, setOpen }: FeedbackProps) => {
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    submitFeedback(values.feedback);
+    toast.success("Feedback submitted successfully! Thank you for your input.");
+
+    form.reset();
+    setOpen(false);
   };
 
   // Function to close the modal

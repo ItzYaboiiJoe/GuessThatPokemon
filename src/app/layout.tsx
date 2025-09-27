@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../assets/globals.css";
 import { APP_DESCRIPTION, APP_NAME, APP_VERSION } from "../lib/constants";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
         <div className="fixed bottom-2 right-2 text-xs text-gray-700 bg-white/70 px-2 py-1 rounded-md shadow-md">
           {APP_VERSION}
         </div>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
