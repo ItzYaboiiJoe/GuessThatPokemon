@@ -5,13 +5,20 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
 import Leaderboard from "@/components/modal/leaderboard";
+import Feedback from "@/components/modal/feedback";
 
 export default function Home() {
   // State to handle leaderboard modal visibility
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
+  // This state controls the feedback modal visibility
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const leaderboardButton = () => {
     setLeaderboardOpen(true);
+  };
+
+  const feedbackButton = () => {
+    setFeedbackOpen(true);
   };
 
   return (
@@ -75,6 +82,21 @@ export default function Home() {
 
       {/* Leaderboard Modal */}
       <Leaderboard open={leaderboardOpen} setOpen={setLeaderboardOpen} />
+      <Feedback open={feedbackOpen} setOpen={setFeedbackOpen} />
+
+      {/* Early Access Feedback */}
+      <div className="fixed bottom-2 right-2 flex items-center space-x-3 text-xs mr-35">
+        <p className="text-white opacity-80">This game is still early access</p>
+        <p className="text-white">•</p>
+        <Button
+          onClick={feedbackButton}
+          variant="default"
+          size="sm"
+          className="cursor-pointer rounded-full bg-white text-black shadow-md hover:bg-gray-200 px-2 text-xs"
+        >
+          Feedback
+        </Button>
+      </div>
     </>
   );
 }
