@@ -9,6 +9,8 @@ import {
   PokemonDetails,
 } from "@/components/api/fetch";
 import AnswerForm from "@/components/forms/answerForm";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
@@ -17,30 +19,63 @@ const GamePage = () => {
   const [pokemon, setPokemon] = useState<PokemonDetails | null>(null);
   // State to manage if the correct answer was input
   const [isCorrect, setIsCorrect] = useState(false);
+  // Loading state
+  const [loading, setLoading] = useState(true);
 
+  const router = useRouter();
+
+  // Check for auth session and if not present, redirect to login
   useEffect(() => {
-    // Get the latest Pokémon once on page load
-    const loadLatest = async () => {
+    const initializeGame = async () => {
+      // Check session
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      // Redirect if no session
+      if (!session) {
+        router.replace("/login");
+        return;
+      }
+
+      // Load trainer name
+      const stored = localStorage.getItem("TrainerName");
+      setTrainerName(stored);
+
+      // Fetch Pokémon
       const latest = await fetchPokemon();
       if (latest) setPokemon(latest);
+
+      // Subscribe to realtime updates
+      const unsubscribe = liveFetchPokemon((newPokemon) => {
+        setPokemon(newPokemon);
+      });
+
+      setLoading(false);
+
+      return () => {
+        unsubscribe();
+      };
     };
-    loadLatest();
 
-    // Watch for new Pokémon entries inserted into the table
-    const unsubscribe = liveFetchPokemon((newPokemon) => {
-      setPokemon(newPokemon);
-    });
+    initializeGame();
+  }, [router]);
 
-    // Cleanup subscription
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("TrainerName");
-    setTrainerName(stored);
-  }, []);
+  // Loading state while fetching trainer name
+  if (loading) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <Image
+          src="/pokeball.png"
+          alt="Pokeball Rotating"
+          width={300}
+          height={300}
+          priority
+          className="animate-spin"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-indigo-900 via-purple-800 to-black text-white p-6">

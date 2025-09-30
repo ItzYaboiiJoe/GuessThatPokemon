@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import Leaderboard from "@/components/modal/leaderboard";
+import { useRouter } from "next/navigation";
 
 const Menu = () => {
   // State to hold Trainer Name
@@ -15,12 +16,19 @@ const Menu = () => {
   // State to handle leaderboard modal visibility
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
 
+  const router = useRouter();
   useEffect(() => {
     // Fetch logged in user ID
     const fetchData = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      // No user logged in then send back to login
+      if (!user) {
+        router.replace("/login");
+        return;
+      }
 
       if (user) {
         // Fetch trainer name
