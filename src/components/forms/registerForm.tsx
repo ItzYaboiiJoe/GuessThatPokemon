@@ -55,6 +55,7 @@ const RegisterForm = () => {
       options: {
         data: {
           trainer_name: values.trainerName,
+          app_name: "GuessThatPokemon",
         },
       },
     });
