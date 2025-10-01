@@ -21,16 +21,27 @@ export default function LoginPage() {
         {/* Login Form */}
         <LoginForm />
 
-        {/* Link to Register */}
-        <p className="mt-6 text-sm text-gray-600">
-          Don’t have an account?{" "}
-          <Link
-            href="/register"
-            className="text-blue-600 font-bold hover:underline"
-          >
-            Register
-          </Link>
-        </p>
+        {/* Auth Links */}
+        <div className="mt-6 border-t border-gray-200 pt-4 text-sm text-gray-600 space-y-2">
+          <p>
+            Forgot your password?{" "}
+            <Link
+              href="/forgot-password"
+              className="text-blue-600 font-semibold hover:underline"
+            >
+              Reset
+            </Link>
+          </p>
+          <p>
+            Don’t have an account?{" "}
+            <Link
+              href="/register"
+              className="text-blue-600 font-semibold hover:underline"
+            >
+              Register
+            </Link>
+          </p>
+        </div>
 
         {/* Back to Menu */}
         <Link
