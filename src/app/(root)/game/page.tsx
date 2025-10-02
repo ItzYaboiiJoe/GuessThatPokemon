@@ -32,8 +32,13 @@ const GamePage = () => {
         data: { session },
       } = await supabase.auth.getSession();
 
-      // Redirect if no session
-      if (!session) {
+      // Check if user is guest (query param)
+      const params = new URLSearchParams(window.location.search);
+      const isGuest = params.get("guest") === "true";
+      console.log(params);
+
+      // Redirect if no session and not a guest
+      if (!session && !isGuest) {
         router.replace("/login");
         return;
       }

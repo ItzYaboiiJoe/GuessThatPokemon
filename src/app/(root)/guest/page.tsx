@@ -27,7 +27,7 @@ const GuestPage = () => {
         <h1 className="text-2xl font-bold mb-4">{guestTrainerName}</h1>
 
         {/* Start Button */}
-        <Link href="/game">
+        <Link href="/game?guest=true">
           <Button className="w-full bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 hover:cursor-pointer">
             Start Game
           </Button>
