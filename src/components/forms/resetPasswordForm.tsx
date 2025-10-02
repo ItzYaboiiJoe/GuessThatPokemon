@@ -14,55 +14,92 @@ import {
 } from "@/components/ui/form";
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
-import { SITE_URL } from "@/lib/constants";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // Define the form schema
 const formSchema = z.object({
-  email: z.email("Invalid email address"),
+  password: z
+    .string()
+    .nonempty("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().nonempty("Please confirm your password"),
 });
 
-const ForgotPasswordForm = () => {
+const ResetPasswordForm = () => {
   // States to handle request messages
   const [requestError, setRequestError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const router = useRouter();
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
-    defaultValues: { email: "" },
+    defaultValues: { password: "", confirmPassword: "" },
     resolver: zodResolver(formSchema),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Reset messages
     setRequestError(null);
-    setSuccessMessage(null);
 
-    // Send password reset email using Supabase
-    const { error } = await supabase.auth.resetPasswordForEmail(values.email, {
-      redirectTo: `${SITE_URL}/reset-password`,
-    });
+    const password = values.password;
+    const confirmPassword = values.confirmPassword;
+
+    if (password !== confirmPassword) {
+      form.setError("confirmPassword", {
+        type: "manual",
+        message: "Passwords do not match",
+      });
+      return;
+    }
+
+    const { error } = await supabase.auth.updateUser({ password: password });
 
     // Handle any errors and display them on the page
     if (error) {
       setRequestError(error.message);
     } else {
-      setSuccessMessage("Password reset email sent! Please check your inbox.");
+      toast.success(
+        "Password has been reset successfully! Routing to login..."
+      );
+      setTimeout(() => {
+        router.push("/login");
+      }, 1500);
     }
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        {/* Email Field */}
+        {/* Password Input */}
         <FormField
           control={form.control}
-          name="email"
+          name="password"
           render={({ field }) => (
             <FormItem>
               <FormControl>
                 <Input
-                  type="email"
-                  placeholder="Email Address"
+                  type="password"
+                  placeholder="Enter New Password"
+                  className="mt-4 text-center rounded-xl"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="text-center" />
+            </FormItem>
+          )}
+        />
+
+        {/* Confirm Password Input */}
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Confirm New Password"
                   className="mt-4 text-center rounded-xl"
                   {...field}
                 />
@@ -86,16 +123,9 @@ const ForgotPasswordForm = () => {
             {requestError}
           </p>
         )}
-
-        {/* Success Message */}
-        {successMessage && (
-          <p className="mt-4 text-center text-green-600 font-semibold">
-            {successMessage}
-          </p>
-        )}
       </form>
     </Form>
   );
 };
 
-export default ForgotPasswordForm;
+export default ResetPasswordForm;
