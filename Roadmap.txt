@@ -49,3 +49,7 @@ v0.9.5:
 
 v1.0:
 - Achievements
+
+Post v1.0:
+- Framer Motion Animations
+- Users Feedback
