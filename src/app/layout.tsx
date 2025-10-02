@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
     images: [
       {
-        url: `${SITE_URL}/pokeball.png`,
-        width: 800,
-        height: 600,
-        alt: "Pokeball",
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Who's That Pokémon Banner",
       },
     ],
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    images: [`${SITE_URL}/pokeball.png`],
+    images: [`${SITE_URL}/og-image.png`],
   },
 };
 
