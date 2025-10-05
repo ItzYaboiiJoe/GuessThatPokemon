@@ -8,6 +8,7 @@ import Image from "next/image";
 import Leaderboard from "@/components/modal/leaderboard";
 import { useRouter } from "next/navigation";
 import { fetchLoggedInPlayer } from "@/components/api/fetch";
+import CountdownTimer from "@/components/tools/countdownTimer";
 
 const Menu = () => {
   // State to hold Trainer Name
@@ -16,8 +17,6 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
   // State to handle leaderboard modal visibility
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
-  // State to handle Countdown Timer
-  const [countdown, setCountdown] = useState("");
 
   const router = useRouter();
 
@@ -52,8 +51,6 @@ const Menu = () => {
     setLeaderboardOpen(true);
   };
 
-  // Countdown Timer Logic
-
   // Clean up local storage and sign out session on exit
   const cleanUp = async () => {
     await supabase.auth.signOut();
@@ -82,10 +79,14 @@ const Menu = () => {
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-center">
-        <div className="flex justify-between">
-          <p className="pr-1">New Challenge In:</p>
-          <p>10 Minutes</p>
+        {/* Countdown Section */}
+        <div className="mb-4 flex items-center justify-center">
+          <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md shadow-orange-200/60 border border-orange-300">
+            <p>New Challenge In:</p>
+            <CountdownTimer />
+          </div>
         </div>
+
         <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 w-full max-w-md text-center">
           {/* Title */}
           <h1 className="text-2xl font-bold mb-4">Welcome Trainer</h1>
