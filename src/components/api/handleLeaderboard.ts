@@ -28,7 +28,8 @@ export const checkLeaderboard = async (trainerName: string) => {
   const { data } = await supabase
     .from("Pokemon_Leaderboard")
     .select("*")
-    .eq("TrainerName", trainerName);
+    .eq("TrainerName", trainerName)
+    .single();
 
   return data;
 };

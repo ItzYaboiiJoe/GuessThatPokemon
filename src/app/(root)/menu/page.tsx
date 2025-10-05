@@ -9,6 +9,7 @@ import Leaderboard from "@/components/modal/leaderboard";
 import { useRouter } from "next/navigation";
 import { fetchLoggedInPlayer } from "@/components/api/fetch";
 import CountdownTimer from "@/components/tools/countdownTimer";
+import Profile from "@/components/modal/profile";
 
 const Menu = () => {
   // State to hold Trainer Name
@@ -17,6 +18,8 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
   // State to handle leaderboard modal visibility
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
+  // State to handle profile modal visibility
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const router = useRouter();
 
@@ -49,6 +52,10 @@ const Menu = () => {
 
   const leaderboardButton = () => {
     setLeaderboardOpen(true);
+  };
+
+  const profileButton = () => {
+    setProfileOpen(true);
   };
 
   // Clean up local storage and sign out session on exit
@@ -95,7 +102,7 @@ const Menu = () => {
           <div className="grid grid-cols-2 gap-4">
             {/* Start Button */}
             <Link href="/game">
-              <Button className="w-full bg-yellow-400 text-black font-bold hover:bg-yellow-300 rounded-full hover:cursor-pointer">
+              <Button className="w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold cursor-pointer hover:from-yellow-400 hover:to-amber-600 rounded-full shadow-md shadow-yellow-200/70">
                 Start Game
               </Button>
             </Link>
@@ -103,14 +110,17 @@ const Menu = () => {
             {/* Leaderboard */}
             <Button
               onClick={leaderboardButton}
-              className="bg-red-500 text-white cursor-pointer rounded-full hover:bg-red-700"
+              className="bg-gradient-to-r from-red-500 to-red-700 text-white font-bold cursor-pointer rounded-full hover:from-red-600 hover:to-red-800 shadow-md shadow-red-200/50"
             >
               View Leaderboard
             </Button>
 
             {/* Profile */}
             <div className="col-span-2 grid place-items-center">
-              <Button className="w-full max-w-[184px] bg-orange-500 text-white cursor-pointer rounded-full hover:bg-orange-700">
+              <Button
+                onClick={profileButton}
+                className="w-full max-w-[184px] bg-gradient-to-r from-orange-400 to-amber-600 text-white font-bold rounded-full cursor-pointer hover:from-orange-500 hover:to-amber-700 shadow-md shadow-orange-200/50"
+              >
                 Profile
               </Button>
             </div>
@@ -120,7 +130,7 @@ const Menu = () => {
           <Link
             href="/"
             onClick={cleanUp}
-            className="mt-6 inline-block text-red-600 text-sm font-medium hover:underline hover:text-red-800 transition"
+            className="mt-6 inline-block text-red-600 text-sm font-semibold hover:text-red-700 hover:underline transition"
           >
             Sign Out
           </Link>
@@ -128,6 +138,8 @@ const Menu = () => {
       </div>
       {/* Leaderboard Modal */}
       <Leaderboard open={leaderboardOpen} setOpen={setLeaderboardOpen} />
+      {/* Profile Modal */}
+      <Profile open={profileOpen} setOpen={setProfileOpen} />
     </>
   );
 };
