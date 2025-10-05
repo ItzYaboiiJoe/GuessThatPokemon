@@ -67,3 +67,14 @@ export const updateDate = async (currentDate: string, trainerGuiID: string) => {
 
   return res;
 };
+
+// This API to fetch a specific player on login
+export const fetchLoggedInPlayer = async (trainerGuiID: string) => {
+  const { data: playerInfo } = await supabase
+    .from("Pokemon_Players")
+    .select("TrainerName")
+    .eq("TrainerID", trainerGuiID)
+    .single();
+
+  return playerInfo?.TrainerName;
+};

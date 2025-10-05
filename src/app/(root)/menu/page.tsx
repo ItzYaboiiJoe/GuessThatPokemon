@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Leaderboard from "@/components/modal/leaderboard";
 import { useRouter } from "next/navigation";
+import { fetchLoggedInPlayer } from "@/components/api/fetch";
 
 const Menu = () => {
   // State to hold Trainer Name
@@ -17,6 +18,7 @@ const Menu = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
 
   const router = useRouter();
+
   useEffect(() => {
     // Fetch logged in user ID
     const fetchData = async () => {
@@ -32,14 +34,10 @@ const Menu = () => {
 
       if (user) {
         // Fetch trainer name
-        const { data } = await supabase
-          .from("Pokemon_Players")
-          .select("*")
-          .eq("TrainerID", user.id)
-          .single();
+        const name = await fetchLoggedInPlayer(user.id);
 
-        setTrainerName(data.TrainerName);
-        localStorage.setItem("TrainerName", data.TrainerName);
+        setTrainerName(name);
+        localStorage.setItem("TrainerName", name);
         localStorage.setItem("Mode", "auth");
         setLoading(false);
       }
@@ -77,6 +75,10 @@ const Menu = () => {
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-center">
+        <div className="flex justify-between">
+          <p className="pr-1">New Challenge In:</p>
+          <p>10 Minutes</p>
+        </div>
         <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 w-full max-w-md text-center">
           {/* Title */}
           <h1 className="text-2xl font-bold mb-4">Welcome Trainer</h1>
