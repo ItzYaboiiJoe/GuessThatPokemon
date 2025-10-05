@@ -103,10 +103,17 @@ const Menu = () => {
             {/* Leaderboard */}
             <Button
               onClick={leaderboardButton}
-              className="bg-red-500 text-white cursor-pointer rounded-full hover:bg-orange-500"
+              className="bg-red-500 text-white cursor-pointer rounded-full hover:bg-red-700"
             >
               View Leaderboard
             </Button>
+
+            {/* Profile */}
+            <div className="col-span-2 grid place-items-center">
+              <Button className="w-full max-w-[184px] bg-orange-500 text-white cursor-pointer rounded-full hover:bg-orange-700">
+                Profile
+              </Button>
+            </div>
           </div>
 
           {/* Back to Menu Link */}
