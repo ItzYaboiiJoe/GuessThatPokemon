@@ -21,6 +21,8 @@ const GamePage = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   // Loading state
   const [loading, setLoading] = useState(true);
+  // State to control Menu Link Path
+  const [menuLink, setMenuLink] = useState("/");
 
   const router = useRouter();
 
@@ -35,12 +37,18 @@ const GamePage = () => {
       // Check if user is guest (query param)
       const params = new URLSearchParams(window.location.search);
       const isGuest = params.get("guest") === "true";
-      console.log(params);
 
       // Redirect if no session and not a guest
       if (!session && !isGuest) {
         router.replace("/login");
         return;
+      }
+
+      // Set menu link based on session
+      if (session) {
+        setMenuLink("/menu");
+      } else {
+        setMenuLink("/");
       }
 
       // Load trainer name
@@ -67,7 +75,7 @@ const GamePage = () => {
   }, [router]);
 
   // Clean up local storage on exit
-  const cleanUp = () => {
+  const cleanUp = async () => {
     localStorage.removeItem("Mode");
     localStorage.removeItem("TrainerName");
   };
@@ -159,7 +167,7 @@ const GamePage = () => {
       {/* Back to Menu Button */}
       <div>
         <Link
-          href="/"
+          href={menuLink}
           onClick={cleanUp}
           className="mt-6 inline-block text-red-500 text-sm italic hover:underline hover:text-red-700 transition"
         >

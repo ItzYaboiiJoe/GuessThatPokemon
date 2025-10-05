@@ -3,13 +3,24 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
 
 const GuestPage = () => {
   // State to hold the guest trainer name
   const [guestTrainerName, setGuestTrainerName] = useState("");
 
-  // Generate a random guest trainer name on component mount and setting to localStorage
   useEffect(() => {
+    // Check if there is a supabase session on storage and sign out
+    (async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session) {
+        await supabase.auth.signOut();
+      }
+    })();
+
+    // Generate a random guest trainer name on component mount and setting to localStorage
     const generateID = Math.random().toString().slice(2, 12);
     const newName = "Guest" + generateID;
     setGuestTrainerName(newName);
