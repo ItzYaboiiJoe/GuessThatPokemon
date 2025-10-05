@@ -106,8 +106,6 @@ const AnswerForm = ({
     timeZone: "America/New_York",
   });
 
-  console.log("Current Date Eastern:", currentDate);
-
   // Call API to check if the user is a guest or an auth user to setup leaderboard stats update
   useEffect(() => {
     if (mode === "auth") {

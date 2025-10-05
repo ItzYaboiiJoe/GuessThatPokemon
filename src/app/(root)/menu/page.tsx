@@ -46,10 +46,16 @@ const Menu = () => {
     };
 
     fetchData();
-  }, []);
+  }, [router]);
 
   const leaderboardButton = () => {
     setLeaderboardOpen(true);
+  };
+
+  // Clean up local storage on exit
+  const cleanUp = () => {
+    localStorage.removeItem("Mode");
+    localStorage.removeItem("TrainerName");
   };
 
   // Show loading state while fetching Trainer Name
@@ -96,6 +102,7 @@ const Menu = () => {
           {/* Back to Menu Link */}
           <Link
             href="/"
+            onClick={cleanUp}
             className="mt-6 inline-block text-red-600 text-sm font-medium hover:underline hover:text-red-800 transition"
           >
             ← Back to Menu

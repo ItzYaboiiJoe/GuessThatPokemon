@@ -66,6 +66,12 @@ const GamePage = () => {
     initializeGame();
   }, [router]);
 
+  // Clean up local storage on exit
+  const cleanUp = () => {
+    localStorage.removeItem("Mode");
+    localStorage.removeItem("TrainerName");
+  };
+
   // Loading state while fetching trainer name
   if (loading) {
     return (
@@ -154,6 +160,7 @@ const GamePage = () => {
       <div>
         <Link
           href="/"
+          onClick={cleanUp}
           className="mt-6 inline-block text-red-500 text-sm italic hover:underline hover:text-red-700 transition"
         >
           ← Back to Menu

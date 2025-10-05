@@ -19,6 +19,12 @@ const GuestPage = () => {
     localStorage.removeItem("TrainerID");
   }, []);
 
+  // Clean up local storage on exit
+  const cleanUp = () => {
+    localStorage.removeItem("Mode");
+    localStorage.removeItem("TrainerName");
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 w-full max-w-md text-center">
@@ -41,6 +47,7 @@ const GuestPage = () => {
         {/* Back to Menu Link */}
         <Link
           href="/"
+          onClick={cleanUp}
           className="mt-3 inline-block text-red-600 text-sm font-medium hover:underline hover:text-red-800 transition"
         >
           ← Back to Menu
