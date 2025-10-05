@@ -16,6 +16,8 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
   // State to handle leaderboard modal visibility
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
+  // State to handle Countdown Timer
+  const [countdown, setCountdown] = useState("");
 
   const router = useRouter();
 
@@ -50,10 +52,15 @@ const Menu = () => {
     setLeaderboardOpen(true);
   };
 
-  // Clean up local storage on exit
-  const cleanUp = () => {
+  // Countdown Timer Logic
+
+  // Clean up local storage and sign out session on exit
+  const cleanUp = async () => {
+    await supabase.auth.signOut();
+
     localStorage.removeItem("Mode");
     localStorage.removeItem("TrainerName");
+    localStorage.removeItem("TrainerID");
   };
 
   // Show loading state while fetching Trainer Name
@@ -107,7 +114,7 @@ const Menu = () => {
             onClick={cleanUp}
             className="mt-6 inline-block text-red-600 text-sm font-medium hover:underline hover:text-red-800 transition"
           >
-            ← Back to Menu
+            Sign Out
           </Link>
         </div>
       </div>
