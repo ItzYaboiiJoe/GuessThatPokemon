@@ -117,7 +117,6 @@ const AnswerForm = ({
     }
   }, [trainerName, mode]);
 
-  console.log(checkUser);
   // Checking if the user exists or its a guest and fetch the current leaderboard score use has
   // Keep your leaderboard effect as-is
   useEffect(() => {

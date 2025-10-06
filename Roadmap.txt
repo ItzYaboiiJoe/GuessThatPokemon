@@ -25,8 +25,8 @@ Social Features
 RoadMap:
 
 v0.7:
-- Trainer Profile.
-- Time countdown
+- Trainer Profile. (Complete)
+- Time countdown (Complete)
 
 v0.7.5:
 - Time Record

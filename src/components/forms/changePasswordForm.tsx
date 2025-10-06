@@ -19,14 +19,14 @@ import { useRouter } from "next/navigation";
 
 // Define the form schema
 const formSchema = z.object({
-  password: z
+  newPassword: z
     .string()
-    .nonempty("Password is required")
+    .nonempty("New Password is required")
     .min(6, "Password must be at least 6 characters"),
   confirmPassword: z.string().nonempty("Please confirm your password"),
 });
 
-const ResetPasswordForm = () => {
+const ChangePasswordForm = () => {
   // States to handle request messages
   const [requestError, setRequestError] = useState<string | null>(null);
 
@@ -34,7 +34,10 @@ const ResetPasswordForm = () => {
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
-    defaultValues: { password: "", confirmPassword: "" },
+    defaultValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
     resolver: zodResolver(formSchema),
   });
 
@@ -42,22 +45,24 @@ const ResetPasswordForm = () => {
     // Reset messages
     setRequestError(null);
 
-    const password = values.password;
+    const newPassword = values.newPassword;
     const confirmPassword = values.confirmPassword;
 
-    if (password !== confirmPassword) {
+    // Confirm new password matches
+    if (newPassword !== confirmPassword) {
       form.setError("confirmPassword", {
         type: "manual",
         message: "Passwords do not match",
       });
-      form.setError("password", {
+      form.setError("newPassword", {
         type: "manual",
         message: "Passwords do not match",
       });
       return;
     }
 
-    const { error } = await supabase.auth.updateUser({ password: password });
+    // Update Password
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
 
     // Handle any errors and display them on the page
     if (error) {
@@ -75,16 +80,16 @@ const ResetPasswordForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        {/* Password Input */}
+        {/* New Password Input */}
         <FormField
           control={form.control}
-          name="password"
+          name="newPassword"
           render={({ field }) => (
             <FormItem>
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="Enter New Password"
+                  placeholder="Enter Your New Password"
                   className="mt-4 text-center rounded-xl"
                   {...field}
                 />
@@ -103,7 +108,7 @@ const ResetPasswordForm = () => {
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="Confirm New Password"
+                  placeholder="Confirm Your New Password"
                   className="mt-4 text-center rounded-xl"
                   {...field}
                 />
@@ -132,4 +137,4 @@ const ResetPasswordForm = () => {
   );
 };
 
-export default ResetPasswordForm;
+export default ChangePasswordForm;

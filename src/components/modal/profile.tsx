@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { checkLeaderboard } from "../api/handleLeaderboard";
+import Link from "next/link";
 
 interface ProfileProps {
   open: boolean;
@@ -113,10 +114,11 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
               Change Trainer Name
             </Button>
             <Button
+              asChild
               className="cursor-pointer text-blue-600 font-semibold hover:text-blue-800"
               variant={"link"}
             >
-              Change Password
+              <Link href="/change-password">Change Password</Link>
             </Button>
           </div>
         </div>
