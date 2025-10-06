@@ -45,7 +45,7 @@ const AnswerForm = ({
   onCorrect,
 }: PokemonNameProp) => {
   // State to store the checking leaderboard api
-  const [checkUser, setCheckUser] = useState<LeaderboardEntry[] | null>(null);
+  const [checkUser, setCheckUser] = useState<LeaderboardEntry | null>(null);
   // State to manage leaderboard score
   const [solvedTrivia, setSolvedTrivia] = useState(0);
   const [firstTryStreak, setFirstTryStreak] = useState(0);
@@ -117,18 +117,29 @@ const AnswerForm = ({
     }
   }, [trainerName, mode]);
 
+  console.log(checkUser);
   // Checking if the user exists or its a guest and fetch the current leaderboard score use has
+  // Keep your leaderboard effect as-is
   useEffect(() => {
-    if (checkUser?.length === 1) {
-      setSolvedTrivia(checkUser?.[0].TriviaSolved);
-      setFirstTryStreak(checkUser?.[0].WinningStreak);
-      // Disable Submit button if the user submitted already current day
-      if (submissionDate === currentDateEastern) {
-        setHasSubmitted(true);
-        onCorrect();
-      }
+    if (checkUser) {
+      setSolvedTrivia(checkUser.TriviaSolved);
+      setFirstTryStreak(checkUser.WinningStreak);
     }
-  }, [checkUser, submissionDate, currentDateEastern, onCorrect]);
+  }, [checkUser]);
+
+  // New effect — runs after submissionDate actually loads
+  useEffect(() => {
+    if (!submissionDate) return;
+
+    const currentDateEastern = new Date().toLocaleDateString("en-CA", {
+      timeZone: "America/New_York",
+    });
+
+    if (submissionDate === currentDateEastern) {
+      setHasSubmitted(true);
+      onCorrect();
+    }
+  }, [submissionDate, onCorrect]);
 
   // Fetch the latest submission Date the user has
   useEffect(() => {
@@ -169,7 +180,7 @@ const AnswerForm = ({
       resultsButton();
 
       // check to update values if the player is an auth user
-      if (mode === "auth" && checkUser?.length === 1) {
+      if (mode === "auth" && checkUser) {
         const newSolved = solvedTrivia + 1;
         const newStreak = triesAttempt.current === 1 ? firstTryStreak + 1 : 0;
 
@@ -199,7 +210,7 @@ const AnswerForm = ({
         setSecondHint(true);
       }
       setResultStatus("wrong");
-      if (mode === "auth" && checkUser?.length === 1) {
+      if (mode === "auth" && checkUser) {
         // Reset First try streak back to 0
         await updateLeaderboard(solvedTrivia, 0, trainerName);
         setFirstTryStreak(0);
