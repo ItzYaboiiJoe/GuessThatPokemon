@@ -41,6 +41,15 @@ const ChangePasswordForm = () => {
     resolver: zodResolver(formSchema),
   });
 
+  // Clean up local storage and sign out session on exit
+  const cleanUp = async () => {
+    await supabase.auth.signOut();
+
+    localStorage.removeItem("Mode");
+    localStorage.removeItem("TrainerName");
+    localStorage.removeItem("TrainerID");
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Reset messages
     setRequestError(null);
@@ -68,6 +77,7 @@ const ChangePasswordForm = () => {
     if (error) {
       setRequestError(error.message);
     } else {
+      cleanUp();
       toast.success(
         "Password has been reset successfully! Routing to login..."
       );
