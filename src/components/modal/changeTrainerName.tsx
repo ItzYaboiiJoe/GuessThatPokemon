@@ -24,6 +24,7 @@ import {
 import { Button } from "../ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
+import { updateTrainerName } from "../api/updateDisplayName";
 
 interface updateNameProps {
   open: boolean;
@@ -41,6 +42,8 @@ const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
   // State to control the spinner loading
   const [loading, setLoading] = useState(false);
 
+  const originalName = localStorage.getItem("TrainerName")!;
+
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { trainerName: "" },
@@ -50,7 +53,10 @@ const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values.trainerName);
+    const newTrainerName = values.trainerName;
+
+    // Update Trainer Name API Call
+    await updateTrainerName(newTrainerName, originalName);
 
     // Display success message and refreshes the page after few seconds
     toast.success("Trainer name updated successfully!");
