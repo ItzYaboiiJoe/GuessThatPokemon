@@ -22,6 +22,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { useState } from "react";
 
 interface updateNameProps {
   open: boolean;
@@ -36,6 +38,9 @@ const formSchema = z.object({
 });
 
 const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
+  // State to control the spinner loading
+  const [loading, setLoading] = useState(false);
+
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { trainerName: "" },
@@ -44,6 +49,7 @@ const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
     console.log(values.trainerName);
 
     // Display success message and refreshes the page after few seconds
@@ -102,14 +108,23 @@ const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
                 type="button"
                 onClick={handleClose}
                 className="bg-red-500 text-white rounded-full px-6 shadow-md hover:bg-red-600 cursor-pointer"
+                disabled={loading}
               >
                 Close
               </Button>
+              {/* Submit button will display the loading to notify user the page is loading */}
               <Button
                 type="submit"
                 className="bg-yellow-400 text-black rounded-full px-6 shadow-md hover:bg-yellow-500 cursor-pointer"
+                disabled={loading}
               >
-                Submit
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <Spinner className="size-8" /> <span>Updating...</span>
+                  </div>
+                ) : (
+                  "Submit"
+                )}
               </Button>
             </div>
           </form>
