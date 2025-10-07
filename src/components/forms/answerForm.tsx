@@ -232,7 +232,7 @@ const AnswerForm = ({
                 <FormControl>
                   <Input disabled={hasSubmitted} className="mt-10" {...field} />
                 </FormControl>
-                <FormMessage className="text-center" />
+                <FormMessage className="text-center text-lg" />
               </FormItem>
             )}
           />
