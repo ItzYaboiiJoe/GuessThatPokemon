@@ -6,11 +6,11 @@ Gameplay Features
 - Time Record (How long user took to solve and add it to leaderboard)
 - Add a Daily login Streak system
 - Region Game Mode will have 2 Pokemon's a day
-~~- Create a time countdown for the next game to be available~~
+- Create a time countdown for the next game to be available (Complete)
 
 Progression Features
 
-- Trainer Profile to display all player progression and stats
+- Trainer Profile to display all player progression and stats (Complete)
 - Achievement system
 - Badges
 - Trainer Level System
