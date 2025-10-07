@@ -16,6 +16,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
 // Define the form schema
 const formSchema = z.object({
@@ -29,6 +30,8 @@ const formSchema = z.object({
 const ChangePasswordForm = () => {
   // States to handle request messages
   const [requestError, setRequestError] = useState<string | null>(null);
+  // State to control the spinner loading
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -53,6 +56,7 @@ const ChangePasswordForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Reset messages
     setRequestError(null);
+    setLoading(true);
 
     const newPassword = values.newPassword;
     const confirmPassword = values.confirmPassword;
@@ -130,10 +134,17 @@ const ChangePasswordForm = () => {
 
         {/* Submit Button */}
         <Button
+          disabled={loading}
           type="submit"
           className="mt-6 w-full bg-blue-600 text-white font-bold text-lg py-6 rounded-xl shadow-2xl hover:bg-blue-500 hover:cursor-pointer"
         >
-          Submit
+          {loading ? (
+            <div className="flex items-center space-x-2">
+              <Spinner className="size-8" /> <span>Updating...</span>
+            </div>
+          ) : (
+            "Submit"
+          )}
         </Button>
 
         {/* Error Message if there were registration problems */}
