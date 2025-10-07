@@ -6,12 +6,15 @@ import Link from "next/link";
 import { useState } from "react";
 import Leaderboard from "@/components/modal/leaderboard";
 import Feedback from "@/components/modal/feedback";
+import ReleaseNotes from "@/components/modal/releaseNotes";
 
 export default function Home() {
   // State to handle leaderboard modal visibility
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
   // This state controls the feedback modal visibility
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  // State to control release notes modal
+  const [releaseNotesOpen, setReleaseNotesOpen] = useState(false);
 
   const leaderboardButton = () => {
     setLeaderboardOpen(true);
@@ -19,6 +22,10 @@ export default function Home() {
 
   const feedbackButton = () => {
     setFeedbackOpen(true);
+  };
+
+  const releaseNotesButton = () => {
+    setReleaseNotesOpen(true);
   };
 
   return (
@@ -82,12 +89,16 @@ export default function Home() {
 
       {/* Leaderboard Modal */}
       <Leaderboard open={leaderboardOpen} setOpen={setLeaderboardOpen} />
+      {/* Feedback Modal */}
       <Feedback open={feedbackOpen} setOpen={setFeedbackOpen} />
+      {/* Release Notes Modal */}
+      <ReleaseNotes open={releaseNotesOpen} setOpen={setReleaseNotesOpen} />
 
-      {/* Early Access Feedback */}
+      {/* Early Access, Feedback, and Release Notes */}
       <div className="fixed bottom-2 right-2 flex items-center space-x-3 text-xs mr-35">
         <p className="text-white opacity-80">This game is still early access</p>
         <p className="text-white">•</p>
+
         <Button
           onClick={feedbackButton}
           variant="default"
@@ -95,6 +106,15 @@ export default function Home() {
           className="cursor-pointer rounded-full bg-white text-black shadow-md hover:bg-gray-200 px-2 text-xs"
         >
           Feedback
+        </Button>
+
+        <Button
+          onClick={releaseNotesButton}
+          variant="default"
+          size="sm"
+          className="cursor-pointer rounded-full bg-white text-black shadow-md hover:bg-gray-200 px-2 text-xs"
+        >
+          Release Notes
         </Button>
       </div>
     </>
