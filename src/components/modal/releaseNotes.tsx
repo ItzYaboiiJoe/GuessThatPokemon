@@ -40,6 +40,35 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
 
         <ScrollArea className="h-[400px] pr-3">
           <div className="space-y-8 text-gray-800">
+            {/* --- Version 0.7.5 --- */}
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-1">v0.7.5</h2>
+              <p className="text-sm text-gray-600 italic mb-3">TBD</p>
+              <div className="space-y-3">
+                <div>
+                  <p className="font-semibold text-orange-700">
+                    ✨ New Features
+                  </p>
+                  <ul className="list-disc list-inside text-sm">
+                    <li>Add new Features</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold text-orange-700">
+                    🧩 Improvements
+                  </p>
+                  <ul className="list-disc list-inside text-sm">
+                    <li>Add New Improvements</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold text-orange-700">🐞 Fixes</p>
+                  <ul className="list-disc list-inside text-sm">
+                    <li>Add New Fixes</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
             {/* --- Version 0.7.0 --- */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-1">v0.7.0</h2>
