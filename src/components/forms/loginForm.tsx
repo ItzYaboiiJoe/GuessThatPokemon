@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { newEntry } from "../api/handleLeaderboard";
 
 // Define the form schema
 const formSchema = z.object({
@@ -59,16 +60,12 @@ const LoginForm = () => {
         }
 
         // Create an empty entry in the leaderboard table for the new user
-        const { error: leaderboardError } = await supabase
-          .from("Pokemon_Leaderboard")
-          .insert({
-            TrainerName: loginUser.user.user_metadata.trainer_name,
-            TriviaSolved: 0,
-            WinningStreak: 0,
-          });
+        const newUser = await newEntry(
+          loginUser.user.user_metadata.trainer_name
+        );
 
-        if (leaderboardError) {
-          setErrorLogin(leaderboardError.message);
+        if (!newUser.success) {
+          setErrorLogin(newUser.error);
           return;
         }
       }

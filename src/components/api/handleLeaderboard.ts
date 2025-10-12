@@ -1,12 +1,14 @@
 // Handles leaderboard data processing
 
 import { supabase } from "@/lib/supabaseClient";
+import { error } from "console";
 
 export type LeaderboardEntry = {
   id: number;
   TrainerName: string;
   TriviaSolved: number;
   WinningStreak: number;
+  DailyLoginStreak: number;
 };
 
 export const fetchLeaderboard = async () => {
@@ -46,4 +48,23 @@ export const updateLeaderboard = async (
     .eq("TrainerName", trainerName);
 
   return updateData;
+};
+
+// Create an empty entry for a new user
+export const newEntry = async (userMetadata: string) => {
+  const { error: entryError } = await supabase
+    .from("Pokemon_Leaderboard")
+    .insert({
+      TrainerName: userMetadata,
+      TriviaSolved: 0,
+      WinningStreak: 0,
+      DailyLoginStreak: 0,
+    });
+
+  if (entryError) {
+    console.error("Error creating a new user in leaderboard: ", entryError);
+    return { success: false, error: entryError.message };
+  }
+
+  return { success: true, error: null };
 };

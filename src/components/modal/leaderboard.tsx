@@ -49,7 +49,7 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className="rounded-2xl shadow-2xl bg-gradient-to-b from-yellow-100 via-orange-100 to-white"
+        className="w-full sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] rounded-2xl shadow-2xl bg-gradient-to-b from-yellow-100 via-orange-100 to-white"
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
@@ -68,6 +68,9 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
                   <TableHead className="text-center">
                     First Try Streak
                   </TableHead>
+                  <TableHead className="text-center">
+                    Daily Login Streak
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -84,6 +87,9 @@ const Leaderboard = ({ open, setOpen }: LeaderboardProps) => {
 
                     {/* First Try Streak */}
                     <TableCell>{entry.WinningStreak}</TableCell>
+
+                    {/* Daily Login Streak */}
+                    <TableCell>{entry.DailyLoginStreak}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
