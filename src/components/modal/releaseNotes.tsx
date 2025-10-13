@@ -50,7 +50,15 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                     ✨ New Features
                   </p>
                   <ul className="list-disc list-inside text-sm">
-                    <li>Add new Features</li>
+                    <li>
+                      Introduced <strong>Daily Login Streak</strong> tracking,
+                      trainers can now earn streaks for consecutive daily play
+                      sessions.
+                    </li>
+                    <li>
+                      Displayed <strong>Daily Login Streak</strong> stat in the
+                      Trainer Profile window.
+                    </li>
                   </ul>
                 </div>
                 <div>
@@ -58,17 +66,24 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                     🧩 Improvements
                   </p>
                   <ul className="list-disc list-inside text-sm">
-                    <li>Add New Improvements</li>
+                    <li>
+                      Optimized database logic to automatically initialize
+                      missing streak data for returning users.
+                    </li>
                   </ul>
                 </div>
                 <div>
                   <p className="font-semibold text-orange-700">🐞 Fixes</p>
                   <ul className="list-disc list-inside text-sm">
-                    <li>Add New Fixes</li>
+                    <li>
+                      Fixed a potential edge case where new users without prior
+                      streak data could cause undefined values.
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
+
             {/* --- Version 0.7.0 --- */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-1">v0.7.0</h2>
