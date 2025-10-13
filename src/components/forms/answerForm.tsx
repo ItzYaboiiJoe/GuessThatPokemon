@@ -106,6 +106,13 @@ const AnswerForm = ({
     timeZone: "America/New_York",
   });
 
+  // Yesterday Date for tracking daily login streak
+  const yesterdayDate = new Date();
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterdayEastern = yesterdayDate.toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+  });
+
   // Call API to check if the user is a guest or an auth user to setup leaderboard stats update
   useEffect(() => {
     if (mode === "auth") {
@@ -156,6 +163,7 @@ const AnswerForm = ({
   }, [trainerID, mode]);
 
   const triesAttempt = useRef(0);
+  let newDailyLoginStreak = checkUser?.DailyLoginStreak ?? 0;
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -180,11 +188,26 @@ const AnswerForm = ({
 
       // check to update values if the player is an auth user
       if (mode === "auth" && checkUser) {
+        // Update Daily Login Streak Data
+        if (submissionDate === currentDateEastern) {
+          newDailyLoginStreak = checkUser?.DailyLoginStreak;
+        } else if (submissionDate === yesterdayEastern) {
+          newDailyLoginStreak = checkUser?.DailyLoginStreak + 1;
+        } else {
+          newDailyLoginStreak = 1;
+        }
+
         const newSolved = solvedTrivia + 1;
         const newStreak = triesAttempt.current === 1 ? firstTryStreak + 1 : 0;
 
         // Update table and increment the solved value by 1 and win streak if the user got it first try
-        await updateLeaderboard(newSolved, newStreak, trainerName);
+        // Update the Daily Login Streak Value
+        await updateLeaderboard(
+          newSolved,
+          newStreak,
+          trainerName,
+          newDailyLoginStreak
+        );
 
         // Update local state so next submit uses fresh values
         setSolvedTrivia(newSolved);
@@ -211,7 +234,12 @@ const AnswerForm = ({
       setResultStatus("wrong");
       if (mode === "auth" && checkUser) {
         // Reset First try streak back to 0
-        await updateLeaderboard(solvedTrivia, 0, trainerName);
+        await updateLeaderboard(
+          solvedTrivia,
+          0,
+          trainerName,
+          newDailyLoginStreak!
+        );
         setFirstTryStreak(0);
       }
     }
