@@ -8,6 +8,7 @@ export type LeaderboardEntry = {
   TriviaSolved: number;
   WinningStreak: number;
   DailyLoginStreak: number;
+  BestSolvedTime: number;
 };
 
 export const fetchLeaderboard = async () => {

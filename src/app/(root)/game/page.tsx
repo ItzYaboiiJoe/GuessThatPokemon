@@ -28,6 +28,8 @@ const GamePage = () => {
   const [isRunning, setIsRunning] = useState(false);
   // State to determine if stopwatch should be displayed
   const [mode, setMode] = useState<string | null>(null);
+  // State to store the stopwatch timer
+  const [seconds, setSeconds] = useState(0);
 
   const router = useRouter();
 
@@ -125,7 +127,11 @@ const GamePage = () => {
         {/* Only show stopwatch for auth users */}
         {mode === "auth" && (
           <h2>
-            <StopWatch isRunning={isRunning} />
+            <StopWatch
+              isRunning={isRunning}
+              seconds={seconds}
+              setSeconds={setSeconds}
+            />
           </h2>
         )}
       </div>
@@ -175,6 +181,7 @@ const GamePage = () => {
             pokemonDescription={pokemon.PokemonDescription}
             onCorrect={() => setIsCorrect(true)}
             onSubmitChange={(hasSubmitted) => setIsRunning(!hasSubmitted)}
+            stopwatchSeconds={seconds}
           />
         )}
       </div>

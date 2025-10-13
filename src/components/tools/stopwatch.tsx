@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface StopWatchProps {
   isRunning: boolean;
+  seconds: number;
+  setSeconds: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const StopWatch = ({ isRunning }: StopWatchProps) => {
-  const [seconds, setSeconds] = useState(0);
-
+const StopWatch = ({ isRunning, seconds, setSeconds }: StopWatchProps) => {
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
 
@@ -21,7 +21,7 @@ const StopWatch = ({ isRunning }: StopWatchProps) => {
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [isRunning]);
+  }, [isRunning, setSeconds]);
 
   const formatTime = (sec: number) => {
     const m = Math.floor(sec / 60);
@@ -32,8 +32,8 @@ const StopWatch = ({ isRunning }: StopWatchProps) => {
   return (
     <div
       className="mr-6 text-yellow-300 text-lg md:text-xl font-bold tracking-widest
-    drop-shadow-[0_0_8px_rgba(255,255,150,0.7)]
-    animate-[pulseGlow_2s_ease-in-out_infinite] select-none"
+      drop-shadow-[0_0_8px_rgba(255,255,150,0.7)]
+      animate-[pulseGlow_2s_ease-in-out_infinite] select-none"
     >
       {formatTime(seconds)}
     </div>

@@ -30,6 +30,7 @@ type PokemonNameProp = {
   pokemonDescription: string;
   onCorrect: () => void;
   onSubmitChange?: (hasSubmitted: boolean) => void;
+  stopwatchSeconds: number;
 };
 
 // Define the form schema
@@ -45,6 +46,7 @@ const AnswerForm = ({
   pokemonDescription,
   onCorrect,
   onSubmitChange,
+  stopwatchSeconds,
 }: PokemonNameProp) => {
   // State to store the checking leaderboard api
   const [checkUser, setCheckUser] = useState<LeaderboardEntry | null>(null);
