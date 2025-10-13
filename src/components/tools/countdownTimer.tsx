@@ -13,7 +13,7 @@ const CountdownTimer = () => {
 
       // Set Target Date to 12:05 AM time
       const nextTarget = new Date();
-      nextTarget.setHours(0, 5, 0, 0);
+      nextTarget.setHours(0, 0, 0, 0);
 
       // If time has already passed 12:05 AM today then start a new countdown for next day
       if (now >= nextTarget) {

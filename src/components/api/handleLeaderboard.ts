@@ -1,7 +1,6 @@
 // Handles leaderboard data processing
 
 import { supabase } from "@/lib/supabaseClient";
-import { error } from "console";
 
 export type LeaderboardEntry = {
   id: number;

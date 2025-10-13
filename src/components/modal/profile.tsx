@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
-import { checkLeaderboard } from "../api/handleLeaderboard";
+import { checkLeaderboard, LeaderboardEntry } from "../api/handleLeaderboard";
 import Link from "next/link";
 import UpdateTrainerName from "./changeTrainerName";
 
@@ -19,15 +19,9 @@ interface ProfileProps {
   setOpen: (open: boolean) => void;
 }
 
-interface ProfileData {
-  TrainerName: string;
-  TriviaSolved: number;
-  WinningStreak: number;
-}
-
 const Profile = ({ open, setOpen }: ProfileProps) => {
   // States to hold profile data
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [profileData, setProfileData] = useState<LeaderboardEntry | null>(null);
   // State to open Change Trainer Name
   const [changeTrainerName, setChangeTrainerName] = useState(false);
 
@@ -76,7 +70,9 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
             </div>
 
             {/* Stats Grid */}
+
             <div className="grid grid-cols-2 gap-4 text-center">
+              {/* Correct Guesses */}
               <div className="bg-gradient-to-r from-yellow-300 to-orange-400 rounded-lg py-3 shadow-md border border-orange-200">
                 <p className="text-xs uppercase font-semibold text-gray-700">
                   Correct Guesses
@@ -86,6 +82,7 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
                 </p>
               </div>
 
+              {/* First Try Streak */}
               <div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-lg py-3 shadow-md border border-orange-200">
                 <p className="text-xs uppercase font-semibold text-gray-100">
                   First Try Streak
@@ -93,6 +90,24 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
                 <p className="text-lg font-bold text-white">
                   {profileData?.WinningStreak ?? 0}
                 </p>
+              </div>
+
+              {/* Daily Login Streak */}
+              <div className="bg-gradient-to-r from-yellow-300 to-orange-400 rounded-lg py-3 shadow-md border border-orange-200">
+                <p className="text-xs uppercase font-semibold text-gray-700">
+                  Daily Login Streak
+                </p>
+                <p className="text-lg font-bold text-black">
+                  {profileData?.DailyLoginStreak ?? 0}
+                </p>
+              </div>
+
+              {/* Best Time Coming Soon */}
+              <div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-lg py-3 shadow-md border border-orange-200">
+                <p className="text-xs uppercase font-semibold text-gray-100">
+                  Coming Soon
+                </p>
+                <p className="text-lg font-bold text-white"></p>
               </div>
             </div>
 
