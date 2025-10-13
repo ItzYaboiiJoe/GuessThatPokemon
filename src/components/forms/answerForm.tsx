@@ -29,6 +29,7 @@ type PokemonNameProp = {
   pokemonHabitat: string;
   pokemonDescription: string;
   onCorrect: () => void;
+  onSubmitChange?: (hasSubmitted: boolean) => void;
 };
 
 // Define the form schema
@@ -43,6 +44,7 @@ const AnswerForm = ({
   pokemonHabitat,
   pokemonDescription,
   onCorrect,
+  onSubmitChange,
 }: PokemonNameProp) => {
   // State to store the checking leaderboard api
   const [checkUser, setCheckUser] = useState<LeaderboardEntry | null>(null);
@@ -71,6 +73,10 @@ const AnswerForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: { answer: "" },
   });
+
+  useEffect(() => {
+    onSubmitChange?.(hasSubmitted);
+  }, [hasSubmitted, onSubmitChange]);
 
   // Open the Modal
   const resultsButton = () => {

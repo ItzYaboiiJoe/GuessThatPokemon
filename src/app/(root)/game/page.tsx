@@ -11,6 +11,7 @@ import {
 import AnswerForm from "@/components/forms/answerForm";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import StopWatch from "@/components/tools/stopwatch";
 
 const GamePage = () => {
   // Get Trainer Name from Local Storage
@@ -23,6 +24,10 @@ const GamePage = () => {
   const [loading, setLoading] = useState(true);
   // State to control Menu Link Path
   const [menuLink, setMenuLink] = useState("/");
+  // State to track stopwatch
+  const [isRunning, setIsRunning] = useState(false);
+  // State to determine if stopwatch should be displayed
+  const [mode, setMode] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -50,6 +55,10 @@ const GamePage = () => {
       } else {
         setMenuLink("/");
       }
+
+      // Store which Mode
+      const storedMode = localStorage.getItem("Mode");
+      setMode(storedMode);
 
       // Load trainer name
       const stored = localStorage.getItem("TrainerName");
@@ -106,11 +115,19 @@ const GamePage = () => {
         height={600}
         className="absolute top-1/4 opacity-5 pointer-events-none"
       />
-      {/* Trainer Name */}
+
       <div className="w-full flex justify-between items-center">
+        {/* Trainer Name */}
         <h2 className="text-sm md:text-base font-semibold bg-white/10 px-3 py-1 rounded-full shadow-md">
           Trainer: {trainerName}
         </h2>
+
+        {/* Only show stopwatch for auth users */}
+        {mode === "auth" && (
+          <h2>
+            <StopWatch isRunning={isRunning} />
+          </h2>
+        )}
       </div>
 
       {/* Pokémon Image */}
@@ -157,6 +174,7 @@ const GamePage = () => {
             pokemonHabitat={pokemon.PokemonHabitat}
             pokemonDescription={pokemon.PokemonDescription}
             onCorrect={() => setIsCorrect(true)}
+            onSubmitChange={(hasSubmitted) => setIsRunning(!hasSubmitted)}
           />
         )}
       </div>
