@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import { checkLeaderboard, LeaderboardEntry } from "../api/handleLeaderboard";
 import Link from "next/link";
 import UpdateTrainerName from "./changeTrainerName";
+import convertSeconds from "../tools/bestTimeConversion";
 
 interface ProfileProps {
   open: boolean;
@@ -44,13 +45,9 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
 
   // Convert seconds to minutes and seconds time format
   const displayBestTime = () => {
-    const userBestSolvedTime = profileData?.BestSolvedTime;
-    if (userBestSolvedTime !== null) {
-      const minutes = Math.floor(userBestSolvedTime! / 60);
-      const seconds = userBestSolvedTime! % 60;
-      const formatMinutes = String(minutes).padStart(2, "0");
-      const formatSeconds = String(seconds).padStart(2, "0");
-      return `${formatMinutes}:${formatSeconds}`;
+    const bestTime = profileData?.BestSolvedTime;
+    if (bestTime !== null && bestTime !== undefined) {
+      return convertSeconds(bestTime);
     } else {
       return "Unknown";
     }
