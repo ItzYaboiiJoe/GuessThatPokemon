@@ -96,13 +96,13 @@ const Results = ({
               </div>
             )}
             <DialogTitle
-              className={`text-4xl font-bold mb-2 ${
+              className={`font-bold mb-2 ${
                 status === "correct"
-                  ? "text-green-600 text-center"
+                  ? "text-4xl text-green-600 text-center"
                   : status === "wrong"
-                  ? "text-red-600 text-center"
+                  ? "text-2xl text-red-600 text-center"
                   : status === "results"
-                  ? "text-yellow-600 text-center"
+                  ? "text-2xl text-yellow-600 text-center"
                   : ""
               }`}
             >
