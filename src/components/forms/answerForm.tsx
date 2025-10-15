@@ -16,6 +16,7 @@ import {
   LeaderboardEntry,
   updateLeaderboard,
   checkLeaderboard,
+  updateTime,
 } from "../api/handleLeaderboard";
 import { fetchPlayerInfo, updateDate } from "../api/fetch";
 import Results from "../modal/results";
@@ -203,6 +204,13 @@ const AnswerForm = ({
           newDailyLoginStreak = checkUser?.DailyLoginStreak + 1;
         } else {
           newDailyLoginStreak = 1;
+        }
+
+        // Update Best Time
+        if (checkUser.BestSolvedTime === null) {
+          await updateTime(stopwatchSeconds, trainerName);
+        } else if (stopwatchSeconds < checkUser.BestSolvedTime) {
+          await updateTime(stopwatchSeconds, trainerName);
         }
 
         const newSolved = solvedTrivia + 1;
