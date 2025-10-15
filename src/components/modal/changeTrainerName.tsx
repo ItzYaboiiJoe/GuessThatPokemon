@@ -24,8 +24,7 @@ import {
 import { Button } from "../ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
-import { updateTrainerName } from "../api/updateDisplayName";
-import { supabase } from "@/lib/supabaseClient";
+import { updateTrainerName, checkTrainerName } from "../api/updateDisplayName";
 
 interface updateNameProps {
   open: boolean;
@@ -59,20 +58,16 @@ const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
     const newTrainerName = values.trainerName;
 
     // Check if Trainer Name exists already
-    const { data: existingTrainer, error: checkError } = await supabase
-      .from("Pokemon_Players")
-      .select("TrainerName")
-      .eq("TrainerName", newTrainerName)
-      .maybeSingle();
+    const result = await checkTrainerName(newTrainerName);
 
-    if (checkError) {
-      console.error("Error checking trainer:", checkError);
+    if (!result.success) {
+      console.error("Error checking trainer:", result.error);
       setCheckError("An error occurred while checking trainer name.");
       setLoading(false);
       return;
     }
 
-    if (existingTrainer) {
+    if (result.exists) {
       setCheckError("Trainer name already exists. Please choose another one.");
       setLoading(false);
       return;

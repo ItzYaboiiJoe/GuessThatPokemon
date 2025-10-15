@@ -15,6 +15,7 @@ import {
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 import RegistrationConfirmation from "../modal/registerConfirmation";
+import { checkTrainerName } from "../api/updateDisplayName";
 
 // Define the form schema
 const formSchema = z.object({
@@ -52,19 +53,15 @@ const RegisterForm = () => {
     setregisterError("");
 
     // Check if Trainer Name exists already
-    const { data: existingTrainer, error: checkError } = await supabase
-      .from("Pokemon_Players")
-      .select("TrainerName")
-      .eq("TrainerName", values.trainerName)
-      .maybeSingle();
+    const result = await checkTrainerName(values.trainerName);
 
-    if (checkError) {
-      console.error("Error checking trainer:", checkError);
+    if (!result.success) {
+      console.error("Error checking trainer:", result.error);
       setregisterError("An error occurred while checking trainer name.");
       return;
     }
 
-    if (existingTrainer) {
+    if (result.exists) {
       setregisterError(
         "Trainer name already exists. Please choose another one."
       );
