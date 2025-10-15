@@ -59,6 +59,15 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       Displayed <strong>Daily Login Streak</strong> stat in the
                       Trainer Profile window.
                     </li>
+                    <li>
+                      Introduced <strong>Best Time</strong> tracking, trainers
+                      can now see their fastest time guessing what is the
+                      pokemon.
+                    </li>
+                    <li>
+                      Displayed <strong>Best Time</strong> stat in the Trainer
+                      profile window
+                    </li>
                   </ul>
                 </div>
                 <div>
