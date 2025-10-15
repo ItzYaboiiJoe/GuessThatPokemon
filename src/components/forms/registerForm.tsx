@@ -31,7 +31,7 @@ const formSchema = z.object({
 
 const RegisterForm = () => {
   // State to handle registration errors
-  const [registerError, setregisterError] = useState<string | null>(null);
+  const [registerError, setregisterError] = useState("");
   // State to control the registration confirmation modal
   const [registerConfirmationOpen, setRegisterConfirmationOpen] =
     useState(false);
@@ -48,6 +48,29 @@ const RegisterForm = () => {
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // Clear Error
+    setregisterError("");
+
+    // Check if Trainer Name exists already
+    const { data: existingTrainer, error: checkError } = await supabase
+      .from("Pokemon_Players")
+      .select("TrainerName")
+      .eq("TrainerName", values.trainerName)
+      .maybeSingle();
+
+    if (checkError) {
+      console.error("Error checking trainer:", checkError);
+      setregisterError("An error occurred while checking trainer name.");
+      return;
+    }
+
+    if (existingTrainer) {
+      setregisterError(
+        "Trainer name already exists. Please choose another one."
+      );
+      return;
+    }
+
     // Sign up the user with Supabase
     const { error } = await supabase.auth.signUp({
       email: values.email,
