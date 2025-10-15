@@ -42,6 +42,20 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
     setOpen(false);
   };
 
+  // Convert seconds to minutes and seconds time format
+  const displayBestTime = () => {
+    const userBestSolvedTime = profileData?.BestSolvedTime;
+    if (userBestSolvedTime !== null) {
+      const minutes = Math.floor(userBestSolvedTime! / 60);
+      const seconds = userBestSolvedTime! % 60;
+      const formatMinutes = String(minutes).padStart(2, "0");
+      const formatSeconds = String(seconds).padStart(2, "0");
+      return `${formatMinutes}:${formatSeconds}`;
+    } else {
+      return "Unknown";
+    }
+  };
+
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -102,12 +116,14 @@ const Profile = ({ open, setOpen }: ProfileProps) => {
                 </p>
               </div>
 
-              {/* Best Time Coming Soon */}
+              {/* Best Time */}
               <div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-lg py-3 shadow-md border border-orange-200">
                 <p className="text-xs uppercase font-semibold text-gray-100">
-                  Coming Soon
+                  Best Solved Time
                 </p>
-                <p className="text-lg font-bold text-white"></p>
+                <p className="text-lg font-bold text-white">
+                  {displayBestTime()}
+                </p>
               </div>
             </div>
 
