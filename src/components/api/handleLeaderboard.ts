@@ -83,3 +83,27 @@ export const updateTime = async (bestTime: number, trainerName: string) => {
 
   return data;
 };
+
+// Update LatestSolvedTime Leaderboard
+export const updateCurrentTime = async (
+  currentTime: number,
+  trainerName: string
+) => {
+  const { data } = await supabase
+    .from("Pokemon_Leaderboard")
+    .update({ LatestSolvedTime: currentTime })
+    .eq("TrainerName", trainerName);
+
+  return data;
+};
+
+// Select and display current time results
+export const currentTime = async (currentTime: number, trainerName: string) => {
+  const { data } = await supabase
+    .from("Pokemon_Leaderboard")
+    .select("LatestSolvedTime")
+    .eq("TrainerName", trainerName)
+    .single();
+
+  return data;
+};
