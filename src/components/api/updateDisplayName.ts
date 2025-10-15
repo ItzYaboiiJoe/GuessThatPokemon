@@ -1,8 +1,6 @@
 // This file handles updating user TrainerName across all the tables
 
 import { supabase } from "@/lib/supabaseClient";
-import { error } from "console";
-import { success } from "zod";
 
 export const updateTrainerName = async (
   newPlayerName: string,
