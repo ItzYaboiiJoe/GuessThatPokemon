@@ -73,3 +73,13 @@ export const newEntry = async (userMetadata: string) => {
 
   return { success: true, error: null };
 };
+
+// Update BestSolvedTime Leaderboard
+export const updateTime = async (bestTime: number, trainerName: string) => {
+  const { data } = await supabase
+    .from("Pokemon_Leaderboard")
+    .update({ BestSolvedTime: bestTime })
+    .eq("TrainerName", trainerName);
+
+  return data;
+};
