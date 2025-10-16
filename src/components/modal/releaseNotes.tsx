@@ -66,7 +66,7 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                     </li>
                     <li>
                       Displayed <strong>Best Time</strong> stat in the Trainer
-                      profile window
+                      profile window.
                     </li>
                   </ul>
                 </div>
@@ -79,6 +79,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       Optimized database logic to automatically initialize
                       missing streak data for returning users.
                     </li>
+                    <li>
+                      The user will be able to see how long it took to guess the
+                      pokemon in the results window now.
+                    </li>
                   </ul>
                 </div>
                 <div>
@@ -87,6 +91,15 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                     <li>
                       Fixed a potential edge case where new users without prior
                       streak data could cause undefined values.
+                    </li>
+                    <li>
+                      There is a time counting now during the game menu to
+                      record how long the user took to guess the pokemon.
+                    </li>
+                    <li>
+                      There were cases where a user was able to change their
+                      Trainer Name to an existing Trainer Name that was already
+                      taken.
                     </li>
                   </ul>
                 </div>
