@@ -96,8 +96,12 @@ const AnswerForm = ({
     if (mode === "auth" && checkUser) {
       // Fetch the Current Time it took to solve this pokemon
       const fetchTime = await currentTime(trainerName);
-      const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
-      setWinTime(convertedTime);
+      if (fetchTime?.LatestSolvedTime === "DNF") {
+        setWinTime("DNF");
+      } else {
+        const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
+        setWinTime(convertedTime);
+      }
     }
     // Pass pokemon data to results view modal
     setResultsOpen(true);
@@ -258,15 +262,25 @@ const AnswerForm = ({
         updateDate(currentDateEastern, trainerID);
       }
     } else {
-      resultsButton();
       setResultTitle("That is incorrect, try again!");
       if (triesAttempt.current === 3) {
         setFirstHint(true);
         setResultDescription(pokemonType);
-      } else if (triesAttempt.current === 5) {
+      } else if (triesAttempt.current === 4) {
         setSecondHint(true);
+      } else if (triesAttempt.current === 6) {
+        setWinTime("DNF");
+        onCorrect();
+        setHasSubmitted(true);
+        setResultTitle("That is incorrect, better luck tomorrow");
+        // Update user submissionDate on the database
+        if (mode === "auth" && trainerID) {
+          updateDate(currentDateEastern, trainerID);
+          await updateCurrentTime("DNF", trainerName);
+        }
       }
       setResultStatus("wrong");
+
       if (mode === "auth" && checkUser) {
         // Reset First try streak back to 0
         await updateLeaderboard(
@@ -277,6 +291,7 @@ const AnswerForm = ({
         );
         setFirstTryStreak(0);
       }
+      resultsButton();
     }
   };
 

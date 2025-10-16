@@ -115,6 +115,7 @@ const Results = ({
             </DialogTitle>
 
             {/* Render Results based on the user submit */}
+            {/* Results View */}
             {status === "results" && (
               <div>
                 {gameMode !== "guest" && (
@@ -146,6 +147,7 @@ const Results = ({
               </div>
             )}
 
+            {/* Correct View */}
             {status === "correct" && (
               <div>
                 {gameMode !== "guest" && (
@@ -177,6 +179,7 @@ const Results = ({
               </div>
             )}
 
+            {/* Incorrect View */}
             {firstHint && (
               <div className="bg-yellow-100 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm">
                 <span className="font-semibold">Hint 1:</span> The Pokémon is a{" "}

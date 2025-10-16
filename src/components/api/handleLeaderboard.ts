@@ -9,7 +9,7 @@ export type LeaderboardEntry = {
   WinningStreak: number;
   DailyLoginStreak: number;
   BestSolvedTime: number;
-  LatestSolvedTune: number;
+  LatestSolvedTune: number | string;
 };
 
 export const fetchLeaderboard = async () => {
@@ -87,7 +87,7 @@ export const updateTime = async (bestTime: number, trainerName: string) => {
 
 // Update LatestSolvedTime Leaderboard
 export const updateCurrentTime = async (
-  currentTime: number,
+  currentTime: number | string,
   trainerName: string
 ) => {
   const { data } = await supabase

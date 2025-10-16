@@ -83,6 +83,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       The user will be able to see how long it took to guess the
                       pokemon in the results window now.
                     </li>
+                    <li>
+                      There will be a limit of 6 attempts now to guess the
+                      pokemon then it will auto reveal what was the pokemon.
+                    </li>
                   </ul>
                 </div>
                 <div>
