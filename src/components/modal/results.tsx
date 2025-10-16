@@ -70,6 +70,9 @@ const Results = ({
     );
   };
 
+  // fetch user mode
+  const gameMode = localStorage.getItem("Mode");
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
@@ -114,13 +117,15 @@ const Results = ({
             {/* Render Results based on the user submit */}
             {status === "results" && (
               <div>
-                <div className="text-center text-gray-800 font-medium bg-white border border-gray-300 rounded-lg px-4 py-2 mt-2 shadow-sm">
-                  You guessed{" "}
-                  <span className="font-bold text-gray-900">
-                    {description.split(" ")[0]}
-                  </span>{" "}
-                  in <span className="font-bold text-red-600">{winTime}</span>
-                </div>
+                {gameMode !== "guest" && (
+                  <div className="text-center text-gray-800 font-medium bg-white border border-gray-300 rounded-lg px-4 py-2 mt-2 shadow-sm">
+                    You guessed{" "}
+                    <span className="font-bold text-gray-900">
+                      {description.split(" ")[0]}
+                    </span>{" "}
+                    in <span className="font-bold text-red-600">{winTime}</span>
+                  </div>
+                )}
 
                 <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm text-center">
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}
@@ -143,13 +148,15 @@ const Results = ({
 
             {status === "correct" && (
               <div>
-                <div className="text-center text-gray-800 font-medium bg-white border border-gray-300 rounded-lg px-4 py-2 mt-2 shadow-sm">
-                  You guessed{" "}
-                  <span className="font-bold text-gray-900">
-                    {description.split(" ")[0]}
-                  </span>{" "}
-                  in <span className="font-bold text-red-600">{winTime}</span>
-                </div>
+                {gameMode !== "guest" && (
+                  <div className="text-center text-gray-800 font-medium bg-white border border-gray-300 rounded-lg px-4 py-2 mt-2 shadow-sm">
+                    You guessed{" "}
+                    <span className="font-bold text-gray-900">
+                      {description.split(" ")[0]}
+                    </span>{" "}
+                    in <span className="font-bold text-red-600">{winTime}</span>
+                  </div>
+                )}
 
                 <div className="mt-6 bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}

@@ -93,10 +93,12 @@ const AnswerForm = ({
 
   // Results Button Render Modal
   const postResultButton = async () => {
-    // Fetch the Current Time it took to solve this pokemon
-    const fetchTime = await currentTime(trainerName);
-    const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
-    setWinTime(convertedTime);
+    if (mode === "auth" && checkUser) {
+      // Fetch the Current Time it took to solve this pokemon
+      const fetchTime = await currentTime(trainerName);
+      const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
+      setWinTime(convertedTime);
+    }
     // Pass pokemon data to results view modal
     setResultsOpen(true);
     setResultTitle(pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1));
@@ -193,10 +195,6 @@ const AnswerForm = ({
     if (userAnswer === correctAnswer) {
       // Update Current Time
       await updateCurrentTime(stopwatchSeconds, trainerName);
-      // Fetch the Current Time it took to solve this pokemon
-      const fetchTime = await currentTime(trainerName);
-      const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
-      setWinTime(convertedTime);
       setResultTitle("Correct");
       setFirstHint(false);
       setSecondHint(false);
@@ -228,6 +226,11 @@ const AnswerForm = ({
         } else if (stopwatchSeconds < checkUser.BestSolvedTime) {
           await updateTime(stopwatchSeconds, trainerName);
         }
+
+        // Fetch the Current Time it took to solve this pokemon
+        const fetchTime = await currentTime(trainerName);
+        const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
+        setWinTime(convertedTime);
 
         const newSolved = solvedTrivia + 1;
         const newStreak = triesAttempt.current === 1 ? firstTryStreak + 1 : 0;
