@@ -9,6 +9,7 @@ export type LeaderboardEntry = {
   WinningStreak: number;
   DailyLoginStreak: number;
   BestSolvedTime: number;
+  LatestSolvedTune: number;
 };
 
 export const fetchLeaderboard = async () => {
@@ -98,7 +99,7 @@ export const updateCurrentTime = async (
 };
 
 // Select and display current time results
-export const currentTime = async (currentTime: number, trainerName: string) => {
+export const currentTime = async (trainerName: string) => {
   const { data } = await supabase
     .from("Pokemon_Leaderboard")
     .select("LatestSolvedTime")

@@ -17,10 +17,13 @@ import {
   updateLeaderboard,
   checkLeaderboard,
   updateTime,
+  updateCurrentTime,
+  currentTime,
 } from "../api/handleLeaderboard";
 import { fetchPlayerInfo, updateDate } from "../api/fetch";
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
+import convertSeconds from "../tools/bestTimeConversion";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
@@ -70,6 +73,8 @@ const AnswerForm = ({
   // State to manage displaying Hints on incorrect
   const [firstHint, setFirstHint] = useState(false);
   const [secondHint, setSecondHint] = useState(false);
+  // State to pass beat time to results modal
+  const [winTime, setWinTime] = useState("");
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -87,7 +92,12 @@ const AnswerForm = ({
   };
 
   // Results Button Render Modal
-  const postResultButton = () => {
+  const postResultButton = async () => {
+    // Fetch the Current Time it took to solve this pokemon
+    const fetchTime = await currentTime(trainerName);
+    const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
+    setWinTime(convertedTime);
+    // Pass pokemon data to results view modal
     setResultsOpen(true);
     setResultTitle(pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1));
     setFirstHint(false);
@@ -181,6 +191,12 @@ const AnswerForm = ({
     triesAttempt.current++;
 
     if (userAnswer === correctAnswer) {
+      // Update Current Time
+      await updateCurrentTime(stopwatchSeconds, trainerName);
+      // Fetch the Current Time it took to solve this pokemon
+      const fetchTime = await currentTime(trainerName);
+      const convertedTime = convertSeconds(fetchTime?.LatestSolvedTime);
+      setWinTime(convertedTime);
       setResultTitle("Correct");
       setFirstHint(false);
       setSecondHint(false);
@@ -311,6 +327,7 @@ const AnswerForm = ({
         cry={pokemonCry}
         firstHint={firstHint}
         secondHint={secondHint}
+        winTime={winTime}
       />
     </>
   );
