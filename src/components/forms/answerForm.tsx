@@ -187,6 +187,13 @@ const AnswerForm = ({
     }
   }, [trainerID, mode]);
 
+  // Update stopwatch as long as has submit is not true
+  useEffect(() => {
+    if (!hasSubmitted && mode === "auth" && trainerID) {
+      localStorage.setItem("time", stopwatchSeconds.toString());
+    }
+  }, [stopwatchSeconds, hasSubmitted, mode, trainerID]);
+
   const triesAttempt = useRef(0);
   let newDailyLoginStreak = checkUser?.DailyLoginStreak ?? 0;
 
@@ -251,6 +258,8 @@ const AnswerForm = ({
         // Update local state so next submit uses fresh values
         setSolvedTrivia(newSolved);
         setFirstTryStreak(newStreak);
+
+        localStorage.removeItem("time");
       }
 
       // A flag to send to the game page to display the image after correct answer submitted
@@ -278,6 +287,7 @@ const AnswerForm = ({
           updateDate(currentDateEastern, trainerID);
           await updateCurrentTime("DNF", trainerName);
           newDailyLoginStreak = checkUser!.DailyLoginStreak + 1;
+          localStorage.removeItem("time");
         }
       }
       setResultStatus("wrong");

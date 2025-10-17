@@ -85,6 +85,15 @@ const GamePage = () => {
     initializeGame();
   }, [router]);
 
+  // check if the user already started the game time
+  useEffect(() => {
+    const gameTime = localStorage.getItem("time");
+    if (gameTime !== null) {
+      setSeconds(Number(gameTime));
+      setIsRunning(true);
+    }
+  }, []);
+
   // Clean up local storage on exit
   const cleanUp = async () => {
     localStorage.removeItem("Mode");

@@ -13,7 +13,13 @@ const StopWatch = ({ isRunning, seconds, setSeconds }: StopWatchProps) => {
     let timer: NodeJS.Timeout | null = null;
 
     if (isRunning) {
-      timer = setInterval(() => setSeconds((s) => s + 1), 1000);
+      timer = setInterval(() => {
+        setSeconds((s) => {
+          const newTime = s + 1;
+          localStorage.setItem("time", String(newTime));
+          return newTime;
+        });
+      }, 1000);
     } else if (timer) {
       clearInterval(timer);
     }
