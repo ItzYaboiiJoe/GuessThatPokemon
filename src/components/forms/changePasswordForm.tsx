@@ -71,6 +71,7 @@ const ChangePasswordForm = () => {
         type: "manual",
         message: "Passwords do not match",
       });
+      setLoading(false);
       return;
     }
 
