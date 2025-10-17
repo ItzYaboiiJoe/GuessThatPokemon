@@ -319,7 +319,12 @@ const AnswerForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input disabled={hasSubmitted} className="mt-10" {...field} />
+                  <Input
+                    disabled={hasSubmitted}
+                    onPaste={(e) => e.preventDefault()}
+                    className="mt-10"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage className="text-center text-lg" />
               </FormItem>
