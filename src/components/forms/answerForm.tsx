@@ -277,6 +277,7 @@ const AnswerForm = ({
         if (mode === "auth" && trainerID) {
           updateDate(currentDateEastern, trainerID);
           await updateCurrentTime("DNF", trainerName);
+          newDailyLoginStreak = checkUser!.DailyLoginStreak + 1;
         }
       }
       setResultStatus("wrong");
