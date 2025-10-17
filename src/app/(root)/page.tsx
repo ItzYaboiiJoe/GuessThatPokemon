@@ -31,6 +31,12 @@ export default function Home() {
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-center">
+        {/* Announcement Banner */}
+        <div className="mb-6 px-5 py-2 rounded-full bg-red-600 text-white font-bold text-sm shadow-md">
+          New version <span className="text-yellow-300">v0.7.5</span> is now
+          live!
+        </div>
+
         {/* Title */}
         <h1
           className="

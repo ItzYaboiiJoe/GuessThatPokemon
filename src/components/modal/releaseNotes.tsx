@@ -87,6 +87,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       There will be a limit of 6 attempts now to guess the
                       pokemon then it will auto reveal what was the pokemon.
                     </li>
+                    <li>
+                      Disabled the ability to paste text in input to prevent
+                      users from pasting the answer in for cheating fast times
+                    </li>
                   </ul>
                 </div>
                 <div>
