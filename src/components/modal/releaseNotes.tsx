@@ -56,17 +56,17 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       sessions.
                     </li>
                     <li>
-                      Displayed <strong>Daily Login Streak</strong> stat in the
-                      Trainer Profile window.
+                      Displayed the <strong>Daily Login Streak</strong> stat in
+                      the Trainer Profile window.
                     </li>
                     <li>
                       Introduced <strong>Best Time</strong> tracking, trainers
-                      can now see their fastest time guessing what is the
-                      pokemon.
+                      can now view their fastest completion time for guessing
+                      the Pokémon.
                     </li>
                     <li>
-                      Displayed <strong>Best Time</strong> stat in the Trainer
-                      profile window.
+                      Displayed the <strong>Best Time</strong> stat in the
+                      Trainer Profile window.
                     </li>
                   </ul>
                 </div>
@@ -76,20 +76,28 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                   </p>
                   <ul className="list-disc list-inside text-sm">
                     <li>
+                      Added in-game time tracking to accurately record how long
+                      each user takes to guess the Pokémon.
+                    </li>
+                    <li>
                       Optimized database logic to automatically initialize
                       missing streak data for returning users.
                     </li>
                     <li>
-                      The user will be able to see how long it took to guess the
-                      pokemon in the results window now.
+                      Players can now see how long it took to guess the Pokémon
+                      directly in the results window.
                     </li>
                     <li>
-                      There will be a limit of 6 attempts now to guess the
-                      pokemon then it will auto reveal what was the pokemon.
+                      Added a limit of five attempts to guess the Pokémon after
+                      that, the correct answer will automatically be revealed.
                     </li>
                     <li>
-                      Disabled the ability to paste text in input to prevent
-                      users from pasting the answer in for cheating fast times
+                      Disabled text pasting in the input field to prevent users
+                      from cheating or achieving artificially fast times.
+                    </li>
+                    <li>
+                      Added a new display showing how many attempts remain
+                      before failing a guess.
                     </li>
                   </ul>
                 </div>
@@ -97,17 +105,12 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                   <p className="font-semibold text-orange-700">🐞 Fixes</p>
                   <ul className="list-disc list-inside text-sm">
                     <li>
-                      Fixed a potential edge case where new users without prior
+                      Fixed a potential issue where new users without prior
                       streak data could cause undefined values.
                     </li>
                     <li>
-                      There is a time counting now during the game menu to
-                      record how long the user took to guess the pokemon.
-                    </li>
-                    <li>
-                      There were cases where a user was able to change their
-                      Trainer Name to an existing Trainer Name that was already
-                      taken.
+                      Fixed an issue that allowed users to change their Trainer
+                      Name to one already taken by another player.
                     </li>
                   </ul>
                 </div>

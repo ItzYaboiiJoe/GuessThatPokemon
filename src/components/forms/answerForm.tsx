@@ -195,6 +195,7 @@ const AnswerForm = ({
   }, [stopwatchSeconds, hasSubmitted, mode, trainerID]);
 
   const triesAttempt = useRef(0);
+  const attemptsLeft = useRef(5);
   let newDailyLoginStreak = checkUser?.DailyLoginStreak ?? 0;
 
   // Handle form submission
@@ -202,6 +203,7 @@ const AnswerForm = ({
     const correctAnswer = pokemonName.toLowerCase().trim();
     const userAnswer = values.answer.toLowerCase().trim();
     triesAttempt.current++;
+    attemptsLeft.current--;
 
     if (userAnswer === correctAnswer) {
       // Update Current Time
@@ -272,12 +274,12 @@ const AnswerForm = ({
       }
     } else {
       setResultTitle("That is incorrect, try again!");
-      if (triesAttempt.current === 3) {
+      if (triesAttempt.current === 2) {
         setFirstHint(true);
         setResultDescription(pokemonType);
-      } else if (triesAttempt.current === 4) {
+      } else if (triesAttempt.current === 3) {
         setSecondHint(true);
-      } else if (triesAttempt.current === 6) {
+      } else if (triesAttempt.current === 5) {
         setWinTime("DNF");
         onCorrect();
         setHasSubmitted(true);
@@ -350,6 +352,22 @@ const AnswerForm = ({
           )}
         </form>
       </Form>
+
+      {/* Attempts Left Section */}
+      {!hasSubmitted && (
+        <h1
+          className="
+    mt-6 text-lg md:text-xl font-extrabold tracking-wide
+    text-transparent bg-clip-text 
+    bg-gradient-to-r from-purple-200 via-pink-300 to-purple-200
+    drop-shadow-[0_0_16px_rgba(255,180,255,0.95)]
+    animate-[pulseSoft_3s_ease-in-out_infinite]
+  "
+        >
+          {attemptsLeft.current} Attempts Left
+        </h1>
+      )}
+
       <Results
         open={resultsOpen}
         setOpen={setResultsOpen}
