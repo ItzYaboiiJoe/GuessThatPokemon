@@ -32,15 +32,15 @@ export default function Home() {
     <>
       <div className="flex min-h-screen flex-col items-center justify-center">
         {/* Announcement Banner */}
-        <div className="mb-6 px-5 py-2 rounded-full bg-red-600 text-white font-bold text-sm shadow-md">
+        {/* <div className="mb-6 px-5 py-2 rounded-full bg-red-600 text-white font-bold text-sm shadow-md">
           New version <span className="text-yellow-300">v0.7.5</span> is now
           live!
-        </div>
+        </div> */}
 
         {/* Title */}
         <h1
           className="
-    text-5xl md:text-7xl font-extrabold mb-6
+    text-3xl lg:text-7xl font-extrabold mb-6
     bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600
     bg-clip-text text-transparent
     drop-shadow-[0_4px_6px_rgba(0,0,0,0.4)]
@@ -51,7 +51,7 @@ export default function Home() {
         </h1>
 
         {/* Pokeball Image */}
-        <div className="mb-8 animate-[bounce_2s_infinite]">
+        <div className="mb-8 animate-[bounce_2s_infinite] w-20 lg:w-32 mx-auto">
           <Image
             src="/pokeball.png"
             alt="Pokeball"
@@ -62,12 +62,12 @@ export default function Home() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4 w-full justify-center items-center">
           <Link href="/guest">
             <Button
               size={"lg"}
               variant="secondary"
-              className="bg-yellow-400 text-black font-bold shadow-2xl hover:bg-yellow-300 rounded-full hover:cursor-pointer"
+              className="w-full lg:w-auto bg-yellow-400 text-black font-bold shadow-xl hover:bg-yellow-300 rounded-full hover:cursor-pointer"
             >
               Play as Guest
             </Button>
@@ -76,7 +76,7 @@ export default function Home() {
             <Button
               size={"lg"}
               variant="default"
-              className="bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-2xl rounded-full hover:cursor-pointer"
+              className="w-full lg:w-auto bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-xl rounded-full hover:cursor-pointer"
             >
               Login / Register
             </Button>
@@ -101,27 +101,31 @@ export default function Home() {
       <ReleaseNotes open={releaseNotesOpen} setOpen={setReleaseNotesOpen} />
 
       {/* Early Access, Feedback, and Release Notes */}
-      <div className="fixed bottom-2 right-2 flex items-center space-x-3 text-xs mr-35">
-        <p className="text-white opacity-80">This game is still early access</p>
-        <p className="text-white">•</p>
+      <div className="fixed bottom-3 left-3 lg:left-1/2 flex lg:-translate-x-1/2 flex-col lg:flex-row lg:items-center lg:space-x-3 gap-3 lg:gap-1 text-xs text-white opacity-90">
+        <div className="flex items-center justify-center gap-2 lg:gap-3 opacity-80">
+          <p>This game is still early access</p>
+          <span className="hidden lg:inline">•</span>
+        </div>
 
-        <Button
-          onClick={feedbackButton}
-          variant="default"
-          size="sm"
-          className="cursor-pointer rounded-full bg-white text-black shadow-md hover:bg-gray-200 px-2 text-xs"
-        >
-          Feedback
-        </Button>
+        <div className="flex justify-center items-center gap-2">
+          <Button
+            onClick={feedbackButton}
+            variant="secondary"
+            size="sm"
+            className="rounded-full bg-white text-black font-medium shadow-sm hover:bg-gray-200 px-3 py-1 text-xs cursor-pointer"
+          >
+            Feedback
+          </Button>
 
-        <Button
-          onClick={releaseNotesButton}
-          variant="default"
-          size="sm"
-          className="cursor-pointer rounded-full bg-white text-black shadow-md hover:bg-gray-200 px-2 text-xs"
-        >
-          Release Notes
-        </Button>
+          <Button
+            onClick={releaseNotesButton}
+            variant="secondary"
+            size="sm"
+            className="rounded-full bg-white text-black font-medium shadow-sm hover:bg-gray-200 px-3 py-1 text-xs cursor-pointer"
+          >
+            Release Notes
+          </Button>
+        </div>
       </div>
     </>
   );
