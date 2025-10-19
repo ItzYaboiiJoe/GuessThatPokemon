@@ -7,14 +7,14 @@ import LoginForm from "@/components/forms/loginForm";
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md text-center">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 responsePhones text-center">
         {/* Pokeball Image */}
         <div className="flex justify-center mb-4">
           <Image src="/pokeball.png" alt="Pokeball" width={60} height={60} />
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-extrabold mb-6 text-gray-800 drop-shadow">
+        <h1 className="text-2xl lg:text-3xl font-extrabold mb-6 text-gray-800 drop-shadow">
           Login to Continue
         </h1>
 
