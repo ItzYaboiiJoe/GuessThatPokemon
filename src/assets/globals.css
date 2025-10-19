@@ -136,6 +136,10 @@
   }
 }
 
+@theme {
+  --breakpoint-iphoneMax: 430px;
+}
+
 @keyframes pulseGlow {
   0%,
   100% {
