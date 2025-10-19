@@ -136,6 +136,12 @@
   }
 }
 
+@layer components {
+  .responsePhones {
+    @apply w-xs iphoneMax:w-sm lg:w-md;
+  }
+}
+
 @theme {
   --breakpoint-iphoneMax: 430px;
 }
