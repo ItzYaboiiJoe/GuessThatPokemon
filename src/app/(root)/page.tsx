@@ -67,7 +67,7 @@ export default function Home() {
             <Button
               size={"lg"}
               variant="secondary"
-              className="w-full lg:w-auto bg-yellow-400 text-black font-bold shadow-xl hover:bg-yellow-300 rounded-full hover:cursor-pointer"
+              className="w-40 lg:w-full bg-yellow-400 text-black font-bold shadow-xl hover:bg-yellow-300 rounded-full hover:cursor-pointer"
             >
               Play as Guest
             </Button>
@@ -76,7 +76,7 @@ export default function Home() {
             <Button
               size={"lg"}
               variant="default"
-              className="w-full lg:w-auto bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-xl rounded-full hover:cursor-pointer"
+              className="w-40 lg:w-full bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-xl rounded-full hover:cursor-pointer"
             >
               Login / Register
             </Button>
