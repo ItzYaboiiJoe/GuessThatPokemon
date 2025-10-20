@@ -172,7 +172,7 @@ const GamePage = () => {
         )}
         <h1
           className="
-    text-4xl md:text-5xl font-extrabold mt-6
+    text-3xl lg:text-5xl font-extrabold mt-6
     text-transparent bg-clip-text 
     bg-gradient-to-r from-pink-400 via-yellow-300 to-pink-400
     drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] animate-[pulseGlow_3s_ease-in-out_infinite]"
@@ -199,11 +199,11 @@ const GamePage = () => {
       <div></div>
 
       {/* Back to Menu Button */}
-      <div>
+      <div className="mb-10 lg:mb-0">
         <Link
           href={menuLink}
           onClick={cleanUp}
-          className="mt-6 inline-block text-red-500 text-sm italic hover:underline hover:text-red-700 transition"
+          className="text-red-500 text-sm italic hover:underline hover:text-red-700 transition"
         >
           ← Back to Menu
         </Link>
