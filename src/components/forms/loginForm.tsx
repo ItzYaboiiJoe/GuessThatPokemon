@@ -91,7 +91,7 @@ const LoginForm = () => {
                 <Input
                   type="text"
                   placeholder="Email Address"
-                  className="mb-4 text-center rounded-xl"
+                  className="mb-4 text-sm text-center rounded-xl"
                   {...field}
                 />
               </FormControl>
@@ -109,7 +109,7 @@ const LoginForm = () => {
                 <Input
                   type="password"
                   placeholder="Password"
-                  className="mb-6 text-center rounded-xl"
+                  className="mb-6 text-sm text-center rounded-xl"
                   {...field}
                 />
               </FormControl>
@@ -127,7 +127,7 @@ const LoginForm = () => {
 
         {/* Error Message if there were login problems */}
         {errorLogin && (
-          <p className="mt-4 text-center text-red-600 font-semibold">
+          <p className="mt-4 text-sm lg:text-base text-center text-red-600 font-semibold">
             {errorLogin}
           </p>
         )}

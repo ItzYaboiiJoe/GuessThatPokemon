@@ -95,7 +95,7 @@ const ResetPasswordForm = () => {
                 <Input
                   type="password"
                   placeholder="Enter New Password"
-                  className="mt-4 text-center rounded-xl"
+                  className="mt-4 text-sm text-center rounded-xl"
                   {...field}
                 />
               </FormControl>
@@ -114,7 +114,7 @@ const ResetPasswordForm = () => {
                 <Input
                   type="password"
                   placeholder="Confirm New Password"
-                  className="mt-4 text-center rounded-xl"
+                  className="mt-4 text-sm text-center rounded-xl"
                   {...field}
                 />
               </FormControl>
@@ -133,7 +133,7 @@ const ResetPasswordForm = () => {
 
         {/* Error Message if there were registration problems */}
         {requestError && (
-          <p className="mt-4 text-center text-red-600 font-semibold">
+          <p className="mt-4 text-sm lg:text-base text-center text-red-600 font-semibold">
             {requestError}
           </p>
         )}

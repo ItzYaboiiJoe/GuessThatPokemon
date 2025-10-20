@@ -104,7 +104,7 @@ const RegisterForm = () => {
                   <Input
                     type="text"
                     placeholder="Trainer Name"
-                    className="text-center rounded-xl"
+                    className="text-center text-sm rounded-xl"
                     {...field}
                   />
                 </FormControl>
@@ -123,7 +123,7 @@ const RegisterForm = () => {
                   <Input
                     type="email"
                     placeholder="Email Address"
-                    className="mt-4 text-center rounded-xl"
+                    className="mt-4 text-sm text-center rounded-xl"
                     {...field}
                   />
                 </FormControl>
@@ -142,7 +142,7 @@ const RegisterForm = () => {
                   <Input
                     type="password"
                     placeholder="Password"
-                    className="mt-4 text-center rounded-xl"
+                    className="mt-4 text-sm text-center rounded-xl"
                     {...field}
                   />
                 </FormControl>
@@ -161,7 +161,7 @@ const RegisterForm = () => {
 
           {/* Error Message if there were registration problems */}
           {registerError && (
-            <p className="mt-4 text-center text-red-600 font-semibold">
+            <p className="mt-4 text-sm lg:text-base text-center text-red-600 font-semibold">
               {registerError}
             </p>
           )}
