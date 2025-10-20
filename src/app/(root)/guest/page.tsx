@@ -40,8 +40,10 @@ const GuestPage = () => {
     <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 responsePhones text-center">
         {/* Title */}
-        <h1 className="text-2xl font-bold mb-4">Welcome Trainer</h1>
-        <h1 className="text-2xl font-bold mb-4">{guestTrainerName}</h1>
+        <h1 className="text-xl lg:text-2xl font-bold mb-4">Welcome Trainer</h1>
+        <h1 className="text-xl lg:text-2xl font-bold mb-4">
+          {guestTrainerName}
+        </h1>
 
         {/* Start Button */}
         <Link href="/game?guest=true">
