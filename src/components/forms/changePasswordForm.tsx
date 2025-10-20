@@ -105,7 +105,7 @@ const ChangePasswordForm = () => {
                 <Input
                   type="password"
                   placeholder="Enter Your New Password"
-                  className="mt-4 text-center rounded-xl"
+                  className="mt-4 text-center text-sm rounded-xl"
                   {...field}
                 />
               </FormControl>
@@ -124,7 +124,7 @@ const ChangePasswordForm = () => {
                 <Input
                   type="password"
                   placeholder="Confirm Your New Password"
-                  className="mt-4 text-center rounded-xl"
+                  className="mt-4 text-center text-sm rounded-xl"
                   {...field}
                 />
               </FormControl>
