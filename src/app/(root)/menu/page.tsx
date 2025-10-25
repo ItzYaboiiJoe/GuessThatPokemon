@@ -103,9 +103,9 @@ const Menu = () => {
 
           <div className="flex flex-col items-center lg:grid lg:grid-cols-2 gap-4">
             {/* Start Button */}
-            <Link href="/game">
+            <Link href="/menu/gameMode">
               <Button className="w-52 lg:w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold cursor-pointer hover:from-yellow-400 hover:to-amber-600 rounded-full shadow-md shadow-yellow-200/70">
-                Start Game
+                Select Game Mode
               </Button>
             </Link>
 
