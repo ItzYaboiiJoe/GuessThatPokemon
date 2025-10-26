@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-const CountdownTimer = () => {
+interface CountdownTimerProps {
+  targetTime?: string;
+}
+
+const CountdownTimer = ({ targetTime = "00:00" }: CountdownTimerProps) => {
   const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
@@ -11,11 +15,16 @@ const CountdownTimer = () => {
     const updateCountdown = () => {
       const now = new Date();
 
-      // Set Target Date to 12:05 AM time
-      const nextTarget = new Date();
-      nextTarget.setHours(0, 0, 0, 0);
+      // Set Target Date
+      // Parse the passed time
+      const [targetHour, targetMinute] = targetTime
+        .split(":")
+        .map((n) => parseInt(n));
 
-      // If time has already passed 12:05 AM today then start a new countdown for next day
+      const nextTarget = new Date();
+      nextTarget.setHours(targetHour, targetMinute, 0, 0);
+
+      // If time has already passed target time then start a new countdown for target time
       if (now >= nextTarget) {
         nextTarget.setDate(nextTarget.getDate() + 1);
       }
@@ -49,7 +58,7 @@ const CountdownTimer = () => {
     interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [targetTime]);
 
   return <div>{countdown}</div>;
 };
