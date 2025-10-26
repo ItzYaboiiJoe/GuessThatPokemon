@@ -90,7 +90,7 @@ const Menu = () => {
         <div className="mb-4 flex items-center justify-center">
           <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md shadow-orange-200/60 border border-orange-300">
             <p>New Challenge In:</p>
-            <CountdownTimer />
+            <CountdownTimer targetTime="00:00" />
           </div>
         </div>
 
