@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 
 interface CountdownTimerProps {
   targetTime?: string;
+  rollingHours?: number;
 }
 
-const CountdownTimer = ({ targetTime = "00:00" }: CountdownTimerProps) => {
+const CountdownTimer = ({ targetTime, rollingHours }: CountdownTimerProps) => {
   const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
@@ -14,19 +15,26 @@ const CountdownTimer = ({ targetTime = "00:00" }: CountdownTimerProps) => {
 
     const updateCountdown = () => {
       const now = new Date();
+      let nextTarget = new Date();
 
-      // Set Target Date
-      // Parse the passed time
-      const [targetHour, targetMinute] = targetTime
-        .split(":")
-        .map((n) => parseInt(n));
+      // If rollingHours is provided, calculate next rolling interval
+      if (rollingHours && rollingHours > 0) {
+        const currentMs = now.getTime();
+        const msPerBlock = rollingHours * 60 * 60 * 1000;
+        const nextBlockMs = Math.ceil(currentMs / msPerBlock) * msPerBlock;
+        nextTarget = new Date(nextBlockMs);
+      } else if (targetTime) {
+        // Regular fixed target time logic
+        const [targetHour, targetMinute] = targetTime
+          .split(":")
+          .map((n) => parseInt(n));
 
-      const nextTarget = new Date();
-      nextTarget.setHours(targetHour, targetMinute, 0, 0);
+        nextTarget.setHours(targetHour, targetMinute, 0, 0);
 
-      // If time has already passed target time then start a new countdown for target time
-      if (now >= nextTarget) {
-        nextTarget.setDate(nextTarget.getDate() + 1);
+        // If time has already passed target time then start a new countdown for target time
+        if (now >= nextTarget) {
+          nextTarget.setDate(nextTarget.getDate() + 1);
+        }
       }
 
       const diff = nextTarget.getTime() - now.getTime();
@@ -58,7 +66,7 @@ const CountdownTimer = ({ targetTime = "00:00" }: CountdownTimerProps) => {
     interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
-  }, [targetTime]);
+  }, [targetTime, rollingHours]);
 
   return <div>{countdown}</div>;
 };

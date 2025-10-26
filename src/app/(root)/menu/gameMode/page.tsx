@@ -25,7 +25,7 @@ const GameMode = () => {
           {/* Countdown */}
           <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md shadow-orange-200/60 border border-orange-300">
             <p>New Challenge In:</p>
-            <CountdownTimer />
+            <CountdownTimer rollingHours={1} />
           </div>
 
           {/* Game Mode Card */}
