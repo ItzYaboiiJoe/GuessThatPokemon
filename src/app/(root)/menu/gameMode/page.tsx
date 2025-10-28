@@ -1,47 +1,83 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import CountdownTimer from "@/components/tools/countdownTimer";
 
 const GameMode = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="grid grid-cols-2 gap-6 items-center">
-        {/* National */}
-        <div className="flex flex-col items-center gap-3">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
+      {/* Title */}
+      <h1 className="text-4xl md:text-5xl font-extrabold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-yellow-500 to-red-500 drop-shadow-[0_0_10px_rgba(255,150,0,0.8)] animate-[pulseGlow_3s_ease-in-out_infinite]">
+        Choose Your Game Mode
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* National Mode */}
+        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm transition-transform hover:scale-105">
           {/* Countdown */}
-          <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md shadow-orange-200/60 border border-orange-300">
-            <p>New Challenge In:</p>
-            <CountdownTimer targetTime="00:00" />
+          <div className="flex justify-center mb-4">
+            <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md border border-orange-300">
+              <p>New Challenge In:</p>
+              <CountdownTimer targetTime="00:00" />
+            </div>
           </div>
 
-          {/* Game Mode Card */}
-          <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 responsePhones text-center">
-            <h1 className="text-3xl font-bold mb-6">National Game Mode</h1>
-          </div>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">
+            National Game Mode
+          </h2>
+
+          <Button
+            className="w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold rounded-full shadow-md shadow-yellow-200/70 hover:from-yellow-400 hover:to-amber-600 transition-all duration-300"
+            asChild
+          >
+            <Link href="/game">Start Game</Link>
+          </Button>
+
+          <p className="mt-4 text-sm text-gray-600">
+            National Game Mode affects leaderboard scores
+          </p>
         </div>
 
-        {/* Regional */}
-        <div className="flex flex-col items-center gap-3">
+        {/* Regional Mode */}
+        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm transition-transform hover:scale-105">
           {/* Countdown */}
-          <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md shadow-orange-200/60 border border-orange-300">
-            <p>New Challenge In:</p>
-            <CountdownTimer targetTime="07:00" />
+          <div className="flex justify-center mb-4">
+            <div className="flex items-center gap-1 bg-gradient-to-r from-orange-300 to-red-400 text-black font-semibold px-4 py-1 rounded-full shadow-md border border-red-200">
+              <p>New Challenge In:</p>
+              <CountdownTimer targetTime="07:00" />
+            </div>
           </div>
 
-          {/* Game Mode Card */}
-          <div className="bg-white/90 rounded-xl shadow-xl shadow-orange-200/50 p-8 responsePhones text-center">
-            <h1 className="text-3xl font-bold mb-6">Region Game Mode</h1>
-          </div>
+          <h2 className="text-2xl font-bold mb-2 text-gray-900">
+            Region Game Mode
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Current Active Region:{" "}
+            <span className="font-extrabold text-orange-600 drop-shadow-[0_0_6px_rgba(255,180,80,0.7)]">
+              Kanto
+            </span>
+          </p>
+
+          <Button
+            asChild
+            className="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white font-bold rounded-full shadow-md shadow-orange-200/70 hover:from-orange-500 hover:to-red-600 transition-all duration-300"
+          >
+            <Link href="/game">Start Game</Link>
+          </Button>
+
+          <p className="mt-4 text-sm text-gray-600">
+            Region Game Mode does not affect leaderboard
+          </p>
         </div>
       </div>
 
-      {/* Back to Home Button */}
+      {/* Return to Menu */}
       <Button
         asChild
-        variant={"default"}
-        className="mt-6 bg-red-600 hover:bg-red-800"
+        className="mt-12 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold rounded-full px-6 shadow-md hover:from-red-600 hover:to-red-800 transition-all duration-300"
       >
-        <Link href="/menu">Return to Menu</Link>
+        <Link href="/menu">← Return to Menu</Link>
       </Button>
     </div>
   );
