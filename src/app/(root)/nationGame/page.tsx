@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import StopWatch from "@/components/tools/stopwatch";
 
-const GamePage = () => {
+const NationGame = () => {
   // Get Trainer Name from Local Storage
   const [trainerName, setTrainerName] = useState<string | null>(null);
   // State to hold the current Pokemon details
@@ -212,4 +212,4 @@ const GamePage = () => {
   );
 };
 
-export default GamePage;
+export default NationGame;
