@@ -46,7 +46,7 @@ const GuestPage = () => {
         </h1>
 
         {/* Start Button */}
-        <Link href="/game?guest=true">
+        <Link href="/nationGame?guest=true">
           <Button className="w-full bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 hover:cursor-pointer">
             Start Game
           </Button>

@@ -14,7 +14,7 @@ const GameMode = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* National Mode */}
-        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm transition-transform hover:scale-105">
+        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm">
           {/* Countdown */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md border border-orange-300">
@@ -23,7 +23,7 @@ const GameMode = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-6 text-gray-900">
+          <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">
             National Game Mode
           </h2>
 
@@ -31,7 +31,7 @@ const GameMode = () => {
             className="w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold rounded-full shadow-md shadow-yellow-200/70 hover:from-yellow-400 hover:to-amber-600 transition-all duration-300"
             asChild
           >
-            <Link href="/game">Start Game</Link>
+            <Link href="/nationGame">Start Game</Link>
           </Button>
 
           <p className="mt-4 text-sm text-gray-600">
@@ -40,7 +40,7 @@ const GameMode = () => {
         </div>
 
         {/* Regional Mode */}
-        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm transition-transform hover:scale-105">
+        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm">
           {/* Countdown */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-1 bg-gradient-to-r from-orange-300 to-red-400 text-black font-semibold px-4 py-1 rounded-full shadow-md border border-red-200">
@@ -49,7 +49,7 @@ const GameMode = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-2 text-gray-900">
+          <h2 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-700">
             Region Game Mode
           </h2>
           <p className="text-gray-700 mb-6">
@@ -63,7 +63,7 @@ const GameMode = () => {
             asChild
             className="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white font-bold rounded-full shadow-md shadow-orange-200/70 hover:from-orange-500 hover:to-red-600 transition-all duration-300"
           >
-            <Link href="/game">Start Game</Link>
+            <Link href="/regionGame">Start Game</Link>
           </Button>
 
           <p className="mt-4 text-sm text-gray-600">
