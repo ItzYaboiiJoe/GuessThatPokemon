@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import StopWatch from "@/components/tools/stopwatch";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import {
@@ -106,7 +105,6 @@ const RegionGame = () => {
           Trainer: {trainerName}
         </h2>
 
-        {/* Only show stopwatch for auth users */}
         {/* StopWatch Component Here */}
       </div>
 
