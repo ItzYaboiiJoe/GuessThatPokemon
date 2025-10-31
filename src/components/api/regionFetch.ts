@@ -29,7 +29,7 @@ export const fetchRegionPokemon = async () => {
 };
 
 // Real-time subscription to listen for new entries in the Pokemon_PokemonRegionDetails table
-export const liveFetchPokemon = (
+export const RegionLiveFetchPokemon = (
   callback: (pokemon: RegionPokemonDetails) => void
 ) => {
   const channel = supabase
