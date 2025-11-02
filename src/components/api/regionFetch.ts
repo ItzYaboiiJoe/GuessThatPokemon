@@ -52,3 +52,13 @@ export const RegionLiveFetchPokemon = (
     supabase.removeChannel(channel);
   };
 };
+
+// This API to fetch Player table to store submission
+export const regionFetchPlayerInfo = async (trainerGuiID: string) => {
+  const { data: playerInfo } = await supabase
+    .from("Pokemon_Players")
+    .select("RegionSubmissionDate")
+    .eq("TrainerID", trainerGuiID);
+
+  return playerInfo;
+};

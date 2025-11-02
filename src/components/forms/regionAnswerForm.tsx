@@ -15,6 +15,7 @@ import {
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
 import { checkLeaderboard, LeaderboardEntry } from "../api/handleLeaderboard";
+import { regionFetchPlayerInfo } from "../api/regionFetch";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
@@ -41,6 +42,7 @@ const RegionAnswerForm = ({
 }: PokemonNameProp) => {
   // State to track if the form has been submitted
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [submissionDate, setSubmissionDate] = useState<string | null>(null);
   // State to handle results modal visibility
   const [resultsOpen, setResultsOpen] = useState(false);
   // State to store the checking leaderboard api
@@ -89,10 +91,9 @@ const RegionAnswerForm = ({
     setResultStatus("results");
   };
 
-  // Fetch Mode
-  const mode = localStorage.getItem("Mode");
   // Fetch trainer name
   const trainerName = localStorage.getItem("TrainerName")!;
+  const trainerID = localStorage.getItem("TrainerID")!;
 
   // Fetch Leaderboard Data
   useEffect(() => {
@@ -101,10 +102,23 @@ const RegionAnswerForm = ({
       if (data) setCheckUser(data);
     };
     loadData();
-  }, [trainerName, mode]);
+  }, [trainerName]);
 
   const triesAttempt = useRef(0);
   const attemptsLeft = useRef(5);
+
+  // Fetch the latest submission Date the user has
+  useEffect(() => {
+    const loadID = async () => {
+      const lastSubmissionDate = await regionFetchPlayerInfo(trainerID);
+
+      if (lastSubmissionDate && lastSubmissionDate.length > 0) {
+        setSubmissionDate(lastSubmissionDate[0].RegionSubmissionDate);
+      }
+    };
+
+    loadID();
+  }, [trainerID]);
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
