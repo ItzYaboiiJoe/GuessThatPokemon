@@ -118,7 +118,7 @@ const Results = ({
             {/* Results View */}
             {status === "results" && (
               <div>
-                {gameMode !== "guest" && (
+                {gameMode !== "guest" && winTime !== "" && (
                   <div className="text-center text-gray-800 font-medium bg-white border border-gray-300 rounded-lg px-4 py-2 mt-2 shadow-sm">
                     You guessed{" "}
                     <span className="font-bold text-gray-900">
@@ -150,7 +150,7 @@ const Results = ({
             {/* Correct View */}
             {status === "correct" && (
               <div>
-                {gameMode !== "guest" && (
+                {gameMode !== "guest" && winTime !== "" && (
                   <div className="text-center text-gray-800 font-medium bg-white border border-gray-300 rounded-lg px-4 py-2 mt-2 shadow-sm">
                     You guessed{" "}
                     <span className="font-bold text-gray-900">
