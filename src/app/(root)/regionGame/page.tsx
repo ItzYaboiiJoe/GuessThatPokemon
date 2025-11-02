@@ -10,6 +10,7 @@ import {
   fetchRegionPokemon,
   RegionLiveFetchPokemon,
 } from "@/components/api/regionFetch";
+import RegionAnswerForm from "@/components/forms/regionAnswerForm";
 
 const RegionGame = () => {
   // Get Trainer Name from Local Storage
@@ -20,6 +21,8 @@ const RegionGame = () => {
   const [loading, setLoading] = useState(true);
   // State to control Menu Link Path
   const [menuLink, setMenuLink] = useState("/");
+  // State to manage if the correct answer was input
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const router = useRouter();
 
@@ -104,13 +107,33 @@ const RegionGame = () => {
         <h2 className="text-sm md:text-base font-semibold bg-white/10 px-3 py-1 rounded-full shadow-md">
           Trainer: {trainerName}
         </h2>
-
-        {/* StopWatch Component Here */}
       </div>
 
       {/* Pokémon Image */}
       <div className="flex flex-col items-center">
-        {/* Pokemon Image Component Here */}
+        {pokemon ? (
+          <Image
+            src={pokemon.PokemonImage}
+            alt="Failed to Fetch Pokemon (Sorry)"
+            width={300}
+            height={300}
+            draggable={false}
+            priority
+            className={`${
+              !isCorrect ? "brightness-0 invert" : ""
+            } drop-shadow-[0_0_20px_rgba(200,100,255,0.7)]`}
+          />
+        ) : (
+          // Pokeball Rotating Animation when loading
+          <Image
+            src="/pokeball.png"
+            alt="Pokeball Rotating"
+            width={300}
+            height={300}
+            priority
+            className="animate-spin"
+          />
+        )}
         <h1
           className="
     text-3xl lg:text-5xl font-extrabold mt-6
@@ -120,6 +143,18 @@ const RegionGame = () => {
         >
           Who’s That Pokémon?
         </h1>
+
+        {/* Answer Section Component will load once pokemon is not null */}
+        {pokemon && (
+          <RegionAnswerForm
+            pokemonName={pokemon.PokemonName}
+            pokemonType={pokemon.PokemonType}
+            pokemonCry={pokemon.PokemonCry}
+            pokemonHabitat={pokemon.PokemonHabitat}
+            pokemonDescription={pokemon.PokemonDescription}
+            onCorrect={() => setIsCorrect(true)}
+          />
+        )}
       </div>
 
       {/* Empty Space */}

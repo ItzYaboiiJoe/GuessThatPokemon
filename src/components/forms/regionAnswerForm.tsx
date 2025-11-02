@@ -24,7 +24,6 @@ type PokemonNameProp = {
   pokemonHabitat: string;
   pokemonDescription: string;
   onCorrect: () => void;
-  onSubmitChange?: (hasSubmitted: boolean) => void;
 };
 
 // Define the form schema
@@ -39,7 +38,6 @@ const RegionAnswerForm = ({
   pokemonHabitat,
   pokemonDescription,
   onCorrect,
-  onSubmitChange,
 }: PokemonNameProp) => {
   // State to track if the form has been submitted
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -90,10 +88,6 @@ const RegionAnswerForm = ({
     setWinTime("");
     setResultStatus("results");
   };
-
-  useEffect(() => {
-    onSubmitChange?.(hasSubmitted);
-  }, [hasSubmitted, onSubmitChange]);
 
   // Fetch Mode
   const mode = localStorage.getItem("Mode");
