@@ -147,6 +147,7 @@ const RegionAnswerForm = ({
         setResultTitle("That is incorrect, better luck tomorrow");
       }
       setResultStatus("wrong");
+      resultsButton();
     }
   };
 
