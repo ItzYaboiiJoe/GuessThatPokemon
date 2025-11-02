@@ -53,3 +53,4 @@ v1.0:
 Post v1.0:
 - Framer Motion Animations
 - Users Feedback
+- Survival Game Mode
