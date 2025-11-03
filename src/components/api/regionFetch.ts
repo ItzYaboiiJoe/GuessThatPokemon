@@ -62,3 +62,16 @@ export const regionFetchPlayerInfo = async (trainerGuiID: string) => {
 
   return playerInfo;
 };
+
+// This API to update the player Regions submission Date
+export const updateRegionDate = async (
+  currentDate: string,
+  trainerGuiID: string
+) => {
+  const { data: res } = await supabase
+    .from("Pokemon_Players")
+    .update({ RegionSubmissionDate: currentDate })
+    .eq("TrainerID", trainerGuiID);
+
+  return res;
+};
