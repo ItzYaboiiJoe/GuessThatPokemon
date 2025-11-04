@@ -75,7 +75,7 @@ const GameMode = () => {
       {/* Return to Menu */}
       <Button
         asChild
-        className="mt-12 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold rounded-full px-6 shadow-md hover:from-red-600 hover:to-red-800 transition-all duration-300"
+        className="mt-5 lg:mt-12 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold rounded-full px-6 shadow-md hover:from-red-600 hover:to-red-800 transition-all duration-300"
       >
         <Link href="/menu">← Return to Menu</Link>
       </Button>
