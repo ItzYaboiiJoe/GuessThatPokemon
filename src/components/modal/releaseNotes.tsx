@@ -71,7 +71,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                     🧩 Improvements
                   </p>
                   <ul className="list-disc list-inside text-sm">
-                    <li></li>
+                    <li>
+                      Updated the Game Selection screen with an improved layout
+                      and color scheme for a cleaner look.
+                    </li>
                   </ul>
                 </div>
                 <div>
