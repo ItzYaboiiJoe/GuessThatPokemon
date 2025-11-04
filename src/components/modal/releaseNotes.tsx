@@ -40,6 +40,52 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
 
         <ScrollArea className="h-[400px] pr-3">
           <div className="space-y-8 text-gray-800">
+            {/* --- Version 0.8.0 --- */}
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-1">v0.8.0</h2>
+              <p className="text-sm text-gray-600 italic mb-3">TBD</p>
+              <div className="space-y-3">
+                <div>
+                  <p className="font-semibold text-orange-700">
+                    ✨ New Features
+                  </p>
+                  <ul className="list-disc list-inside text-sm">
+                    <li>
+                      A new game mode is now available:{" "}
+                      <strong>Region Game Mode</strong>.
+                    </li>
+                    <li>
+                      <strong>Region Game Mode</strong> features Pokémon
+                      specific to one region for 7 days. After that period, the
+                      region will automatically change.
+                    </li>
+                    <li>
+                      <strong>Region Game Mode</strong> does not affect
+                      leaderboard data or daily streaks. It still allows only
+                      one submission per day.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold text-orange-700">
+                    🧩 Improvements
+                  </p>
+                  <ul className="list-disc list-inside text-sm">
+                    <li></li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold text-orange-700">🐞 Fixes</p>
+                  <ul className="list-disc list-inside text-sm">
+                    <li>
+                      The Results Button and Submit Button Style were different,
+                      now they are matching.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* --- Version 0.7.6 --- */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-1">v0.7.6</h2>
