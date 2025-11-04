@@ -15,7 +15,7 @@ import {
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
 import { checkLeaderboard, LeaderboardEntry } from "../api/handleLeaderboard";
-import { regionFetchPlayerInfo } from "../api/regionFetch";
+import { regionFetchPlayerInfo, updateRegionDate } from "../api/regionFetch";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
@@ -94,6 +94,11 @@ const RegionAnswerForm = ({
   // Fetch trainer name
   const trainerName = localStorage.getItem("TrainerName")!;
   const trainerID = localStorage.getItem("TrainerID")!;
+  // Current Date
+  const currentDate = new Date();
+  const currentDateEastern = currentDate.toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+  });
 
   // Fetch Leaderboard Data
   useEffect(() => {
@@ -147,6 +152,8 @@ const RegionAnswerForm = ({
       onCorrect();
       // To disable the submit button
       setHasSubmitted(true);
+      // Update Submission Date
+      updateRegionDate(currentDateEastern, trainerID);
     } else {
       setResultTitle("That is incorrect, try again!");
       if (triesAttempt.current === 2) {
@@ -159,6 +166,7 @@ const RegionAnswerForm = ({
         onCorrect();
         setHasSubmitted(true);
         setResultTitle("That is incorrect, better luck tomorrow");
+        updateRegionDate(currentDateEastern, trainerID);
       }
       setResultStatus("wrong");
       resultsButton();
