@@ -3,8 +3,41 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import CountdownTimer from "@/components/tools/countdownTimer";
+import { fetchRegionPokemon } from "@/components/api/regionFetch";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const GameMode = () => {
+  // State to hold Region Pokemon
+  const [region, setRegion] = useState("");
+  // State to handle loading state
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRegion = async () => {
+      const regionData = await fetchRegionPokemon();
+      setRegion(regionData.PokemonRegion);
+      setLoading(false);
+    };
+    fetchRegion();
+  }, []);
+
+  // Show loading state while fetching Trainer Name
+  if (loading) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <Image
+          src="/pokeball.png"
+          alt="Pokeball Rotating"
+          width={300}
+          height={300}
+          priority
+          className="animate-spin"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
       {/* Title */}
@@ -57,7 +90,7 @@ const GameMode = () => {
           <p className="text-gray-700 mb-6">
             Current Active Region:{" "}
             <span className="font-extrabold text-orange-600 drop-shadow-[0_0_6px_rgba(255,180,80,0.7)]">
-              Kanto
+              {region}
             </span>
           </p>
 
