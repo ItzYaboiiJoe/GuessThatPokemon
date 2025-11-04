@@ -84,6 +84,11 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       The Results Button and Submit Button Style were different,
                       now they are matching.
                     </li>
+                    <li>
+                      Resolved an issue where the stopwatch timer would carry
+                      over to the next day’s challenge if the user started but
+                      did not complete the current day’s challenge.
+                    </li>
                   </ul>
                 </div>
               </div>
