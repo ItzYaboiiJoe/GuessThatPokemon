@@ -225,7 +225,7 @@ const RegionAnswerForm = ({
             <Button
               type="button"
               onClick={postResultButton}
-              className="bg-yellow-500 text-black mt-5 hover:bg-yellow-600 hover:cursor-pointer"
+              className="bg-yellow-500 text-black mt-5 w-32 rounded-full hover:bg-yellow-600 hover:cursor-pointer"
             >
               Results
             </Button>
