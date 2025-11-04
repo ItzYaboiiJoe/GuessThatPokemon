@@ -8,13 +8,13 @@ const GameMode = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
       {/* Title */}
-      <h1 className="text-4xl md:text-5xl font-extrabold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-yellow-500 to-red-500 drop-shadow-[0_0_10px_rgba(255,150,0,0.8)] animate-[pulseGlow_3s_ease-in-out_infinite]">
+      <h1 className="text-2xl lg:text-4xl font-extrabold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-yellow-500 to-red-500 drop-shadow-[0_0_10px_rgba(255,150,0,0.8)] animate-[pulseGlow_3s_ease-in-out_infinite]">
         Choose Your Game Mode
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* National Mode */}
-        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm">
+        <div className="bg-white/90 rounded-3xl shadow-xl shadow-orange-400/50 p-8 w-full max-w-sm border-1 border-yellow-600">
           {/* Countdown */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold px-4 py-1 rounded-full shadow-md border border-orange-300">
@@ -23,9 +23,11 @@ const GameMode = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">
+          <h2 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">
             National Game Mode
           </h2>
+
+          <p className="text-gray-700 mb-6">Good Luck, Have Fun!</p>
 
           <Button
             className="w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold rounded-full shadow-md shadow-yellow-200/70 hover:from-yellow-400 hover:to-amber-600 transition-all duration-300"
@@ -40,12 +42,12 @@ const GameMode = () => {
         </div>
 
         {/* Regional Mode */}
-        <div className="bg-white/90 rounded-3xl shadow-lg shadow-orange-300/50 p-8 w-full max-w-sm">
+        <div className="bg-white/90 rounded-3xl shadow-xl shadow-red-400/50 p-8 w-full max-w-sm border-1 border-red-500">
           {/* Countdown */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-1 bg-gradient-to-r from-orange-300 to-red-400 text-black font-semibold px-4 py-1 rounded-full shadow-md border border-red-200">
               <p>New Challenge In:</p>
-              <CountdownTimer targetTime="07:00" />
+              <CountdownTimer targetTime="00:00" />
             </div>
           </div>
 
@@ -75,7 +77,7 @@ const GameMode = () => {
       {/* Return to Menu */}
       <Button
         asChild
-        className="mt-5 lg:mt-12 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold rounded-full px-6 shadow-md hover:from-red-600 hover:to-red-800 transition-all duration-300"
+        className="mt-5 lg:mt-12 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold rounded-full px-6 shadow-xl hover:from-red-600 hover:to-red-800 transition-all duration-300"
       >
         <Link href="/menu">← Return to Menu</Link>
       </Button>
