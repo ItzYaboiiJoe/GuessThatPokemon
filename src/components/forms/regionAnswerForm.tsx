@@ -125,6 +125,21 @@ const RegionAnswerForm = ({
     loadID();
   }, [trainerID]);
 
+  // If User already submitted today, disable form
+
+  useEffect(() => {
+    if (!submissionDate) return;
+
+    const currentDateEastern = new Date().toLocaleDateString("en-CA", {
+      timeZone: "America/New_York",
+    });
+
+    if (submissionDate === currentDateEastern) {
+      setHasSubmitted(true);
+      onCorrect();
+    }
+  }, [submissionDate, onCorrect]);
+
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const correctAnswer = pokemonName.toLowerCase().trim();
@@ -187,7 +202,7 @@ const RegionAnswerForm = ({
               <FormItem>
                 <FormControl>
                   <Input
-                    // disabled={hasSubmitted}
+                    disabled={hasSubmitted}
                     onPaste={(e) => e.preventDefault()}
                     className="mt-10"
                     {...field}
