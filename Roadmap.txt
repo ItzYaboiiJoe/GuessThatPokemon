@@ -2,7 +2,7 @@ Planned Features by 1.0 release
 
 Gameplay Features
 
-- Game Modes (Hard - Region)
+- Game Modes (Hard - Region) ✅
 - Time Record (How long user took to solve and add it to leaderboard) ✅
 - Add a Daily login Streak system ✅
 - Region Game Mode will have 2 Pokemon's a day
@@ -33,7 +33,7 @@ v0.7.5:
 - Daily Login Streak (Complete)
 
 v0.8:
-- Game Modes
+- Game Modes (Complete)
 - Share System
 
 v0.8.5:
