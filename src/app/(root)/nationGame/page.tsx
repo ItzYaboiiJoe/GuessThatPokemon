@@ -87,10 +87,24 @@ const NationGame = () => {
 
   // check if the user already started the game time
   useEffect(() => {
-    const gameTime = localStorage.getItem("time");
-    if (gameTime !== null) {
-      setSeconds(Number(gameTime));
+    const savedDate = localStorage.getItem("timeDate");
+    const todayEastern = new Date().toLocaleDateString("en-CA", {
+      timeZone: "America/New_York",
+    });
+
+    // If it's a new day → reset time and update the date
+    if (savedDate !== todayEastern) {
+      localStorage.removeItem("time");
+      localStorage.setItem("timeDate", todayEastern);
+      setSeconds(0);
       setIsRunning(true);
+    } else {
+      // Same day → resume time if available
+      const gameTime = localStorage.getItem("time");
+      if (gameTime !== null) {
+        setSeconds(Number(gameTime));
+        setIsRunning(true);
+      }
     }
   }, []);
 
