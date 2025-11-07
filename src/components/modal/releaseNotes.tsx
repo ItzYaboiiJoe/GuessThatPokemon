@@ -75,6 +75,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       Updated the Game Selection screen with an improved layout
                       and color scheme for a cleaner look.
                     </li>
+                    <li>
+                      Added a new hint to help users identify the Pokémon, and
+                      display this information in the results view as well.
+                    </li>
                   </ul>
                 </div>
                 <div>
