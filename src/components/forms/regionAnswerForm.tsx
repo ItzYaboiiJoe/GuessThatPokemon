@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/form";
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
-import { checkLeaderboard, LeaderboardEntry } from "../api/handleLeaderboard";
 import { regionFetchPlayerInfo, updateRegionDate } from "../api/regionFetch";
 
 // Define the Pokemon Name Prop
@@ -24,6 +23,7 @@ type PokemonNameProp = {
   pokemonCry: string;
   pokemonHabitat: string;
   pokemonDescription: string;
+  pokemonRegion: string;
   onCorrect: () => void;
 };
 
@@ -38,6 +38,7 @@ const RegionAnswerForm = ({
   pokemonCry,
   pokemonHabitat,
   pokemonDescription,
+  pokemonRegion,
   onCorrect,
 }: PokemonNameProp) => {
   // State to track if the form has been submitted
@@ -45,8 +46,6 @@ const RegionAnswerForm = ({
   const [submissionDate, setSubmissionDate] = useState<string | null>(null);
   // State to handle results modal visibility
   const [resultsOpen, setResultsOpen] = useState(false);
-  // State to store the checking leaderboard api
-  const [checkUser, setCheckUser] = useState<LeaderboardEntry | null>(null);
   // State for passing results to modal
   const [resultTitle, setResultTitle] = useState("");
   const [resultDescription, setResultDescription] = useState("");
@@ -58,6 +57,8 @@ const RegionAnswerForm = ({
   // State to manage displaying Hints on incorrect
   const [firstHint, setFirstHint] = useState(false);
   const [secondHint, setSecondHint] = useState(false);
+  const [thirdHint, setThirdHint] = useState(false);
+
   // State to pass beat time to results modal
   const [winTime, setWinTime] = useState("");
 
@@ -79,6 +80,7 @@ const RegionAnswerForm = ({
     setResultTitle(pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1));
     setFirstHint(false);
     setSecondHint(false);
+    setThirdHint(false);
     setResultDescription(
       pokemonName.charAt(0).toUpperCase() +
         pokemonName.slice(1) +
@@ -92,22 +94,12 @@ const RegionAnswerForm = ({
   };
 
   // Fetch trainer name
-  const trainerName = localStorage.getItem("TrainerName")!;
   const trainerID = localStorage.getItem("TrainerID")!;
   // Current Date
   const currentDate = new Date();
   const currentDateEastern = currentDate.toLocaleDateString("en-CA", {
     timeZone: "America/New_York",
   });
-
-  // Fetch Leaderboard Data
-  useEffect(() => {
-    const loadData = async () => {
-      const data = await checkLeaderboard(trainerName);
-      if (data) setCheckUser(data);
-    };
-    loadData();
-  }, [trainerName]);
 
   const triesAttempt = useRef(0);
   const attemptsLeft = useRef(5);
@@ -151,6 +143,7 @@ const RegionAnswerForm = ({
       setResultTitle("Correct");
       setFirstHint(false);
       setSecondHint(false);
+      setThirdHint(false);
       setResultDescription(
         pokemonName.charAt(0).toUpperCase() +
           pokemonName.slice(1) +
@@ -176,6 +169,8 @@ const RegionAnswerForm = ({
         setResultDescription(pokemonType);
       } else if (triesAttempt.current === 3) {
         setSecondHint(true);
+      } else if (triesAttempt.current === 4) {
+        setThirdHint(true);
       } else if (triesAttempt.current === 5) {
         setWinTime("");
         onCorrect();
@@ -255,10 +250,12 @@ const RegionAnswerForm = ({
         description={resultDescription}
         pokemonHabitat={pokemonHabitatState}
         pokemonDescription={pokemonDescription}
+        pokemonRegion={pokemonRegion}
         status={resultStatus}
         cry={pokemonCry}
         firstHint={firstHint}
         secondHint={secondHint}
+        thirdHint={thirdHint}
         winTime={winTime}
       />
     </>

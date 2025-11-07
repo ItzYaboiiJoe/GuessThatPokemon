@@ -152,6 +152,7 @@ const RegionGame = () => {
             pokemonCry={pokemon.PokemonCry}
             pokemonHabitat={pokemon.PokemonHabitat}
             pokemonDescription={pokemon.PokemonDescription}
+            pokemonRegion={pokemon.PokemonRegion}
             onCorrect={() => setIsCorrect(true)}
           />
         )}
