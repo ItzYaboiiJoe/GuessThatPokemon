@@ -19,7 +19,7 @@ Social Features
 
 - Expand leaderboard (Create 2 leaderboard "Seasonal Leaderboard" and "All Time Leaderboard")
 - Reset seasonal Leaderboard monthly
-- Share system
+- Share system ❌
 
 
 RoadMap:
@@ -34,7 +34,7 @@ v0.7.5:
 
 v0.8:
 - Game Modes (Complete)
-- Share System
+- Share System (Cancelled)
 
 v0.8.5:
 - Region Game Mode 2 Pokemon's
