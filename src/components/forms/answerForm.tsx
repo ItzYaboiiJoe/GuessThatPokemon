@@ -24,7 +24,6 @@ import { fetchPlayerInfo, updateDate } from "../api/fetch";
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
 import convertSeconds from "../tools/bestTimeConversion";
-import { tr } from "zod/v4/locales";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
