@@ -20,10 +20,12 @@ interface resultsProps {
   description: string;
   pokemonHabitat: string;
   pokemonDescription: string;
+  pokemonRegion: string;
   status?: "correct" | "wrong" | "results";
   cry: string;
   firstHint: boolean;
   secondHint: boolean;
+  thirdHint: boolean;
   winTime: string;
 }
 
@@ -34,10 +36,12 @@ const Results = ({
   description,
   pokemonHabitat,
   pokemonDescription,
+  pokemonRegion,
   status,
   cry,
   firstHint,
   secondHint,
+  thirdHint,
   winTime,
 }: resultsProps) => {
   // Function to close the modal
@@ -128,15 +132,22 @@ const Results = ({
                   </div>
                 )}
 
+                {/* Pokemon Type */}
                 <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md shadow-sm text-center">
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}
                   <span className="italic">
                     {description.replace(description.split(" ")[0], "")}
                   </span>
                 </div>
+                {/* Habitat */}
                 <div className="mt-6 bg-orange-50 border-l-4 border-orange-400 p-3 rounded-md shadow-sm text-center">
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}
                   <span>{pokemonHabitat}</span>
+                </div>
+                {/* Region */}
+                <div className="mt-6 bg-purple-50 border-l-4 border-purple-400 p-3 rounded-md shadow-sm text-center">
+                  <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                  <span>is from {pokemonRegion} region.</span>
                 </div>
                 {/* Flavor text description */}
                 {pokemonDescription && (
@@ -160,15 +171,22 @@ const Results = ({
                   </div>
                 )}
 
+                {/* Pokemon Type */}
                 <div className="mt-6 bg-green-50 border-l-4 border-green-400 p-3 rounded-md shadow-sm text-center">
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}
                   <span className="italic">
                     {description.replace(description.split(" ")[0], "")}
                   </span>
                 </div>
+                {/* Habitat */}
                 <div className="mt-6 bg-orange-50 border-l-4 border-orange-400 p-3 rounded-md shadow-sm text-center">
                   <span className="font-bold">{description.split(" ")[0]}</span>{" "}
                   <span>{pokemonHabitat}</span>
+                </div>
+                {/* Region */}
+                <div className="mt-6 bg-purple-50 border-l-4 border-purple-400 p-3 rounded-md shadow-sm text-center">
+                  <span className="font-bold">{description.split(" ")[0]}</span>{" "}
+                  <span>is from {pokemonRegion} region.</span>
                 </div>
                 {/* Flavor text description */}
                 {pokemonDescription && (
@@ -188,8 +206,16 @@ const Results = ({
             )}
 
             {secondHint && (
+              <div className="bg-purple-100 border-l-4 border-purple-400 p-3 rounded-md shadow-sm">
+                <span className="font-semibold">Hint 2:</span> This Pokemon
+                originated from{" "}
+                <span className="font-semibold">{pokemonRegion}</span> region.
+              </div>
+            )}
+
+            {thirdHint && (
               <div className="bg-blue-100 border-l-4 border-blue-400 p-3 rounded-md shadow-sm">
-                <span className="font-semibold">Hint 2:</span> Need more help?
+                <span className="font-semibold">Hint 3:</span> Need more help?
                 <div className="mt-2 flex justify-center">{cryButton()}</div>
               </div>
             )}

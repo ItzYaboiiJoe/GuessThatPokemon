@@ -202,6 +202,7 @@ const NationGame = () => {
             pokemonCry={pokemon.PokemonCry}
             pokemonHabitat={pokemon.PokemonHabitat}
             pokemonDescription={pokemon.PokemonDescription}
+            pokemonRegion={pokemon.PokemonRegion}
             onCorrect={() => setIsCorrect(true)}
             onSubmitChange={(hasSubmitted) => setIsRunning(!hasSubmitted)}
             stopwatchSeconds={seconds}

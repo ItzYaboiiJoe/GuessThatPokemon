@@ -24,6 +24,7 @@ import { fetchPlayerInfo, updateDate } from "../api/fetch";
 import Results from "../modal/results";
 import { useState, useEffect, useRef } from "react";
 import convertSeconds from "../tools/bestTimeConversion";
+import { tr } from "zod/v4/locales";
 
 // Define the Pokemon Name Prop
 type PokemonNameProp = {
@@ -32,6 +33,7 @@ type PokemonNameProp = {
   pokemonCry: string;
   pokemonHabitat: string;
   pokemonDescription: string;
+  pokemonRegion: string;
   onCorrect: () => void;
   onSubmitChange?: (hasSubmitted: boolean) => void;
   stopwatchSeconds: number;
@@ -48,6 +50,7 @@ const AnswerForm = ({
   pokemonCry,
   pokemonHabitat,
   pokemonDescription,
+  pokemonRegion,
   onCorrect,
   onSubmitChange,
   stopwatchSeconds,
@@ -73,6 +76,7 @@ const AnswerForm = ({
   // State to manage displaying Hints on incorrect
   const [firstHint, setFirstHint] = useState(false);
   const [secondHint, setSecondHint] = useState(false);
+  const [thirdHint, setThirdHint] = useState(false);
   // State to pass beat time to results modal
   const [winTime, setWinTime] = useState("");
 
@@ -108,6 +112,7 @@ const AnswerForm = ({
     setResultTitle(pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1));
     setFirstHint(false);
     setSecondHint(false);
+    setThirdHint(false);
     setResultDescription(
       pokemonName.charAt(0).toUpperCase() +
         pokemonName.slice(1) +
@@ -211,6 +216,7 @@ const AnswerForm = ({
       setResultTitle("Correct");
       setFirstHint(false);
       setSecondHint(false);
+      setThirdHint(false);
       setResultDescription(
         pokemonName.charAt(0).toUpperCase() +
           pokemonName.slice(1) +
@@ -279,6 +285,8 @@ const AnswerForm = ({
         setResultDescription(pokemonType);
       } else if (triesAttempt.current === 3) {
         setSecondHint(true);
+      } else if (triesAttempt.current === 4) {
+        setThirdHint(true);
       } else if (triesAttempt.current === 5) {
         setWinTime("DNF");
         onCorrect();
@@ -375,10 +383,12 @@ const AnswerForm = ({
         description={resultDescription}
         pokemonHabitat={pokemonHabitatState}
         pokemonDescription={pokemonDescription}
+        pokemonRegion={pokemonRegion}
         status={resultStatus}
         cry={pokemonCry}
         firstHint={firstHint}
         secondHint={secondHint}
+        thirdHint={thirdHint}
         winTime={winTime}
       />
     </>

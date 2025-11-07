@@ -9,6 +9,7 @@ export type PokemonDetails = {
   PokemonImage: string;
   PokemonHabitat: string;
   PokemonDescription: string;
+  PokemonRegion: string;
 };
 
 // Selecting the latest entry from the Pokemon_PokemonDetails table
