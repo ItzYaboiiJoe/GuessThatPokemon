@@ -79,6 +79,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                       Added a new hint to help users identify the Pokémon, and
                       display this information in the results view as well.
                     </li>
+                    <li>
+                      Added a new animation effect around the Game Mode
+                      selection cards.
+                    </li>
                   </ul>
                 </div>
                 <div>
