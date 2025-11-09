@@ -55,7 +55,13 @@ const GameMode = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* National Mode */}
-        <ElectricBorder color="#b37100" speed={2} chaos={0.5} thickness={3}>
+        <ElectricBorder
+          color="#b37100"
+          speed={2}
+          chaos={0.5}
+          thickness={3}
+          style={{ borderRadius: "1.5rem" }}
+        >
           <Card className="bg-white/90 rounded-3xl shadow-xl shadow-orange-400/50 p-8 w-full max-w-sm border-1 border-yellow-600">
             <CardHeader>
               {/* Countdown */}
@@ -88,7 +94,13 @@ const GameMode = () => {
         </ElectricBorder>
 
         {/* Regional Mode */}
-        <ElectricBorder color="#fb2c36" speed={2} chaos={0.5} thickness={3}>
+        <ElectricBorder
+          color="#fb2c36"
+          speed={2}
+          chaos={0.5}
+          thickness={3}
+          style={{ borderRadius: "1.5rem" }}
+        >
           <Card className="bg-white/90 rounded-3xl shadow-xl shadow-red-400/50 p-8 w-full max-w-sm border-1 border-red-500">
             <CardHeader>
               {/* Countdown */}
