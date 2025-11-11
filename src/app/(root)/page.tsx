@@ -7,6 +7,7 @@ import { useState } from "react";
 import Leaderboard from "@/components/modal/leaderboard";
 import Feedback from "@/components/modal/feedback";
 import ReleaseNotes from "@/components/modal/releaseNotes";
+import { motion } from "motion/react";
 
 export default function Home() {
   // State to handle leaderboard modal visibility
@@ -65,11 +66,20 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-4 w-full justify-center items-center">
           <Link href="/guest">
             <Button
-              size={"lg"}
+              size="lg"
               variant="secondary"
               className="w-40 lg:w-full bg-yellow-400 text-black font-bold shadow-xl hover:bg-yellow-300 rounded-full hover:cursor-pointer"
             >
-              Play as Guest
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  scale: { type: "spring", duration: 0.5, bounce: 0.5 },
+                }}
+              >
+                Play as Guest
+              </motion.div>
             </Button>
           </Link>
           <Link href={"/login"}>
@@ -78,7 +88,16 @@ export default function Home() {
               variant="default"
               className="w-40 lg:w-full bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-xl rounded-full hover:cursor-pointer"
             >
-              Login / Register
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  scale: { type: "spring", duration: 0.5, bounce: 0.5 },
+                }}
+              >
+                Login / Register
+              </motion.div>
             </Button>
           </Link>
         </div>
