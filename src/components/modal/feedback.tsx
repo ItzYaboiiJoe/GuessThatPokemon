@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
 import { submitFeedback } from "../api/feedback";
+import * as motion from "motion/react-client";
 
 interface FeedbackProps {
   open: boolean;
@@ -61,53 +62,63 @@ const Feedback = ({ open, setOpen }: FeedbackProps) => {
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
-        <DialogHeader className="text-center">
-          <DialogTitle className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-t-xl font-bold shadow-lg">
-            Feedback
-          </DialogTitle>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.4,
+            delay: 0.2,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
+          <DialogHeader className="text-center">
+            <DialogTitle className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-t-xl font-bold shadow-lg">
+              Feedback
+            </DialogTitle>
 
-          <DialogDescription className="text-gray-700 text-sm">
-            For any new features or modifications, let us know below
-          </DialogDescription>
-        </DialogHeader>
+            <DialogDescription className="text-gray-700 text-sm">
+              For any new features or modifications, let us know below
+            </DialogDescription>
+          </DialogHeader>
 
-        {/* form Text Area */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="feedback"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      className="mb-2 w-full rounded-lg border border-gray-300 bg-gray-50 shadow-inner focus:ring-2 focus:ring-yellow-500 focus:outline-none focus:border-yellow-500"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-center" />
-                </FormItem>
-              )}
-            />
+          {/* form Text Area */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                control={form.control}
+                name="feedback"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Textarea
+                        className="mb-2 w-full rounded-lg border border-gray-300 bg-gray-50 shadow-inner focus:ring-2 focus:ring-yellow-500 focus:outline-none focus:border-yellow-500"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-center" />
+                  </FormItem>
+                )}
+              />
 
-            {/* Buttons */}
-            <div className="flex justify-between mt-4">
-              <Button
-                type="button"
-                onClick={handleClose}
-                className="bg-red-500 text-white rounded-full px-6 shadow-md hover:bg-red-600 cursor-pointer"
-              >
-                Close
-              </Button>
-              <Button
-                type="submit"
-                className="bg-yellow-400 text-black rounded-full px-6 shadow-md hover:bg-yellow-500 cursor-pointer"
-              >
-                Submit
-              </Button>
-            </div>
-          </form>
-        </Form>
+              {/* Buttons */}
+              <div className="flex justify-between mt-4">
+                <Button
+                  type="button"
+                  onClick={handleClose}
+                  className="bg-red-500 text-white rounded-full px-6 shadow-md hover:bg-red-600 cursor-pointer"
+                >
+                  Close
+                </Button>
+                <Button
+                  type="submit"
+                  className="bg-yellow-400 text-black rounded-full px-6 shadow-md hover:bg-yellow-500 cursor-pointer"
+                >
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </motion.div>
       </DialogContent>
     </Dialog>
   );
