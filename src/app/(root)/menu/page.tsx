@@ -105,25 +105,6 @@ const Menu = () => {
           <div className="flex flex-col items-center lg:grid lg:grid-cols-2 gap-4">
             {/* Start Button */}
             <Link href="/menu/gameMode">
-              <Button className="w-52 lg:w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold cursor-pointer hover:from-yellow-400 hover:to-amber-600 rounded-full shadow-md shadow-yellow-200/70">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    scale: { type: "spring", duration: 0.5, bounce: 0.5 },
-                  }}
-                >
-                  Select Game Mode
-                </motion.div>
-              </Button>
-            </Link>
-
-            {/* Leaderboard */}
-            <Button
-              onClick={leaderboardButton}
-              className="w-52 lg:w-full bg-gradient-to-r from-red-500 to-red-700 text-white font-bold cursor-pointer rounded-full hover:from-red-600 hover:to-red-800 shadow-md shadow-red-200/50"
-            >
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -132,27 +113,46 @@ const Menu = () => {
                   scale: { type: "spring", duration: 0.5, bounce: 0.5 },
                 }}
               >
-                View Leaderboard
+                <Button className="w-52 lg:w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold cursor-pointer hover:from-yellow-400 hover:to-amber-600 rounded-full shadow-md shadow-yellow-200/70">
+                  Select Game Mode
+                </Button>
               </motion.div>
-            </Button>
+            </Link>
+
+            {/* Leaderboard */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                scale: { type: "spring", duration: 0.5, bounce: 0.5 },
+              }}
+            >
+              <Button
+                onClick={leaderboardButton}
+                className="w-52 lg:w-full bg-gradient-to-r from-red-500 to-red-700 text-white font-bold cursor-pointer rounded-full hover:from-red-600 hover:to-red-800 shadow-md shadow-red-200/50"
+              >
+                View Leaderboard
+              </Button>
+            </motion.div>
 
             {/* Profile */}
             <div className="col-span-2 grid place-items-center">
-              <Button
-                onClick={profileButton}
-                className="w-52 lg:max-w-[184px] bg-gradient-to-r from-orange-400 to-amber-600 text-white font-bold rounded-full cursor-pointer hover:from-orange-500 hover:to-amber-700 shadow-md shadow-orange-200/50"
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  scale: { type: "spring", duration: 0.5, bounce: 0.5 },
+                }}
               >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    scale: { type: "spring", duration: 0.5, bounce: 0.5 },
-                  }}
+                <Button
+                  onClick={profileButton}
+                  className="w-52 lg:max-w-[184px] bg-gradient-to-r from-orange-400 to-amber-600 text-white font-bold rounded-full cursor-pointer hover:from-orange-500 hover:to-amber-700 shadow-md shadow-orange-200/50"
                 >
                   Profile
-                </motion.div>
-              </Button>
+                </Button>
+              </motion.div>
             </div>
           </div>
 

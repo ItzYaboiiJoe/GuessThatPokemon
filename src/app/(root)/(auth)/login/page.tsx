@@ -57,7 +57,7 @@ export default function LoginPage() {
             href="/"
             className="mt-6 inline-block text-gray-500 text-sm font-medium hover:text-gray-800 transition"
           >
-            ← Back to Menu
+            ← Back to Home
           </Link>
         </div>
       </motion.div>
