@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { motion } from "motion/react";
 
 const GuestPage = () => {
   // State to hold the guest trainer name
@@ -47,9 +48,18 @@ const GuestPage = () => {
 
         {/* Start Button */}
         <Link href="/nationGame?guest=true">
-          <Button className="w-full bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 hover:cursor-pointer">
-            Start Game
-          </Button>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.5,
+              scale: { type: "spring", duration: 0.5, bounce: 0.5 },
+            }}
+          >
+            <Button className="w-full bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-300 hover:cursor-pointer">
+              Start Game
+            </Button>
+          </motion.div>
         </Link>
 
         {/* Info Note */}
