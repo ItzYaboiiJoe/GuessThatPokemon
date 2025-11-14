@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import ChangePasswordForm from "@/components/forms/changePasswordForm";
+import { motion } from "motion/react";
 
 const ChangePassword = () => {
   // State to handle loading state
@@ -48,28 +49,37 @@ const ChangePassword = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 responsePhones text-center">
-        {/* Pokeball Image */}
-        <div className="flex justify-center mb-4">
-          <Image src="/pokeball.png" alt="Pokeball" width={60} height={60} />
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.5,
+          scale: { type: "spring", duration: 0.5, bounce: 0.5 },
+        }}
+      >
+        <div className="bg-white rounded-3xl shadow-2xl p-8 responsePhones text-center">
+          {/* Pokeball Image */}
+          <div className="flex justify-center mb-4">
+            <Image src="/pokeball.png" alt="Pokeball" width={60} height={60} />
+          </div>
+
+          {/* Title */}
+          <h1 className="text-2xl lg:text-3xl font-extrabold mb-6 text-gray-800 drop-shadow">
+            Change Password
+          </h1>
+
+          {/* Change Password Form */}
+          <ChangePasswordForm />
+
+          {/* Back to Menu */}
+          <Link
+            href="/menu"
+            className="mt-6 inline-block text-gray-500 text-sm font-medium hover:text-gray-800 transition"
+          >
+            ← Back to Menu
+          </Link>
         </div>
-
-        {/* Title */}
-        <h1 className="text-2xl lg:text-3xl font-extrabold mb-6 text-gray-800 drop-shadow">
-          Change Password
-        </h1>
-
-        {/* Change Password Form */}
-        <ChangePasswordForm />
-
-        {/* Back to Menu */}
-        <Link
-          href="/menu"
-          className="mt-6 inline-block text-gray-500 text-sm font-medium hover:text-gray-800 transition"
-        >
-          ← Back to Menu
-        </Link>
-      </div>
+      </motion.div>
     </div>
   );
 };
