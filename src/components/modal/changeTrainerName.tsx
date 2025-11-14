@@ -25,6 +25,7 @@ import { Button } from "../ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
 import { updateTrainerName, checkTrainerName } from "../api/updateDisplayName";
+import * as motion from "motion/react-client";
 
 interface updateNameProps {
   open: boolean;
@@ -97,71 +98,81 @@ const UpdateTrainerName = ({ open, setOpen }: updateNameProps) => {
           onInteractOutside={(e) => e.preventDefault()}
           onEscapeKeyDown={(e) => e.preventDefault()}
         >
-          <DialogHeader className="text-center">
-            <DialogTitle className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-t-xl font-bold shadow-lg">
-              Change Trainer Name
-            </DialogTitle>
-            <DialogDescription className="text-gray-700 text-sm">
-              Enter your new Trainer Name you would like to change to
-            </DialogDescription>
-          </DialogHeader>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.4,
+              delay: 0.2,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+          >
+            <DialogHeader className="text-center">
+              <DialogTitle className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-t-xl font-bold shadow-lg">
+                Change Trainer Name
+              </DialogTitle>
+              <DialogDescription className="text-gray-700 text-sm">
+                Enter your new Trainer Name you would like to change to
+              </DialogDescription>
+            </DialogHeader>
 
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              {/* New Trainer Name Input */}
-              <FormField
-                control={form.control}
-                name="trainerName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        disabled={loading}
-                        placeholder="New Trainer Name"
-                        className="text-center rounded-xl"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-center" />
-                  </FormItem>
-                )}
-              />
-
-              {/* Buttons */}
-              <div className="flex justify-between mt-4">
-                <Button
-                  type="button"
-                  onClick={handleClose}
-                  className="bg-red-500 text-white rounded-full px-6 shadow-md hover:bg-red-600 cursor-pointer"
-                  disabled={loading}
-                >
-                  Close
-                </Button>
-                {/* Submit button will display the loading to notify user the page is loading */}
-                <Button
-                  type="submit"
-                  className="bg-yellow-400 text-black rounded-full px-6 shadow-md hover:bg-yellow-500 cursor-pointer"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <div className="flex items-center space-x-2">
-                      <Spinner className="size-8" /> <span>Updating...</span>
-                    </div>
-                  ) : (
-                    "Submit"
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                {/* New Trainer Name Input */}
+                <FormField
+                  control={form.control}
+                  name="trainerName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          disabled={loading}
+                          placeholder="New Trainer Name"
+                          className="text-center rounded-xl"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-center" />
+                    </FormItem>
                   )}
-                </Button>
-              </div>
+                />
 
-              {/* Error Message if there were matching trainer names */}
-              {checkError && (
-                <p className="mt-4 text-center text-red-600 font-semibold">
-                  {checkError}
-                </p>
-              )}
-            </form>
-          </Form>
+                {/* Buttons */}
+                <div className="flex justify-between mt-4">
+                  <Button
+                    type="button"
+                    onClick={handleClose}
+                    className="bg-red-500 text-white rounded-full px-6 shadow-md hover:bg-red-600 cursor-pointer"
+                    disabled={loading}
+                  >
+                    Close
+                  </Button>
+                  {/* Submit button will display the loading to notify user the page is loading */}
+                  <Button
+                    type="submit"
+                    className="bg-yellow-400 text-black rounded-full px-6 shadow-md hover:bg-yellow-500 cursor-pointer"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <div className="flex items-center space-x-2">
+                        <Spinner className="size-8" /> <span>Updating...</span>
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
+                  </Button>
+                </div>
+
+                {/* Error Message if there were matching trainer names */}
+                {checkError && (
+                  <p className="mt-4 text-center text-red-600 font-semibold">
+                    {checkError}
+                  </p>
+                )}
+              </form>
+            </Form>
+          </motion.div>
         </DialogContent>
       </Dialog>
     </>
