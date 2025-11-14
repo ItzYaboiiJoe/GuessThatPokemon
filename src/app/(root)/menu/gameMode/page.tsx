@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ElectricBorder from "@/components/bitsComponents/ElectricBorder";
+import { motion } from "motion/react";
 
 const GameMode = () => {
   // State to hold Region Pokemon
@@ -80,12 +81,21 @@ const GameMode = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button
-                className="w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold rounded-full shadow-md shadow-yellow-200/70 hover:from-yellow-400 hover:to-amber-600 transition-all duration-300"
-                asChild
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  scale: { type: "spring", duration: 0.7, bounce: 0.5 },
+                }}
               >
-                <Link href="/nationGame">Start Game</Link>
-              </Button>
+                <Button
+                  className="w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black font-bold rounded-full shadow-md shadow-yellow-200/70 hover:from-yellow-400 hover:to-amber-600 transition-all duration-300"
+                  asChild
+                >
+                  <Link href="/nationGame">Start Game</Link>
+                </Button>
+              </motion.div>
               <p className="mt-4 text-sm text-gray-600">
                 National Game Mode affects leaderboard scores
               </p>
@@ -122,12 +132,21 @@ const GameMode = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button
-                asChild
-                className="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white font-bold rounded-full shadow-md shadow-orange-200/70 hover:from-orange-500 hover:to-red-600 transition-all duration-300"
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  scale: { type: "spring", duration: 0.7, bounce: 0.5 },
+                }}
               >
-                <Link href="/regionGame">Start Game</Link>
-              </Button>
+                <Button
+                  asChild
+                  className="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white font-bold rounded-full shadow-md shadow-orange-200/70 hover:from-orange-500 hover:to-red-600 transition-all duration-300"
+                >
+                  <Link href="/regionGame">Start Game</Link>
+                </Button>
+              </motion.div>
 
               <p className="mt-4 text-sm text-gray-600">
                 Region Game Mode does not affect leaderboard
