@@ -71,7 +71,7 @@ const GameMode = () => {
               scale: { type: "spring", duration: 0.7, bounce: 0.5 },
             }}
           >
-            <Card className="bg-white/90 rounded-3xl shadow-xl shadow-orange-400/50 p-8 w-full max-w-sm border-1 border-yellow-600">
+            <Card className="bg-white/90 rounded-3xl shadow-xl shadow-orange-400/50 p-5 lg:p-8 w-full max-w-sm border-1 border-yellow-600">
               <CardHeader>
                 {/* Countdown */}
                 <div className="flex justify-center mb-4">
@@ -119,7 +119,7 @@ const GameMode = () => {
               scale: { type: "spring", duration: 0.7, bounce: 0.5 },
             }}
           >
-            <Card className="bg-white/90 rounded-3xl shadow-xl shadow-red-400/50 p-8 w-full max-w-sm border-1 border-red-500">
+            <Card className="bg-white/90 rounded-3xl shadow-xl shadow-red-400/50 p-5 lg:p-8 w-full max-w-sm border-1 border-red-500">
               <CardHeader>
                 {/* Countdown */}
                 <div className="flex justify-center mb-4">
