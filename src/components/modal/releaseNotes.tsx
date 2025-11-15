@@ -113,6 +113,10 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                         over to the next day’s challenge if the user started but
                         did not complete the current day’s challenge.
                       </li>
+                      <li>
+                        Fixed an issue where the daily streak was not being
+                        calculated correctly.
+                      </li>
                     </ul>
                   </div>
                 </div>

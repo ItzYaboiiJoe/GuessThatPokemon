@@ -253,6 +253,11 @@ const AnswerForm = ({
         const newSolved = solvedTrivia + 1;
         const newStreak = triesAttempt.current === 1 ? firstTryStreak + 1 : 0;
 
+        // Update user submissionDate on the database
+        if (mode === "auth" && trainerID) {
+          await updateDate(currentDateEastern, trainerID);
+        }
+
         // Update table and increment the solved value by 1 and win streak if the user got it first try
         // Update the Daily Login Streak Value
         await updateLeaderboard(
@@ -273,10 +278,6 @@ const AnswerForm = ({
       onCorrect();
       // To disable the submit button
       setHasSubmitted(true);
-      // Update user submissionDate on the database
-      if (mode === "auth" && trainerID) {
-        updateDate(currentDateEastern, trainerID);
-      }
     } else {
       setResultTitle("That is incorrect, try again!");
       if (triesAttempt.current === 2) {
