@@ -11,6 +11,7 @@ import {
   RegionLiveFetchPokemon,
 } from "@/components/api/regionFetch";
 import RegionAnswerForm from "@/components/forms/regionAnswerForm";
+import { motion } from "motion/react";
 
 const RegionGame = () => {
   // Get Trainer Name from Local Storage
@@ -110,7 +111,15 @@ const RegionGame = () => {
       </div>
 
       {/* Pokémon Image */}
-      <div className="flex flex-col items-center">
+      <motion.div
+        initial={{ opacity: 0, y: 40, scale: 0.9, filter: "blur(6px)" }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+        transition={{
+          duration: 0.7,
+          ease: "easeOut",
+        }}
+        className="flex flex-col items-center"
+      >
         {pokemon ? (
           <Image
             src={pokemon.PokemonImage}
@@ -156,7 +165,7 @@ const RegionGame = () => {
             onCorrect={() => setIsCorrect(true)}
           />
         )}
-      </div>
+      </motion.div>
 
       {/* Empty Space */}
       <div></div>
