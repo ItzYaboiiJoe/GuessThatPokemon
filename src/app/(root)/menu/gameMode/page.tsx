@@ -64,11 +64,11 @@ const GameMode = () => {
           style={{ borderRadius: "1.5rem" }}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             transition={{
-              duration: 0.5,
-              scale: { type: "spring", duration: 0.7, bounce: 0.5 },
+              duration: 0.6,
+              ease: "easeOut",
             }}
           >
             <Card className="bg-white/90 rounded-3xl shadow-xl shadow-orange-400/50 p-5 lg:p-8 w-full max-w-sm border-1 border-yellow-600">
@@ -112,11 +112,11 @@ const GameMode = () => {
           style={{ borderRadius: "1.5rem" }}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             transition={{
-              duration: 0.5,
-              scale: { type: "spring", duration: 0.7, bounce: 0.5 },
+              duration: 0.6,
+              ease: "easeOut",
             }}
           >
             <Card className="bg-white/90 rounded-3xl shadow-xl shadow-red-400/50 p-5 lg:p-8 w-full max-w-sm border-1 border-red-500">
