@@ -55,7 +55,9 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-1">
                   v0.8.0
                 </h2>
-                <p className="text-sm text-gray-600 italic mb-3">TBD</p>
+                <p className="text-sm text-gray-600 italic mb-3">
+                  Released November 22, 2025
+                </p>
                 <div className="space-y-3">
                   <div>
                     <p className="font-semibold text-orange-700">
