@@ -56,7 +56,7 @@ const ReleaseNotes = ({ open, setOpen }: NotesProps) => {
                   v0.8.0
                 </h2>
                 <p className="text-sm text-gray-600 italic mb-3">
-                  Released November 22, 2025
+                  Released November 21, 2025
                 </p>
                 <div className="space-y-3">
                   <div>
