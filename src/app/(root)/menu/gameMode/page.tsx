@@ -13,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import ElectricBorder from "@/components/bitsComponents/ElectricBorder";
 import { motion } from "motion/react";
 
 const GameMode = () => {
